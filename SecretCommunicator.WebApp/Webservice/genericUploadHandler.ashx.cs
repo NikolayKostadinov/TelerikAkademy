@@ -122,8 +122,7 @@ namespace SecretCommunicator.WebApp.Webservice
                                 fileStream.Close();
                             }
 
-                            _sessionState.AuthClient();
-                            SaveSession(context);
+                            
 
                             //save in mongodb
                             msg.PrivateData = AppCache.AESProvider.EncryptToString(JsonConvert.SerializeObject(msg.PublicData));
@@ -189,6 +188,8 @@ namespace SecretCommunicator.WebApp.Webservice
             }
             else
             {
+                _sessionState.AuthClient();
+                SaveSession(context);
                 //upload to dropbox
                 string cloudPath = "/" + chan.Name + "/" + filename;
                 var result = _sessionState.Client.UploadFileAsync(new FileResource(file), cloudPath).Result;
