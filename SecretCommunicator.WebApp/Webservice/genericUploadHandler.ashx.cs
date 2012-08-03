@@ -41,9 +41,14 @@ namespace SecretCommunicator.WebApp.Webservice
                     _sessionState.CurrentUser = new User() { ChannelName = new List<string>() };
                     _sessionState.CurrentUser.ChannelName.Add(chan.Name);
                     _sessionState.GetChanMessages(chan, 10);
-                    _restoreSession.LastChannel  = new List<dynamic>();
+                    _restoreSession.LastChannel = new List<dynamic>();
                     _restoreSession.LastChannel.Add(chan);
                     _restoreSession.LastChannel.Add(AppCache.MessageList.Where(m => m.ChannelId == chan.Id).Take(10).ToList());
+                }
+                else
+                {
+                    context.Response.Write("{ 'success': login to channel pls }");
+                    return;
                 }
             }
             else if (_restoreSession.LastChannel == null)
@@ -52,11 +57,12 @@ namespace SecretCommunicator.WebApp.Webservice
                 if (chan != null)
                 {
                     _sessionState.GetChanMessages(chan, 10);
-                    _restoreSession.LastChannel  = new List<dynamic>();
+                    _restoreSession.LastChannel = new List<dynamic>();
                     _restoreSession.LastChannel.Add(chan);
                     _restoreSession.LastChannel.Add(AppCache.MessageList.Where(m => m.ChannelId == chan.Id).Take(10).ToList());
                 }
             }
+
 
             chan = _restoreSession.LastChannel[0];
             if (chan != null)
@@ -92,68 +98,35 @@ namespace SecretCommunicator.WebApp.Webservice
                                 filename = uploadFileName;
                             }
 
-                            
-                            
-                                msg.PublicData.Type = MessageTypes.File;
-                                // create full server path
-                                string file = string.Format("{0}\\{1}", directory, filename);
 
-                                // If file exists already, delete it (optional)
-                                //if (System.IO.File.Exists(file) == true) System.IO.File.Delete(file);
 
-                                if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
+                            msg.PublicData.Type = MessageTypes.File;
+                            // create full server path
+                            string file = string.Format("{0}\\{1}", directory, filename);
+
+                            // If file exists already, delete it (optional)
+                            //if (System.IO.File.Exists(file) == true) System.IO.File.Delete(file);
+
+                            if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
+                            {
+                                uploadToCloud(filename, uploadFileName, context, msg, chan, file);
+                                // Save file to server
+                                context.Request.Files[0].SaveAs(file);
+                            }
+                            else // Other Browsers
+                            {
+                                uploadToCloud(filename, uploadFileName, context, msg, chan, file);
+                                // Save file to server
+                                using (System.IO.FileStream fileStream = new System.IO.FileStream(file, System.IO.FileMode.OpenOrCreate))
                                 {
-                                    // Save file to server
-                                    context.Request.Files[0].SaveAs(file);
+                                    
+                                    context.Request.InputStream.CopyTo(fileStream);
+                                    fileStream.Close();
                                 }
-                                else // Other Browsers
-                                {
-                                    // Save file to server
-                                    using (System.IO.FileStream fileStream = new System.IO.FileStream(file, System.IO.FileMode.OpenOrCreate))
-                                    {
-                                        context.Request.InputStream.CopyTo(fileStream);
-                                        fileStream.Close();
-                                    }
-                                }
+                            }
 
-                                _sessionState.AuthClient();
-                                SaveSession(context);
-
-                                if (filename.EndsWith("png") || filename.EndsWith("jpeg") || filename.EndsWith("jpg") || filename.EndsWith("gif") || filename.EndsWith("bmp"))
-                                {
-                                    try
-                                    {
-                                        msg.PublicData.Type = MessageTypes.Image;
-                                        var configuration = new AccountConfiguration("saykor", "277334748579534", "mUjzZ-X3jOuNKGswrAjocB-D-Rc");
-
-                                        var uploader = new Uploader(configuration);
-                                        string publicId = Path.GetFileNameWithoutExtension(filename);
-                                        Stream stream;
-                                        if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
-                                            stream = context.Request.Files[0].InputStream;
-                                        else // Other Browsers
-                                            stream = context.Request.InputStream;
-
-                                        var uploadResult = uploader.Upload(new UploadInformation(filename, stream)
-                                        {
-                                            PublicId = publicId,
-                                            Format = filename.Substring(filename.Length - 3),
-                                        });
-                                        msg.PublicData.Value = filename;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        context.Response.Write("{ 'success': " + ex.Message + " }");
-                                        return;
-                                    }
-                                }
-                                else
-                                {
-                                    //upload to dropbox
-                                    string cloudPath = "/" + chan.Name + "/" + filename;
-                                    var result = _sessionState.Client.UploadFileAsync(new FileResource(file), cloudPath).Result;
-                                    msg.PublicData.Value = cloudPath;
-                                }
+                            _sessionState.AuthClient();
+                            SaveSession(context);
 
                             //save in mongodb
                             msg.PrivateData = AppCache.AESProvider.EncryptToString(JsonConvert.SerializeObject(msg.PublicData));
@@ -187,6 +160,44 @@ namespace SecretCommunicator.WebApp.Webservice
             }
         }
 
+        private void uploadToCloud(string filename, string uploadFileName, HttpContext context, Message msg, Channel chan, string file)
+        {
+            if (filename.EndsWith("png") || filename.EndsWith("jpeg") || filename.EndsWith("jpg") || filename.EndsWith("gif") || filename.EndsWith("bmp"))
+            {
+                try
+                {
+                    msg.PublicData.Type = MessageTypes.Image;
+                    var configuration = new AccountConfiguration("saykor", "277334748579534", "mUjzZ-X3jOuNKGswrAjocB-D-Rc");
+
+                    var uploader = new Uploader(configuration);
+                    string publicId = Path.GetFileNameWithoutExtension(filename);
+                    Stream stream;
+                    if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
+                        stream = context.Request.Files[0].InputStream;
+                    else // Other Browsers
+                        stream = context.Request.InputStream;
+
+                    var uploadResult = uploader.Upload(new UploadInformation(filename, stream)
+                    {
+                        PublicId = publicId,
+                        Format = filename.Substring(filename.Length - 3),
+                    });
+                    msg.PublicData.Value = filename;
+                }
+                catch (Exception ex)
+                {
+                    context.Response.Write("{ 'success': " + ex.Message + " }");
+                    return;
+                }
+            }
+            else
+            {
+                //upload to dropbox
+                string cloudPath = "/" + chan.Name + "/" + filename;
+                var result = _sessionState.Client.UploadFileAsync(new FileResource(file), cloudPath).Result;
+                msg.PublicData.Value = cloudPath;
+            }
+        }
         private void PublishToPubNub(string name, Message msg)
         {
             if (msg != null)
