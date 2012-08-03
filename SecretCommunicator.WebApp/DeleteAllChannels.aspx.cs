@@ -15,6 +15,7 @@ namespace SecretCommunicator.WebApp
         protected void Page_Load(object sender, EventArgs e)
         {
             _sessionState.DeleteChannels();
+            AppCache.ChannelList.Clear();
             Response.Write("done");
         }
     }
