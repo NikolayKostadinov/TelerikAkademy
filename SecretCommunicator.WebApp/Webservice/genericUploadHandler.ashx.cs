@@ -206,17 +206,9 @@ namespace SecretCommunicator.WebApp.Webservice
                 Dictionary<string, string> actionDict = new Dictionary<string, string>();
                 actionDict.Add("Action", "add");
                 actionDict.Add("Channel", name);
-                actionDict.Add("CreatedDateTime", msg.CreatedDateTime);
                 pubnubMessage.Add(actionDict);
-                if (msg.PublicData.Type == MessageTypes.File)
-                {
-                    _sessionState.AuthClient();
-                    msg.PrivateData = null;
-                    msg.PublicData.Type = MessageTypes.File;
-                    var url = _sessionState.Client.GetMediaLinkAsync(msg.PublicData.Value).Result.Url;
-                    msg.PublicData.Value = url;
-                }
-                pubnubMessage.Add(new Message() { Id = msg.Id, PublicData = new MessageResource() { Type = msg.PublicData.Type, Value = msg.PublicData.Value } });
+                msg.PrivateData = null;
+                pubnubMessage.Add(msg);
                 List<object> publishResult = pubnub.Publish("NewMsgIn" + name, pubnubMessage);
             }
         }

@@ -25,7 +25,9 @@ namespace SecretCommunicator.WebData.Library
 
         public DateTime PrivateDateTime { get; set; }
 
+        [BsonIgnore]
         private string _CreatedDateTime = string.Empty;
+        [BsonIgnore]
         [DataMember(Name = "CreatedDateTime")]
         public string CreatedDateTime
         {
@@ -37,7 +39,6 @@ namespace SecretCommunicator.WebData.Library
             }
             set { _CreatedDateTime = value; }
         }
-
 
         [BsonIgnore]
         private MessageResource _PublicData = new MessageResource();
