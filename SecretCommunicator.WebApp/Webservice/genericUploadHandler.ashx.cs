@@ -109,20 +109,17 @@ namespace SecretCommunicator.WebApp.Webservice
 
                             if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
                             {
-                                uploadToCloud(filename, uploadFileName, context, msg, chan, file);
                                 // Save file to server
                                 context.Request.Files[0].SaveAs(file);
+                                uploadToCloud(filename, uploadFileName, context, msg, chan, file);
                             }
                             else // Other Browsers
                             {
-                                uploadToCloud(filename, uploadFileName, context, msg, chan, file);
                                 // Save file to server
-                                using (System.IO.FileStream fileStream = new System.IO.FileStream(file, System.IO.FileMode.OpenOrCreate))
-                                {
-                                    
-                                    context.Request.InputStream.CopyTo(fileStream);
-                                    fileStream.Close();
-                                }
+                                System.IO.FileStream fileStream = new System.IO.FileStream(file, System.IO.FileMode.OpenOrCreate);
+                                uploadToCloud(filename, uploadFileName, context, msg, chan, file);
+                                context.Request.InputStream.CopyTo(fileStream);
+                                fileStream.Close();
                             }
 
                             _sessionState.AuthClient();
@@ -208,6 +205,8 @@ namespace SecretCommunicator.WebApp.Webservice
                 actionDict.Add("Channel", name);
                 pubnubMessage.Add(actionDict);
                 msg.PrivateData = null;
+                if (msg.PublicData.Type == MessageTypes.File)
+                    msg.PublicData.Value = _sessionState.Client.GetMediaLinkAsync(msg.PublicData.Value).Result.Url;
                 pubnubMessage.Add(msg);
                 List<object> publishResult = pubnub.Publish("NewMsgIn" + name, pubnubMessage);
             }
