@@ -31,6 +31,7 @@ namespace SecretCommunicator.WebApp.Webservice
 
         public void ProcessRequest(HttpContext context)
         {
+            _sessionState.AuthClient();
             Channel chan;
             GetSession(context);
             if (_sessionState.CurrentUser == null)
@@ -122,9 +123,6 @@ namespace SecretCommunicator.WebApp.Webservice
                                 fileStream.Close();
                             }
 
-                            _sessionState.AuthClient();
-                            SaveSession(context);
-
                             //save in mongodb
                             msg.PrivateData = AppCache.AESProvider.EncryptToString(JsonConvert.SerializeObject(msg.PublicData));
                             _sessionState.SaveMessage(msg);
@@ -132,7 +130,10 @@ namespace SecretCommunicator.WebApp.Webservice
                             //send notification in pubnub
 
                             if (msg.PublicData.Type == MessageTypes.File)
+                            {
+                                _sessionState.AuthClient();
                                 msg.PublicData.Value = _sessionState.Client.GetMediaLinkAsync(msg.PublicData.Value).Result.Url;
+                            }
 
                             PublishToPubNub(chan.Name, msg);
 
@@ -159,8 +160,6 @@ namespace SecretCommunicator.WebApp.Webservice
 
         private void uploadToCloud(string filename, string uploadFileName, HttpContext context, Message msg, Channel chan, string file)
         {
-            _sessionState.AuthClient();
-            SaveSession(context);
             if (filename.EndsWith("png") || filename.EndsWith("jpeg") || filename.EndsWith("jpg") || filename.EndsWith("gif") || filename.EndsWith("bmp"))
             {
                 try
@@ -191,13 +190,14 @@ namespace SecretCommunicator.WebApp.Webservice
             }
             else
             {
-                
                 //upload to dropbox
                 string cloudPath = "/" + chan.Name + "/" + filename;
+                _sessionState.AuthClient();
                 var result = _sessionState.Client.UploadFileAsync(new FileResource(file), cloudPath).Result;
                 msg.PublicData.Value = cloudPath;
             }
         }
+
         private void PublishToPubNub(string name, Message msg)
         {
             if (msg != null)
@@ -209,7 +209,10 @@ namespace SecretCommunicator.WebApp.Webservice
                 pubnubMessage.Add(actionDict);
                 msg.PrivateData = null;
                 if (msg.PublicData.Type == MessageTypes.File)
+                {
+                    _sessionState.AuthClient();
                     msg.PublicData.Value = _sessionState.Client.GetMediaLinkAsync(msg.PublicData.Value).Result.Url;
+                }
                 pubnubMessage.Add(msg);
                 List<object> publishResult = pubnub.Publish("NewMsgIn" + name, pubnubMessage);
             }
