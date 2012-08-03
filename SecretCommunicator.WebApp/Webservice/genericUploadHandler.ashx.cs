@@ -158,6 +158,8 @@ namespace SecretCommunicator.WebApp.Webservice
 
         private void uploadToCloud(string filename, string uploadFileName, HttpContext context, Message msg, Channel chan, string file)
         {
+            _sessionState.AuthClient();
+            SaveSession(context);
             if (filename.EndsWith("png") || filename.EndsWith("jpeg") || filename.EndsWith("jpg") || filename.EndsWith("gif") || filename.EndsWith("bmp"))
             {
                 try
@@ -188,8 +190,7 @@ namespace SecretCommunicator.WebApp.Webservice
             }
             else
             {
-                _sessionState.AuthClient();
-                SaveSession(context);
+                
                 //upload to dropbox
                 string cloudPath = "/" + chan.Name + "/" + filename;
                 var result = _sessionState.Client.UploadFileAsync(new FileResource(file), cloudPath).Result;
