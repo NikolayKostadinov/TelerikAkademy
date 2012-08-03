@@ -122,7 +122,8 @@ namespace SecretCommunicator.WebApp.Webservice
                                 fileStream.Close();
                             }
 
-                            
+                            _sessionState.AuthClient();
+                            SaveSession(context);
 
                             //save in mongodb
                             msg.PrivateData = AppCache.AESProvider.EncryptToString(JsonConvert.SerializeObject(msg.PublicData));
