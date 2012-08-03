@@ -121,23 +121,30 @@ namespace SecretCommunicator.WebApp.Webservice
 
                                 if (filename.EndsWith("png") || filename.EndsWith("jpeg") || filename.EndsWith("jpg") || filename.EndsWith("gif") || filename.EndsWith("bmp"))
                                 {
-                                    msg.PublicData.Type = MessageTypes.Image;
-                                    var configuration = new AccountConfiguration("saykor", "277334748579534", "mUjzZ-X3jOuNKGswrAjocB-D-Rc");
-
-                                    var uploader = new Uploader(configuration);
-                                    string publicId = Path.GetFileNameWithoutExtension(filename);
-                                    Stream stream;
-                                    if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
-                                        stream = context.Request.Files[0].InputStream;
-                                    else // Other Browsers
-                                        stream = context.Request.InputStream;
-
-                                    var uploadResult = uploader.Upload(new UploadInformation(filename, stream)
+                                    try
                                     {
-                                        PublicId = publicId,
-                                        Format = filename.Substring(filename.Length - 3),
-                                    });
-                                    msg.PublicData.Value = filename;
+                                        msg.PublicData.Type = MessageTypes.Image;
+                                        var configuration = new AccountConfiguration("saykor", "277334748579534", "mUjzZ-X3jOuNKGswrAjocB-D-Rc");
+
+                                        var uploader = new Uploader(configuration);
+                                        string publicId = Path.GetFileNameWithoutExtension(filename);
+                                        Stream stream;
+                                        if (string.IsNullOrEmpty(uploadFileName) == true) // IE Browsers
+                                            stream = context.Request.Files[0].InputStream;
+                                        else // Other Browsers
+                                            stream = context.Request.InputStream;
+
+                                        var uploadResult = uploader.Upload(new UploadInformation(filename, stream)
+                                        {
+                                            PublicId = publicId,
+                                            Format = filename.Substring(filename.Length - 3),
+                                        });
+                                        msg.PublicData.Value = filename;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        context.Response.Write("{ 'success': " + ex.Message + " }");
+                                    }
                                 }
                                 else
                                 {
