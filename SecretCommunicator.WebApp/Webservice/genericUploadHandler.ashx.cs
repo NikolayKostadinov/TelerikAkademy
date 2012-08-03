@@ -144,6 +144,7 @@ namespace SecretCommunicator.WebApp.Webservice
                                     catch (Exception ex)
                                     {
                                         context.Response.Write("{ 'success': " + ex.Message + " }");
+                                        return
                                     }
                                 }
                                 else
