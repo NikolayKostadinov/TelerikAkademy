@@ -1,6 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirst10Numbers\bin\Debug\PrintFirst10Numbers.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirst10Numbers\bin\Debug\PrintFirst10Numbers.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirst10Numbers\bin\Debug\PrintFirst10Numbers.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirst10Numbers\obj\Debug\PrintFirst10Numbers.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirst10Numbers\obj\Debug\PrintFirst10Numbers.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirst10Numbers\obj\Debug\PrintFirst10Numbers.csprojResolveAssemblyReference.cache

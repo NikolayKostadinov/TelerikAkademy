@@ -1,5 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintNumbers\bin\Debug\PrintNumbers.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintNumbers\bin\Debug\PrintNumbers.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintNumbers\bin\Debug\PrintNumbers.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintNumbers\obj\Debug\PrintNumbers.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintNumbers\obj\Debug\PrintNumbers.pdb

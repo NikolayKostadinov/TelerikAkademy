@@ -1,6 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\DefiningClassesPartI\DefiningClassesPartI\bin\Debug\DefiningClassesPartI.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\DefiningClassesPartI\DefiningClassesPartI\bin\Debug\DefiningClassesPartI.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\DefiningClassesPartI\DefiningClassesPartI\bin\Debug\DefiningClassesPartI.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\DefiningClassesPartI\DefiningClassesPartI\obj\Debug\DefiningClassesPartI.csprojResolveAssemblyReference.cache
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\DefiningClassesPartI\DefiningClassesPartI\obj\Debug\DefiningClassesPartI.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\DefiningClassesPartI\DefiningClassesPartI\obj\Debug\DefiningClassesPartI.pdb

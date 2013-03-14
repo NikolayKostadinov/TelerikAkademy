@@ -1,6 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\HelloCSharp\bin\Debug\HelloCSharp.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\HelloCSharp\bin\Debug\HelloCSharp.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\HelloCSharp\bin\Debug\HelloCSharp.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\HelloCSharp\obj\Debug\HelloCSharp.csprojResolveAssemblyReference.cache
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\HelloCSharp\obj\Debug\HelloCSharp.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\HelloCSharp\obj\Debug\HelloCSharp.pdb

@@ -1,5 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\CalculateSquareOfNumber\bin\Debug\CalculateSquareOfNumber.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\CalculateSquareOfNumber\bin\Debug\CalculateSquareOfNumber.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\CalculateSquareOfNumber\bin\Debug\CalculateSquareOfNumber.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\CalculateSquareOfNumber\obj\Debug\CalculateSquareOfNumber.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\CalculateSquareOfNumber\obj\Debug\CalculateSquareOfNumber.pdb

@@ -1,1 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\bin\Debug\StudentsSort.exe.config

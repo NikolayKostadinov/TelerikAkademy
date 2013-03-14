@@ -1,6 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\ConsoleInputOutput\bin\Debug\ConsoleInputOutput.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\ConsoleInputOutput\bin\Debug\ConsoleInputOutput.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\ConsoleInputOutput\bin\Debug\ConsoleInputOutput.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\ConsoleInputOutput\obj\Debug\ConsoleInputOutput.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\ConsoleInputOutput\obj\Debug\ConsoleInputOutput.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\ConsoleInputOutput\obj\Debug\ConsoleInputOutput.csprojResolveAssemblyReference.cache

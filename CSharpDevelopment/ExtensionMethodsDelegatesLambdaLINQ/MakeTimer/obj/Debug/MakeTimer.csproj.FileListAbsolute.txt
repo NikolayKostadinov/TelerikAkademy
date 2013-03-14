@@ -1,1 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\MakeTimer\bin\Debug\MakeTimer.exe.config

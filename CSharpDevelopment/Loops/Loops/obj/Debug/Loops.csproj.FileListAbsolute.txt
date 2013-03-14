@@ -1,6 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Loops\Loops\bin\Debug\Loops.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Loops\Loops\bin\Debug\Loops.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Loops\Loops\bin\Debug\Loops.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Loops\Loops\obj\Debug\Loops.csprojResolveAssemblyReference.cache
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Loops\Loops\obj\Debug\Loops.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Loops\Loops\obj\Debug\Loops.pdb

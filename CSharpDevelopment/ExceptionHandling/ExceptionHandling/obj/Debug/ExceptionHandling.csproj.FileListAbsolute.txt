@@ -1,6 +1,0 @@
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExceptionHandling\ExceptionHandling\bin\Debug\ExceptionHandling.exe.config
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExceptionHandling\ExceptionHandling\bin\Debug\ExceptionHandling.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExceptionHandling\ExceptionHandling\bin\Debug\ExceptionHandling.pdb
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExceptionHandling\ExceptionHandling\obj\Debug\ExceptionHandling.csprojResolveAssemblyReference.cache
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExceptionHandling\ExceptionHandling\obj\Debug\ExceptionHandling.exe
-D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExceptionHandling\ExceptionHandling\obj\Debug\ExceptionHandling.pdb
