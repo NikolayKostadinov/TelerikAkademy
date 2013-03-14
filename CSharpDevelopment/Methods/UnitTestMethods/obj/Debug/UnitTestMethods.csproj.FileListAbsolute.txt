@@ -1,0 +1,7 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\bin\Debug\UnitTestMethods.dll
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\bin\Debug\UnitTestMethods.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\bin\Debug\Methods.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\bin\Debug\Methods.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\obj\Debug\UnitTestMethods.csprojResolveAssemblyReference.cache
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\obj\Debug\UnitTestMethods.dll
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\UnitTestMethods\obj\Debug\UnitTestMethods.pdb

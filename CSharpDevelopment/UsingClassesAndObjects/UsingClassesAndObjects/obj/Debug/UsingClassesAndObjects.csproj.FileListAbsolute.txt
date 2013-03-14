@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\UsingClassesAndObjects\UsingClassesAndObjects\bin\Debug\UsingClassesAndObjects.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\UsingClassesAndObjects\UsingClassesAndObjects\bin\Debug\UsingClassesAndObjects.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\UsingClassesAndObjects\UsingClassesAndObjects\bin\Debug\UsingClassesAndObjects.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\UsingClassesAndObjects\UsingClassesAndObjects\obj\Debug\UsingClassesAndObjects.csprojResolveAssemblyReference.cache
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\UsingClassesAndObjects\UsingClassesAndObjects\obj\Debug\UsingClassesAndObjects.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\UsingClassesAndObjects\UsingClassesAndObjects\obj\Debug\UsingClassesAndObjects.pdb

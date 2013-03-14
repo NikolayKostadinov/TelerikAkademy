@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\bin\Debug\StudentsSort.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\bin\Debug\StudentsSort.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\bin\Debug\StudentsSort.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\obj\Debug\03 StudentsSort.csprojResolveAssemblyReference.cache
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\obj\Debug\StudentsSort.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\StudentsSort\obj\Debug\StudentsSort.pdb

@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\Methods\bin\Debug\Methods.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\Methods\bin\Debug\Methods.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\Methods\bin\Debug\Methods.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\Methods\obj\Debug\Methods.csprojResolveAssemblyReference.cache
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\Methods\obj\Debug\Methods.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Methods\Methods\obj\Debug\Methods.pdb

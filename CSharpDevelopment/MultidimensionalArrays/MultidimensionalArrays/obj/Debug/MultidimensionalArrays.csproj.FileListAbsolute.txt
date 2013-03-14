@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\MultidimensionalArrays\MultidimensionalArrays\bin\Debug\MultidimensionalArrays.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\MultidimensionalArrays\MultidimensionalArrays\bin\Debug\MultidimensionalArrays.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\MultidimensionalArrays\MultidimensionalArrays\bin\Debug\MultidimensionalArrays.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\MultidimensionalArrays\MultidimensionalArrays\obj\Debug\MultidimensionalArrays.csprojResolveAssemblyReference.cache
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\MultidimensionalArrays\MultidimensionalArrays\obj\Debug\MultidimensionalArrays.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\MultidimensionalArrays\MultidimensionalArrays\obj\Debug\MultidimensionalArrays.pdb

@@ -1,0 +1,1 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\IntroductionToProgramming\PrintFirstLastName\bin\Debug\PrintFirstLastName.exe.config

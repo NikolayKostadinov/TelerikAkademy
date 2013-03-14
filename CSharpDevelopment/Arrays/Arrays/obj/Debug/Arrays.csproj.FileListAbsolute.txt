@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Arrays\Arrays\bin\Debug\Arrays.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Arrays\Arrays\bin\Debug\Arrays.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Arrays\Arrays\bin\Debug\Arrays.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Arrays\Arrays\obj\Debug\Arrays.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Arrays\Arrays\obj\Debug\Arrays.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\Arrays\Arrays\obj\Debug\Arrays.csprojResolveAssemblyReference.cache

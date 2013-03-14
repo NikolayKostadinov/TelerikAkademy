@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\FallingRocks\bin\Debug\FallingRocks.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\FallingRocks\bin\Debug\FallingRocks.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\FallingRocks\bin\Debug\FallingRocks.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\FallingRocks\obj\Debug\FallingRocks.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\FallingRocks\obj\Debug\FallingRocks.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ConsoleInputOutput\FallingRocks\obj\Debug\FallingRocks.csprojResolveAssemblyReference.cache

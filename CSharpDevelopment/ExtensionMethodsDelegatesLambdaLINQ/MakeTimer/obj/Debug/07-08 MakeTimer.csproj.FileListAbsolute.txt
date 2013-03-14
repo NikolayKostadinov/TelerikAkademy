@@ -1,0 +1,5 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\MakeTimer\bin\Debug\MakeTimer.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\MakeTimer\bin\Debug\MakeTimer.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\MakeTimer\bin\Debug\MakeTimer.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\MakeTimer\obj\Debug\MakeTimer.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\ExtensionMethodsDelegatesLambdaLINQ\MakeTimer\obj\Debug\MakeTimer.pdb

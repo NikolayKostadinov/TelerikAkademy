@@ -1,0 +1,6 @@
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\NumeralSystems\NumeralSystems\bin\Debug\NumeralSystems.exe.config
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\NumeralSystems\NumeralSystems\bin\Debug\NumeralSystems.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\NumeralSystems\NumeralSystems\bin\Debug\NumeralSystems.pdb
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\NumeralSystems\NumeralSystems\obj\Debug\NumeralSystems.csprojResolveAssemblyReference.cache
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\NumeralSystems\NumeralSystems\obj\Debug\NumeralSystems.exe
+D:\Projects\VisualStudio2012\Telerik\CSharpDevelopment\NumeralSystems\NumeralSystems\obj\Debug\NumeralSystems.pdb
