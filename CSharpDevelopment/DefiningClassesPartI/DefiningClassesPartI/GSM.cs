@@ -79,21 +79,26 @@ namespace DefiningClassesPartI
                 this.Display = display;
         }
 
+        //old
         public void Add(Call call)
         {
             if (call != null)
             {
+                //logikata na tova da proverqva i ako nameri obekta da mu go dava e da overridne obekta v spisaka.
+                //toy veche go ima, nqma kak da go dobavim - Imame unikalno ID. Trqbva da go updeitnem samo.
                 var result = this.CallHistory.Where(c => c.CallID == call.CallID).FirstOrDefault();
                 if (result != null)
                     result = call;
                 else
                     this.CallHistory.Add(call);
             }
+            else
+                throw new ArgumentNullException();
         }
 
         public void Remove(Call call)
         {
-            if (call != null && this.CallHistory.Where(c => c.CallID == call.CallID).FirstOrDefault() != null)
+            //if (call != null && this.CallHistory.Where(c => c.CallID == call.CallID).FirstOrDefault() != null)
                 this.CallHistory.Remove(call);
         }
 
