@@ -60,6 +60,9 @@
     <Content Include="ConditionalStatements\Default.html" />
     <Content Include="ConditionalStatements\script.js" />
     <Content Include="ConditionalStatements\Scripts\jquery-1.7.1.js" />
+    <Content Include="Loops\Default.html" />
+    <Content Include="Loops\script.js" />
+    <Content Include="Loops\Scripts\jquery-1.7.1.js" />
     <Content Include="OperatorsExpressions\Default.html" />
     <Content Include="OperatorsExpressions\script.js" />
     <Content Include="OperatorsExpressions\Scripts\jquery-1.7.1.js" />
