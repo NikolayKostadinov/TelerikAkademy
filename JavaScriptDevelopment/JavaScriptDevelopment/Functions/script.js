@@ -50,6 +50,30 @@
         return count;
     }
 
+    $('#btnCountNumberTest').click(function () {
+        var arr = $('#txtCountNumber1').val().split(',');
+        var result = [];
+        result.push(" Number 5 count 4 time:");
+        if (CountNumber(5, arr))
+            result.push("true");
+        else
+            result.push("false");
+
+        result.push(" Number 9 count 1 time:");
+        if (CountNumber(9, arr))
+            result.push("true");
+        else
+            result.push("false");
+
+        result.push(" Number 1 count 2 time:");
+        if (CountNumber(1, arr))
+            result.push("true");
+        else
+            result.push("false");
+
+        $('#pnlCountNumberTest').text(result.toString());
+    });
+
     $('#btnIsBiggerThanNighboars').click(function () {
         var source = $('#txtIsBiggerThanNighboars1').val().split(',');
         var position = parseInt($('#txtIsBiggerThanNighboars2').val());
