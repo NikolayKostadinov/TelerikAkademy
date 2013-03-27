@@ -63,6 +63,9 @@
     <Content Include="Arrays\Default.html" />
     <Content Include="Arrays\script.js" />
     <Content Include="Arrays\Scripts\jquery-1.7.1.js" />
+    <Content Include="Objects\Default.html" />
+    <Content Include="Objects\script.js" />
+    <Content Include="Objects\Scripts\jquery-1.7.1.js" />
     <Content Include="Functions\Default.html" />
     <Content Include="Functions\script.js" />
     <Content Include="Functions\Scripts\jquery-1.7.1.js" />
