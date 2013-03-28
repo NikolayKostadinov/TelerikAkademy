@@ -24,9 +24,9 @@
     });
 
     function SearchInText(source, word, isCaseSensitive) {
-        var re = new RegExp(word, "g");
+        var re = new RegExp('\\b' + word + '\\b', "g");
         if (isCaseSensitive === true)
-            re = new RegExp(word, "gi");
+            re = new RegExp('\\b' + word + '\\b', "gi");
         return source.match(re);
     }
 

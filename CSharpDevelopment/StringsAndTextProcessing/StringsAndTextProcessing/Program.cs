@@ -20,7 +20,7 @@ namespace StringsAndTextProcessing
             //3. Write a program to check if in a given expression the brackets are put correctly.
             //Example of correct expression: ((a+b)/5-d).
             //Example of incorrect expression: )(a+b)).
-            //CheckCorrectBrackets("((a+b)/5-d)");
+            CheckCorrectBrackets("((a+b)/5-d)");
             //CheckCorrectBrackets(")(a+b))");
 
             //4. Write a program that finds how many times a substring is contained in a given text (perform case insensitive search).

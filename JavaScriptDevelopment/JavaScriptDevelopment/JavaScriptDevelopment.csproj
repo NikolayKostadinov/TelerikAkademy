@@ -63,6 +63,9 @@
     <Content Include="Arrays\Default.html" />
     <Content Include="Arrays\script.js" />
     <Content Include="Arrays\Scripts\jquery-1.7.1.js" />
+    <Content Include="Strings\Default.html" />
+    <Content Include="Strings\script.js" />
+    <Content Include="Strings\Scripts\jquery-1.7.1.js" />
     <Content Include="Objects\Default.html" />
     <Content Include="Objects\script.js" />
     <Content Include="Objects\Scripts\jquery-1.7.1.js" />
@@ -103,7 +106,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>49270</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49981/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
