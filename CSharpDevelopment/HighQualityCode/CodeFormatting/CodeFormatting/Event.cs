@@ -18,53 +18,39 @@ namespace CodeFormatting
 
         public int CompareTo(object obj)
         {
-            Event other = obj as Event;
+            var other = obj as Event;
 
-            if (this == null && other == null)
-            {
-                return 0;
-            }
-            else if (this == null)
-            {
-                return -1;
-            }
-            else if (other == null)
+            if (other == null)
             {
                 return 1;
             }
-            else
+
+            var byDate = date.CompareTo(other.date);
+            if (title != null && location != null)
             {
-                int byDate = this.date.CompareTo(other.date);
-                int byTitle = this.title.CompareTo(other.title);
-                int byLocation = this.location.CompareTo(other.location);
-                
+                var byTitle = title.CompareTo(other.title);
+                var byLocation = location.CompareTo(other.location);
+
                 if (byDate == 0)
                 {
-                    if (byTitle == 0)
-                    {
-                        return byLocation;
-                    }
-                    else
-                    {
-                        return byTitle;
-                    }
+                    return byTitle == 0 ? byLocation : byTitle;
                 }
-                else
-                {
-                    return byDate;
-                }
+
+                return byDate;
             }
+
+            return 0;
         }
 
         public override string ToString()
         {
-            StringBuilder toString = new StringBuilder();
-            toString.Append(this.date.ToString("yyyy-MM-ddTHH:mm:ss"));
-            toString.Append(" | " + this.title);
+            var toString = new StringBuilder();
+            toString.Append(date.ToString("yyyy-MM-ddTHH:mm:ss"));
+            toString.Append(" | " + title);
 
-            if (!string.IsNullOrEmpty(this.location))
+            if (!string.IsNullOrEmpty(location))
             {
-                toString.Append(" | " + this.location);
+                toString.Append(" | " + location);
             }
          
             return toString.ToString();
