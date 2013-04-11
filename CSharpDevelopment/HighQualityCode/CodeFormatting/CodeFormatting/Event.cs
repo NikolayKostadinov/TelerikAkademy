@@ -39,7 +39,7 @@ namespace CodeFormatting
                 return byDate;
             }
 
-            return 0;
+            return -1;
         }
 
         public override string ToString()
