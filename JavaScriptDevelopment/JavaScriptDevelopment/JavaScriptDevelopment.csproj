@@ -57,12 +57,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Chirpy.ReadMe.txt" />
     <Content Include="ConditionalStatements\Default.html" />
     <Content Include="ConditionalStatements\script.js" />
     <Content Include="ConditionalStatements\Scripts\jquery-1.7.1.js" />
     <Content Include="Arrays\Default.html" />
     <Content Include="Arrays\script.js" />
     <Content Include="Arrays\Scripts\jquery-1.7.1.js" />
+    <Content Include="DomManipulation\ChangeColors.html" />
+    <Content Include="DomManipulation\GenerateTagCloud.html" />
+    <Content Include="DomManipulation\MovableDivs.html" />
+    <Content Include="DomManipulation\querySelectorTest.html" />
+    <Content Include="DomManipulation\RandomDivElements.html" />
+    <Content Include="DomManipulation\Scripts\ChangeColors.js" />
+    <Content Include="DomManipulation\Scripts\jquery-2.0.0.js" />
+    <Content Include="DomManipulation\Scripts\jquery.plugin.js" />
+    <Content Include="DomManipulation\Scripts\jquery.timer.js" />
+    <Content Include="DomManipulation\Scripts\MovableDivs.js" />
+    <Content Include="DomManipulation\Scripts\RandomDivElements.js" />
+    <None Include="Scripts\jquery-2.0.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
+    <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Strings\Default.html" />
     <Content Include="Strings\script.js" />
     <Content Include="Strings\Scripts\jquery-1.7.1.js" />
@@ -78,13 +93,14 @@
     <Content Include="OperatorsExpressions\Default.html" />
     <Content Include="OperatorsExpressions\script.js" />
     <Content Include="OperatorsExpressions\Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-2.0.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
