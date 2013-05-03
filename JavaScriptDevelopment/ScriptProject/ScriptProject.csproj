@@ -7,8 +7,8 @@
     <ProjectGuid>{3A0D7103-FF7D-436B-9FEF-6A39071BC472}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScriptProject</RootNamespace>
-    <AssemblyName>ScriptProject</AssemblyName>
+    <RootNamespace>SimulateVehicles</RootNamespace>
+    <AssemblyName>SimulateVehicles</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NoStdLib>True</NoStdLib>
@@ -34,8 +34,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AirVehicle.cs" />
+    <Compile Include="AmphibiousVehicle.cs" />
+    <Compile Include="LandVehicle.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="Propellers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PropellingNozzles.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropulsionUnit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Vehicle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WaterVehicle.cs" />
+    <Compile Include="Wheel.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -45,9 +66,6 @@
     <Reference Include="mscorlib">
       <HintPath>$(SolutionDir)packages\Saltarelle.Runtime.2.2.0\tools\Assemblies\mscorlib.dll</HintPath>
     </Reference>
-    <Reference Include="Saltarelle.jQuery">
-      <HintPath>..\packages\Saltarelle.jQuery.1.9.0\lib\Saltarelle.jQuery.dll</HintPath>
-    </Reference>
     <Reference Include="Saltarelle.Web">
       <HintPath>..\packages\Saltarelle.Web.2.2.0\lib\Saltarelle.Web.dll</HintPath>
     </Reference>
@@ -55,7 +73,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition="!Exists('$(SolutionDir)packages\Saltarelle.Compiler.2.2.0\tools\Saltarelle.Compiler.targets')" />
   <Import Project="$(SolutionDir)packages\Saltarelle.Compiler.2.2.0\tools\Saltarelle.Compiler.targets" Condition="Exists('$(SolutionDir)packages\Saltarelle.Compiler.2.2.0\tools\Saltarelle.Compiler.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)$(TargetName).js" "$(SolutionDir)\JavaScriptDevelopment\DomManipulation\Scripts"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)$(TargetName).js" "$(SolutionDir)\JavaScriptDevelopment\OOP\Scripts"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

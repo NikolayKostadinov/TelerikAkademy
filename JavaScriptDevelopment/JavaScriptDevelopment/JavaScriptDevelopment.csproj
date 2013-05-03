@@ -57,6 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdvanceFunctions\Default.html" />
+    <Content Include="AdvanceFunctions\domModule.js" />
+    <Content Include="AdvanceFunctions\movingShapes.js" />
+    <Content Include="AdvanceFunctions\specialConsole.js" />
     <Content Include="Chirpy.ReadMe.txt" />
     <Content Include="ConditionalStatements\Default.html" />
     <Content Include="ConditionalStatements\script.js" />
@@ -76,6 +80,8 @@
     <Content Include="DomManipulation\Scripts\MovableDivs.js" />
     <Content Include="DomManipulation\Scripts\RandomDivElements.js" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
+    <Content Include="OOP\Default.html" />
+    <Content Include="OOP\Scripts\SimulateVehicles.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Strings\Default.html" />
