@@ -25,31 +25,37 @@
             bucket.style.backgroundRepeat = 'no-repeat';
             bucket.style.top = '30px';
             bucket.style.left = '30px';
-            bucket.ondragover = function(ev) {
-                ev.preventDefault();
-                IsBucketOpen(bucket, true);
-            };
-            bucket.ondragleave = function() {
-                IsBucketOpen(bucket, false);
-            };
-            bucket.ondrop = function(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData("Text");
-                document.body.removeChild(document.getElementById(data));
-                IsBucketOpen(bucket, false);
-                if (refreshIntervalId === undefined) {
-                    refreshIntervalId = setInterval(function () {
-                        ++totalSeconds;
-                        pnlTimerCount.innerHTML = totalSeconds;
-                    }, 1);
-                }
-                trashCount--;
-                if (trashCount === 0) {
-                    clearInterval(refreshIntervalId);
-                    OpenScoreWindow();
-                }
-            };
+            bucket.addEventListener('dragover', dragoverEvent, false);
+            bucket.addEventListener('dragleave', dragleaveEvent, false);
+            bucket.addEventListener('drop', dropEvent, false);
             document.body.appendChild(bucket);
+        }
+
+        function dragleaveEvent(ev) {
+            IsBucketOpen(this, false);
+        }
+
+        function dragoverEvent(ev) {
+            ev.preventDefault();
+            IsBucketOpen(this, true);
+        }
+
+        function dropEvent(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            document.body.removeChild(document.getElementById(data));
+            IsBucketOpen(this, false);
+            if (refreshIntervalId === undefined) {
+                refreshIntervalId = setInterval(function () {
+                    ++totalSeconds;
+                    pnlTimerCount.innerHTML = totalSeconds;
+                }, 1);
+            }
+            trashCount--;
+            if (trashCount === 0) {
+                clearInterval(refreshIntervalId);
+                OpenScoreWindow();
+            }
         }
 
         function IsBucketOpen(bucket, isOpen) {
@@ -71,14 +77,16 @@
                 trash.style.top = randomNumber(300, 600) + 'px';
                 trash.style.left = randomNumber(300, 600) + 'px';
                 trash.draggable = true;
-                trash.ondragstart = function(ev) {
-                    ev.dataTransfer.setData("Text", ev.target.id);
-                };
+                trash.addEventListener('dragstart', startDrag, false);
                 document.body.appendChild(trash);
                 trashCount++;
             }
         }
         
+        function startDrag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+
         function randomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
