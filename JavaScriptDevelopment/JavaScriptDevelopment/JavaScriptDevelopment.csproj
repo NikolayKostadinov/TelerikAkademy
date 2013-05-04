@@ -61,6 +61,13 @@
     <Content Include="AdvanceFunctions\domModule.js" />
     <Content Include="AdvanceFunctions\movingShapes.js" />
     <Content Include="AdvanceFunctions\specialConsole.js" />
+    <Content Include="APIs\CleanTheTrash.html" />
+    <Content Include="APIs\Drawing.html" />
+    <Content Include="APIs\Images\bucketClose.jpg" />
+    <Content Include="APIs\Images\bucketOpen.jpg" />
+    <Content Include="APIs\Images\trash.jpg" />
+    <Content Include="APIs\MovableCircle.html" />
+    <Content Include="APIs\storage.js" />
     <Content Include="Chirpy.ReadMe.txt" />
     <Content Include="ConditionalStatements\Default.html" />
     <Content Include="ConditionalStatements\script.js" />

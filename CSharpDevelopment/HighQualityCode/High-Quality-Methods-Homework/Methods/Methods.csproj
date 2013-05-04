@@ -43,6 +43,11 @@
   <ItemGroup>
     <Compile Include="Methods.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="Utils\Calculations.cs" />
+    <Compile Include="Utils\Converters.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\Formatters.cs" />
+    <Compile Include="Utils\Mathematical.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
