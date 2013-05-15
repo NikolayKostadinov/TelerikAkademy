@@ -98,6 +98,9 @@
     <Content Include="EventModel\Images\Image6.jpg" />
     <Content Include="EventModel\Images\Image7.jpg" />
     <Content Include="EventModel\ToDoList.html" />
+    <Content Include="JS2PrepareExam\Default.html" />
+    <Content Include="JS2PrepareExam\scripts\siteController.js" />
+    <Content Include="JS2PrepareExam\scripts\treeView.js" />
     <Content Include="OOP\Default.html" />
     <Content Include="OOP\Scripts\SimulateVehicles.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
