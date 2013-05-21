@@ -98,7 +98,17 @@
     <Content Include="EventModel\Images\Image6.jpg" />
     <Content Include="EventModel\Images\Image7.jpg" />
     <Content Include="EventModel\ToDoList.html" />
+    <Content Include="JS2Exam\Default.html" />
+    <Content Include="JS2Exam\Images\jsninja.png" />
+    <Content Include="JS2Exam\Scripts\Helpers.js" />
+    <Content Include="JS2Exam\Scripts\imageGallery.js" />
+    <Content Include="JS2Exam\Scripts\imageGalleryRepository.js" />
+    <Content Include="JS2Exam\Scripts\PopupControl.js" />
+    <Content Include="JS2Exam\Scripts\shims.js" />
+    <Content Include="JS2PrepareExam\AccordionScripts\accordion.js" />
+    <Content Include="JS2PrepareExam\AccordionScripts\local-storage-extensions.js" />
     <Content Include="JS2PrepareExam\Default.html" />
+    <Content Include="JS2PrepareExam\JSAccordion.html" />
     <Content Include="JS2PrepareExam\scripts\siteController.js" />
     <Content Include="JS2PrepareExam\scripts\treeView.js" />
     <Content Include="OOP\Default.html" />
