@@ -214,31 +214,20 @@
     <Content Include="JS2\EventModel\Images\Image6.jpg" />
     <Content Include="JS2\EventModel\Images\Image7.jpg" />
     <Content Include="JS2\EventModel\ToDoList.html" />
-    <Content Include="JS2\JS2Exam\Default.html" />
-    <Content Include="JS2\JS2Exam\Images\jsninja.png" />
-    <Content Include="JS2\JS2Exam\Scripts\Helpers.js" />
-    <Content Include="JS2\JS2Exam\Scripts\imageGallery.js" />
-    <Content Include="JS2\JS2Exam\Scripts\imageGalleryRepository.js" />
-    <Content Include="JS2\JS2Exam\Scripts\PopupControl.js" />
-    <Content Include="JS2\JS2Exam\Scripts\shims.js" />
-    <Content Include="JS2\JS2PrepareExam\AccordionScripts\accordion.js" />
-    <Content Include="JS2\JS2PrepareExam\AccordionScripts\local-storage-extensions.js" />
-    <Content Include="JS2\JS2PrepareExam\Default.html" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\collapse.png" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\expand.png" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\grd_alt.png" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\grd_head.png" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\grd_pgr.png" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\Grid.css" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\Grid.js" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\jquery-1.7.2.min.js" />
-    <Content Include="JS2\JS2PrepareExam\examples\jsControls\Test.htm" />
-    <Content Include="JS2\JS2PrepareExam\JSAccordion.html" />
-    <Content Include="JS2\JS2PrepareExam\scripts\siteController.js" />
-    <Content Include="JS2\JS2PrepareExam\scripts\treeView.js" />
     <Content Include="JS2\OOP\Default.html" />
     <Content Include="JS2\OOP\Scripts\SimulateVehicles.js" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
+    <Content Include="JSApps\AdvancedOOP\FavoriteSiteBar.html" />
+    <Content Include="JSApps\AdvancedOOP\ImageSlider.html" />
+    <Content Include="JSApps\AdvancedOOP\SchoolRepository.html" />
+    <Content Include="JSApps\AdvancedOOP\SchoolRepositoryClassic.html" />
+    <Content Include="JSApps\AdvancedOOP\Scripts\classicClassCreate.js" />
+    <Content Include="JSApps\AdvancedOOP\Scripts\FavoriteSiteBar.js" />
+    <Content Include="JSApps\AdvancedOOP\Scripts\ImageSlider.js" />
+    <Content Include="JSApps\AdvancedOOP\Scripts\prototypeCreateExtend.js" />
+    <Content Include="JSApps\AdvancedOOP\Scripts\SchoolRepository.js" />
+    <Content Include="JSApps\AdvancedOOP\Scripts\SchoolRepositoryClassic.js" />
+    <Content Include="JSApps\AdvancedOOP\Styles\SliderStyle.css" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Web.config">
@@ -264,7 +253,6 @@
     <Content Include="JS2\APIs\APIs.rar" />
     <Content Include="JS2\DomManipulation\DomManipulation.rar" />
     <Content Include="JS2\EventModel\EventModel.rar" />
-    <Content Include="JS2\JS2Exam\JS2ExamFinal.rar" />
     <Content Include="JS2\OOP\OOP.rar" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
     <None Include="Web.Debug.config">
@@ -274,7 +262,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="JSApps\AdvancedOOP\Images\Large\" />
+    <Folder Include="JSApps\AdvancedOOP\Images\Thumb\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
