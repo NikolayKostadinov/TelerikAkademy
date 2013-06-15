@@ -204,8 +204,41 @@
     <Content Include="JS2\DomManipulation\Scripts\MovableDivs.js" />
     <Content Include="JS2\DomManipulation\Scripts\RandomDivElements.js" />
     <Content Include="JS2\EventModel\Carousel.html" />
-    <Content Include="JS2\EventModel\Images\arrowLeft.png" />
-    <Content Include="JS2\EventModel\Images\arrowRight.png" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image3.jpg" />
+    <Content Include="JSApps\JQueryOverview\ChangeBackground.html" />
+    <Content Include="JSApps\JQueryOverview\GenerateTable.html" />
+    <Content Include="JSApps\JQueryOverview\Images\blank.gif" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_background.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_hex.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_hsb_b.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_hsb_h.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_hsb_s.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_indic.gif" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_overlay.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_rgb_b.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_rgb_g.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_rgb_r.png" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_select.gif" />
+    <Content Include="JSApps\JQueryOverview\Images\colorpicker_submit.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_background.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_hex.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_hsb_b.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_hsb_h.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_hsb_s.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_indic.gif" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_rgb_b.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_rgb_g.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_rgb_r.png" />
+    <Content Include="JSApps\JQueryOverview\Images\custom_submit.png" />
+    <Content Include="JSApps\JQueryOverview\Images\image3.jpg" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image4.jpg" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image5.jpg" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image6.jpg" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image7.jpg" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image8.jpg" />
+    <Content Include="JSApps\AdvancedOOP\Images\Large\image9.jpg" />
+    <Content Include="JSApps\JQueryOverview\Images\arrowLeft.png" />
+    <Content Include="JSApps\JQueryOverview\Images\arrowRight.png" />
     <Content Include="JS2\EventModel\Images\Image1.jpg" />
     <Content Include="JS2\EventModel\Images\Image2.jpg" />
     <Content Include="JS2\EventModel\Images\Image3.jpg" />
@@ -228,6 +261,18 @@
     <Content Include="JSApps\AdvancedOOP\Scripts\SchoolRepository.js" />
     <Content Include="JSApps\AdvancedOOP\Scripts\SchoolRepositoryClassic.js" />
     <Content Include="JSApps\AdvancedOOP\Styles\SliderStyle.css" />
+    <Content Include="JSApps\JQueryOverview\Images\select.png" />
+    <Content Include="JSApps\JQueryOverview\Images\select2.png" />
+    <Content Include="JSApps\JQueryOverview\Images\slider.png" />
+    <Content Include="JSApps\JQueryOverview\InsertElement.html" />
+    <Content Include="JSApps\JQueryOverview\Scripts\colorpicker.js" />
+    <Content Include="JSApps\JQueryOverview\Scripts\eye.js" />
+    <Content Include="JSApps\JQueryOverview\Scripts\jquery-2.0.0.js" />
+    <Content Include="JSApps\JQueryOverview\Scripts\Slider.js" />
+    <Content Include="JSApps\JQueryOverview\Scripts\utils.js" />
+    <Content Include="JSApps\JQueryOverview\Slider.html" />
+    <Content Include="JSApps\JQueryOverview\Styles\colorpicker.css" />
+    <Content Include="JSApps\JQueryOverview\Styles\Slider.css" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Web.config">
@@ -263,7 +308,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="JSApps\AdvancedOOP\Images\Large\" />
     <Folder Include="JSApps\AdvancedOOP\Images\Thumb\" />
   </ItemGroup>
   <PropertyGroup>
