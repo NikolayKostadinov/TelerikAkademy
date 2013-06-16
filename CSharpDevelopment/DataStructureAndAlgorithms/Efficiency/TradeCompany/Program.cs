@@ -46,7 +46,7 @@ namespace TradeCompany
             Console.WriteLine("Search: {0}", stopwatch.Elapsed);
             Console.WriteLine(result.Count);
 
-            //To test with 1 500 000 mil Articles download 100mb file: 
+            //To test with 1 500 000 mil Articles download 100mb file: https://github.com/saykorz/TelerikAkademy/blob/master/CSharpDevelopment/DataStructureAndAlgorithms/data1500000.rar
             //Create and add 1 500 000 mil Articles: 00:00:19.8488240
             //Search: 00:00:00.0015390
             //1394252
