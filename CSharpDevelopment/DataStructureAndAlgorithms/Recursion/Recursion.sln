@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07 FindAllPath", "FindAllPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08 CheckForPossiblePath", "CheckForPossiblePath\08 CheckForPossiblePath.csproj", "{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindLargeArea", "FindLargeArea\FindLargeArea.csproj", "{D4D0876E-9F07-4278-B5F1-AC514648298D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09 FindLargeArea", "FindLargeArea\09 FindLargeArea.csproj", "{D4D0876E-9F07-4278-B5F1-AC514648298D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAllAreas", "FindAllAreas\FindAllAreas.csproj", "{037E1220-AAF4-4CAA-B861-EAA635F33135}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{D4D0876E-9F07-4278-B5F1-AC514648298D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4D0876E-9F07-4278-B5F1-AC514648298D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4D0876E-9F07-4278-B5F1-AC514648298D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FindLargeArea
+namespace FindAllAreas
 {
     class Program
     {
@@ -17,7 +21,7 @@ namespace FindLargeArea
 
         static void Main()
         {
-            
+
             for (int row = 0; row < labyrinth.GetLength(0); row++)
             {
                 for (int col = 0; col < labyrinth.GetLength(1); col++)
@@ -25,10 +29,11 @@ namespace FindLargeArea
                     if (labyrinth[row, col] == " ")
                     {
                         DFS(row, col, 0);
+                        Console.WriteLine(maxSum);
+                        maxSum = 0;
                     }
                 }
             }
-            Console.WriteLine(maxSum);
         }
 
         static void DFS(int row, int col, int count)
