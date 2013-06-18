@@ -35,17 +35,18 @@ namespace FindLargeArea
             Console.WriteLine(maxSum);
         }
 
-        static int DFS(int row, int col, int count)
+        static void DFS(int row, int col, int count)
         {
             if (count > maxSum)
             {
                 maxSum = count;
             }
+
             if (row < 0 || col < 0 ||
                 row >= labyrinth.GetLength(0) || col >= labyrinth.GetLength(1) ||
                 labyrinth[row, col] != " ")
             {
-                return 0;
+                return;
             }
 
             labyrinth[row, col] = count.ToString();
@@ -55,8 +56,6 @@ namespace FindLargeArea
             DFS(row - 1, col, count);
             DFS(row, col + 1, count);
             DFS(row + 1, col, count);
-
-            return count;
         }
     }
 }
