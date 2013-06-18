@@ -4,124 +4,132 @@ namespace EightQueensPuzzle
 {
     class Program
     {
-        private static int queens = 8;
-        private static int matrixLenght = 8;
-        static int[,] matrix = new int[matrixLenght, matrixLenght];
+        private static int count = 0;
 
         static void Main()
         {
-            int startPosition = 0;
-            while(queens > 0)
-            {
-                PutQueen(startPosition, 0);
-                Start(0);
-                startPosition++;
-            }
+            int[,] matrix = new int[8, 8];
+            Queens(matrix, 8, 0);
+            Console.WriteLine(count);
         }
 
-        private static void Start(int startPosition)
+        private static void Queens(int[,] matrix, int queens, int col)
         {
-            for (int row = startPosition; row < matrixLenght; row++)
+            for (int row = 0; row < 8; row++)
             {
-                for (int col = 0; col < matrixLenght; col++)
+                if (matrix[row, col] == 0)
                 {
-                    if (matrix[row, col] == 0)
+                    //place queen
+                    queens--;
+                    matrix[row, col] = 9;
+
+                    SetBeatenField(matrix, row, col, 1);
+                    if (queens == 0)
                     {
-                        PutQueen(row, col);
-                        Print();
-                        Console.WriteLine();
+                        //Print(matrix);
+                        count++;
                     }
+                    if (col + 1 < 8)
+                    {
+                        Queens(matrix, queens, col + 1);
+                    }
+
+                    //remove queen
+                    queens++;
+                    matrix[row, col] = 1;
+                    SetBeatenField(matrix, row, col, -1);
                 }
             }
-
-            if (queens > 0)
-            {
-                queens = 8;
-                matrix = new int[matrixLenght, matrixLenght];
-            }
         }
 
-        private static void Print()
+        private static void Print(int[,] matrix)
         {
-            for (int row = 0; row < matrixLenght; row++)
+            for (int row = 0; row < 8; row++)
             {
-                for (int col = 0; col < matrixLenght; col++)
+                for (int col = 0; col < 8; col++)
                 {
                     Console.Write(matrix[row, col] + " ");
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine();
         }
 
-        private static void PutQueen(int row, int col)
+        private static void SetBeatenField(int[,] matrix, int row, int col, int sum)
         {
-            queens--;
-            matrix[row, col] = 9;
-            SetBeatenField(row, col);
-        }
-  
-        private static void SetBeatenField(int row, int col)
-        {
-            SetBeatenColumns(row);
-            SetBeatenRows(col);
-            SetBeatenTopLeftBottomRight(row, col);
-            SetBeatenTopRightBottomLeft(row, col);
+            SetBeatenColumns(matrix, row, sum);
+            SetBeatenRows(matrix, col, sum);
+            SetBeatenTopLeftBottomRight(matrix, row, col, sum);
+            SetBeatenTopRightBottomLeft(matrix, row, col, sum);
         }
 
-        private static void SetBeatenTopRightBottomLeft(int row, int col)
+        private static void SetBeatenTopRightBottomLeft(int[,] matrix, int row, int col, int sum)
         {
-            int startCol;
-            int startRow = 0;
-            startCol = col + row;
-            if (startCol >= matrixLenght)
+            int currentRow = row;
+            int currentCol = col;
+            while (currentRow  - 1 >= 0 && currentCol + 1 < 8)
             {
-                startCol = matrixLenght - 1;
+                matrix[currentRow  - 1, currentCol + 1] += sum;
+                currentRow--;
+                currentCol++;
             }
 
-            for (int i = 0; i < matrixLenght; i++)
+            currentRow = row;
+            currentCol = col;
+            while (currentRow + 1 < 8 && currentCol - 1 >= 0 )
             {
-                if (startRow + i < matrixLenght && startCol - i >= 0 &&
-                    matrix[startRow + i, startCol - i] < 9)
-                {
-                    matrix[startRow + i, startCol - i]++;
-                }
+                matrix[currentRow + 1, currentCol - 1] += sum;
+                currentRow++;
+                currentCol--;
             }
         }
 
-        private static void SetBeatenTopLeftBottomRight(int row, int col)
+        private static void SetBeatenTopLeftBottomRight(int[,] matrix, int row, int col, int sum)
         {
             int startCol;
             int startRow = 0;
             startCol = col - row;
 
-            for (int i = 0; i < matrixLenght; i++)
+            for (int i = 0; i < 8; i++)
             {
-                if (startRow + i < matrixLenght && startCol + i < matrixLenght && startCol + i >= 0 &&
-                    matrix[startRow + i, startCol + i] < 9)
+                if (startRow + i < 8 && startCol + i < 8 && startCol + i >= 0 &&
+                    matrix[startRow + i, startCol + i] >= 0 && matrix[startRow + i, startCol + i] < 9)
                 {
-                    matrix[startRow + i, startCol + i]++;
+                    matrix[startRow + i, startCol + i] += sum;
+                    if (matrix[startRow + i, startCol + i] < 0)
+                    {
+                        matrix[startRow + i, startCol + i] = 0;
+                    }
                 }
             }
         }
 
-        private static void SetBeatenRows(int col)
+        private static void SetBeatenRows(int[,] matrix, int col, int sum)
         {
-            for (int i = 0; i < matrixLenght; i++)
+            for (int i = 0; i < 8; i++)
             {
-                if (matrix[i, col] < 9)
+                if (matrix[i, col] >= 0 && matrix[i, col] < 9)
                 {
-                    matrix[i, col]++;
+                    matrix[i, col] += sum;
+                    if (matrix[i, col] < 0)
+                    {
+                        matrix[i, col] = 0;
+                    }
                 }
             }
         }
 
-        private static void SetBeatenColumns(int row)
+        private static void SetBeatenColumns(int[,] matrix, int row, int sum)
         {
-            for (int i = 0; i < matrixLenght; i++)
+            for (int i = 0; i < 8; i++)
             {
-                if (matrix[row, i] < 9)
+                if (matrix[row, i] >= 0 && matrix[row, i] < 9)
                 {
-                    matrix[row, i]++;
+                    matrix[row, i] += sum;
+                    if (matrix[row, i] < 0)
+                    {
+                        matrix[row, i] = 0;
+                    }
                 }
             }
         }
