@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SubsetVariation
 {
@@ -24,7 +21,7 @@ namespace SubsetVariation
         {
             if (index >= arr.Length)
             {
-                sb.Append("(" + String.Join(" ", arr) + "),");
+                Print(arr, sb);
             }
             else
             {
@@ -34,6 +31,11 @@ namespace SubsetVariation
                     GenValue(index + 1, arr, start, sb);
                 }
             }
+        }
+
+        private static void Print(string[] arr, StringBuilder sb)
+        {
+            sb.Append("(" + String.Join(" ", arr) + "),");
         }
     }
 }

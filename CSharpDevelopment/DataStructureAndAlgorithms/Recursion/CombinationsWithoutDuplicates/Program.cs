@@ -21,7 +21,7 @@ namespace CombinationsWithoutDuplicates
         {
             if (index >= arr.Length)
             {
-                sb.Append("(" + String.Join(" ", arr) + "),");
+                Print(arr, sb);
             }
             else
             {
@@ -31,6 +31,11 @@ namespace CombinationsWithoutDuplicates
                     GenValue(index + 1, arr, arr[0] + 1, end, sb);
                 }
             }
+        }
+
+        private static void Print(int[] arr, StringBuilder sb)
+        {
+            sb.Append("(" + String.Join(" ", arr) + "),");
         }
     }
 }

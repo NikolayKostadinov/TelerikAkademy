@@ -22,19 +22,7 @@ namespace AllSubset
         {
             if (index >= arr.Length)
             {
-                sb.Append("(");
-                for (int i = 0; i < arr.Length; i++)
-                {
-                    if (i == 0)
-                    {
-                        sb.Append(set[arr[i]] + " ");
-                    }
-                    else
-                    {
-                        sb.Append(set[arr[i]]);
-                    }
-                }
-                sb.Append("), ");
+                Print(arr, sb);
             }
             else
             {
@@ -44,6 +32,23 @@ namespace AllSubset
                     GenValue(index + 1, arr, arr[0] + 1, sb);
                 }
             }
+        }
+
+        private static void Print(int[] arr, StringBuilder sb)
+        {
+            sb.Append("(");
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i == 0)
+                {
+                    sb.Append(set[arr[i]] + " ");
+                }
+                else
+                {
+                    sb.Append(set[arr[i]]);
+                }
+            }
+            sb.Append("), ");
         }
     }
 }

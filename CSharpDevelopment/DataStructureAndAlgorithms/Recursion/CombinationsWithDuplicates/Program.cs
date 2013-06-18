@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CombinationsWithDuplicates
 {
@@ -23,7 +20,7 @@ namespace CombinationsWithDuplicates
         {
             if (index >= arr.Length)
             {
-                sb.Append("(" + String.Join(" ", arr) + "),");
+                Print(arr, sb);
             }
             else
             {
@@ -33,6 +30,11 @@ namespace CombinationsWithDuplicates
                     GenValue(index + 1, arr, arr[0], end, sb);
                 }
             }
+        }
+
+        private static void Print(int[] arr, StringBuilder sb)
+        {
+            sb.Append("(" + String.Join(" ", arr) + "),");
         }
     }
 }
