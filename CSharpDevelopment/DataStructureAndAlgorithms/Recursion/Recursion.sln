@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03 CombinationsWithoutDupli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05 SubsetVariation", "SubsetVariation\05 SubsetVariation.csproj", "{6D60D66B-5F84-4132-9A7C-DAF749695665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllSubset", "AllSubset\AllSubset.csproj", "{33570936-C9B1-4DBA-BA9E-FCBE09953DB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06 AllSubset", "AllSubset\06 AllSubset.csproj", "{33570936-C9B1-4DBA-BA9E-FCBE09953DB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAllPath", "FindAllPath\FindAllPath.csproj", "{4C5DC3F6-B281-4171-85AF-B65F03F56E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckForPossiblePath", "CheckForPossiblePath\CheckForPossiblePath.csproj", "{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +41,14 @@ Global
 		{33570936-C9B1-4DBA-BA9E-FCBE09953DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33570936-C9B1-4DBA-BA9E-FCBE09953DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33570936-C9B1-4DBA-BA9E-FCBE09953DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C5DC3F6-B281-4171-85AF-B65F03F56E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C5DC3F6-B281-4171-85AF-B65F03F56E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C5DC3F6-B281-4171-85AF-B65F03F56E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C5DC3F6-B281-4171-85AF-B65F03F56E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
