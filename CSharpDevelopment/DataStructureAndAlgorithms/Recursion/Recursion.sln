@@ -17,7 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08 CheckForPossiblePath", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09 FindLargeArea", "FindLargeArea\09 FindLargeArea.csproj", "{D4D0876E-9F07-4278-B5F1-AC514648298D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAllAreas", "FindAllAreas\FindAllAreas.csproj", "{037E1220-AAF4-4CAA-B861-EAA635F33135}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10 FindAllAreas", "FindAllAreas\10 FindAllAreas.csproj", "{037E1220-AAF4-4CAA-B861-EAA635F33135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04 Permutation", "Permutation\04 Permutation.csproj", "{486DB82A-CCD4-419A-8D3C-60DDEA58B805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11 PermutationsWithRepetitions", "PermutationsWithRepetitions\11 PermutationsWithRepetitions.csproj", "{C98C7766-789B-4129-9F7A-827639DB9E2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12 EightQueensPuzzle", "EightQueensPuzzle\12 EightQueensPuzzle.csproj", "{0EAEBCB9-1927-4441-8CD4-28223D5A379C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +67,18 @@ Global
 		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{037E1220-AAF4-4CAA-B861-EAA635F33135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486DB82A-CCD4-419A-8D3C-60DDEA58B805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486DB82A-CCD4-419A-8D3C-60DDEA58B805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486DB82A-CCD4-419A-8D3C-60DDEA58B805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486DB82A-CCD4-419A-8D3C-60DDEA58B805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98C7766-789B-4129-9F7A-827639DB9E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98C7766-789B-4129-9F7A-827639DB9E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98C7766-789B-4129-9F7A-827639DB9E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98C7766-789B-4129-9F7A-827639DB9E2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EAEBCB9-1927-4441-8CD4-28223D5A379C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAEBCB9-1927-4441-8CD4-28223D5A379C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAEBCB9-1927-4441-8CD4-28223D5A379C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAEBCB9-1927-4441-8CD4-28223D5A379C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
