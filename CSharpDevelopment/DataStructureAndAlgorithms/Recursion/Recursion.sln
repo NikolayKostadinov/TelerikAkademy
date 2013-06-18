@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05 SubsetVariation", "Subse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06 AllSubset", "AllSubset\06 AllSubset.csproj", "{33570936-C9B1-4DBA-BA9E-FCBE09953DB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAllPath", "FindAllPath\FindAllPath.csproj", "{4C5DC3F6-B281-4171-85AF-B65F03F56E97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07 FindAllPath", "FindAllPath\07 FindAllPath.csproj", "{4C5DC3F6-B281-4171-85AF-B65F03F56E97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckForPossiblePath", "CheckForPossiblePath\CheckForPossiblePath.csproj", "{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08 CheckForPossiblePath", "CheckForPossiblePath\08 CheckForPossiblePath.csproj", "{A1AECBCB-E2C1-40C6-BFC1-BBF8B0D184F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

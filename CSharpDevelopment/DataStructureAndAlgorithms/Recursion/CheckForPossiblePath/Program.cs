@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CheckForPossiblePath
 {
     class Program
     {
-        static string[,] labyrinth = 
-        {
-            {" ", " ", " ", "*", " ", " ", " "},
-            {"*", "*", " ", "*", " ", "*", " "},
-            {" ", " ", " ", " ", " ", " ", " "},
-            {" ", "*", "*", "*", "*", "*", " "},
-            {" ", " ", " ", " ", " ", " ", " "},
-        };
+        static string[,] labyrinth = new string[100, 100];
 
         static void Main()
         {
-            labyrinth[4, 6] = "e";
+            for (int row = 0; row < 100; row++)
+            {
+                for (int col = 0; col < 100; col++)
+                {
+                    labyrinth[row, col] = " ";
+                }
+            }
+            labyrinth[40, 60] = "e";
             Stack<int> stack = new Stack<int>();
-            CheckPath(0, 0, 0, stack);
+            Console.WriteLine(CheckPath(5, 5, 0, stack));
         }
 
         private static bool CheckPath(int row, int col, int count, Stack<int> stack)
