@@ -7,6 +7,7 @@ namespace EightQueensPuzzle
         private static int queens = 8;
         private static int matrixLenght = 8;
         static int[,] matrix = new int[matrixLenght, matrixLenght];
+
         static void Main()
         {
             int startPosition = 0;
@@ -32,6 +33,7 @@ namespace EightQueensPuzzle
                     }
                 }
             }
+
             if (queens > 0)
             {
                 queens = 8;
@@ -60,16 +62,50 @@ namespace EightQueensPuzzle
   
         private static void SetBeatenField(int row, int col)
         {
-            //cols
-            for (int i = 0; i < matrixLenght; i++)
+            SetBeatenColumns(row);
+            SetBeatenRows(col);
+            SetBeatenTopLeftBottomRight(row, col);
+            SetBeatenTopRightBottomLeft(row, col);
+        }
+
+        private static void SetBeatenTopRightBottomLeft(int row, int col)
+        {
+            int startCol;
+            int startRow = 0;
+            startCol = col + row;
+            if (startCol >= matrixLenght)
             {
-                if(matrix[row, i] < 9)
-                {
-                    matrix[row, i]++;
-                }
+                startCol = matrixLenght - 1;
             }
 
-            //rows
+            for (int i = 0; i < matrixLenght; i++)
+            {
+                if (startRow + i < matrixLenght && startCol - i >= 0 &&
+                    matrix[startRow + i, startCol - i] < 9)
+                {
+                    matrix[startRow + i, startCol - i]++;
+                }
+            }
+        }
+
+        private static void SetBeatenTopLeftBottomRight(int row, int col)
+        {
+            int startCol;
+            int startRow = 0;
+            startCol = col - row;
+
+            for (int i = 0; i < matrixLenght; i++)
+            {
+                if (startRow + i < matrixLenght && startCol + i < matrixLenght && startCol + i >= 0 &&
+                    matrix[startRow + i, startCol + i] < 9)
+                {
+                    matrix[startRow + i, startCol + i]++;
+                }
+            }
+        }
+
+        private static void SetBeatenRows(int col)
+        {
             for (int i = 0; i < matrixLenght; i++)
             {
                 if (matrix[i, col] < 9)
@@ -77,30 +113,15 @@ namespace EightQueensPuzzle
                     matrix[i, col]++;
                 }
             }
+        }
 
-            //topleft
-            var startRow = 0;
-            var startCol = 0;
-            startCol = col - row;
+        private static void SetBeatenColumns(int row)
+        {
             for (int i = 0; i < matrixLenght; i++)
             {
-                if (startRow + i < matrixLenght && startCol + i < matrixLenght && startCol + i >=0 && matrix[startRow + i, startCol + i] < 9)
+                if (matrix[row, i] < 9)
                 {
-                    matrix[startRow + i, startCol + i]++;
-                }
-            }
-
-            //topright
-            startCol = col + row;
-            if (startCol >= matrixLenght)
-            {
-                startCol = matrixLenght - 1;
-            }
-            for (int i = 0; i < matrixLenght; i++)
-            {
-                if (startRow + i < matrixLenght && startCol - i >= 0 && matrix[startRow + i, startCol - i] < 9)
-                {
-                    matrix[startRow + i, startCol - i]++;
+                    matrix[row, i]++;
                 }
             }
         }
