@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Wintellect.PowerCollections;
 
 namespace OrderStudents
 {
@@ -9,7 +10,7 @@ namespace OrderStudents
     {
         static void Main()
         {
-            SortedDictionary<string, List<Student>> students = new SortedDictionary<string, List<Student>>();
+            SortedDictionary<string, OrderedBag<Student>> students = new SortedDictionary<string, OrderedBag<Student>>();
 
             string line;
             using (StreamReader reader = new StreamReader(@"..\..\students.txt"))
@@ -24,14 +25,14 @@ namespace OrderStudents
                     }
                     else
                     {
-                        students.Add(student.Course, new List<Student>() {student});
+                        students.Add(student.Course, new OrderedBag<Student>() { student });
                     }
                 }
             }
 
             foreach (var student in students)
             {
-                Console.WriteLine("{0}: {1}", student.Key, string.Join(", ", student.Value.OrderBy(s => s.FirstName).ToList()));
+                Console.WriteLine("{0}: {1}", student.Key, string.Join(", ", student.Value));
             }
         }
     }

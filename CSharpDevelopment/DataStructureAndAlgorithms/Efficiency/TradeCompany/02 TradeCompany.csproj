@@ -51,7 +51,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="data15000.csv" />
-    <None Include="data1500000.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@ using Wintellect.PowerCollections;
 
 namespace ImplementBiDictionary
 {
-    class BiDictionaryBiDictionary<TKey1, TKey2, TValue>
+    class BiDictionary<TKey1, TKey2, TValue>
     {
         private MultiDictionary<TKey1, TValue> key1 = new MultiDictionary<TKey1, TValue>(true);
         private MultiDictionary<TKey2, TValue> key2 = new MultiDictionary<TKey2, TValue>(true);
