@@ -18,6 +18,7 @@ namespace FindAllAreas
         };
 
         private static int maxSum = 0;
+        private static int count = 0;
 
         static void Main()
         {
@@ -28,21 +29,21 @@ namespace FindAllAreas
                 {
                     if (labyrinth[row, col] == " ")
                     {
-                        DFS(row, col, 0);
+                        DFS(row, col);
+                        if (count > maxSum)
+                        {
+                            maxSum = count;
+                        }
                         Console.WriteLine(maxSum);
                         maxSum = 0;
+                        count = 0;
                     }
                 }
             }
         }
 
-        static void DFS(int row, int col, int count)
+        static void DFS(int row, int col)
         {
-            if (count > maxSum)
-            {
-                maxSum = count;
-            }
-
             if (row < 0 || col < 0 ||
                 row >= labyrinth.GetLength(0) || col >= labyrinth.GetLength(1) ||
                 labyrinth[row, col] != " ")
@@ -53,10 +54,10 @@ namespace FindAllAreas
             labyrinth[row, col] = count.ToString();
 
             count++;
-            DFS(row, col - 1, count);
-            DFS(row - 1, col, count);
-            DFS(row, col + 1, count);
-            DFS(row + 1, col, count);
+            DFS(row, col - 1);
+            DFS(row - 1, col);
+            DFS(row, col + 1);
+            DFS(row + 1, col);
         }
     }
 }

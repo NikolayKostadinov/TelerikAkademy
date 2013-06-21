@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace CombinationsWithoutDuplicates
 {
     class Program
     {
+        
+
         static void Main()
         {
-            int k = 2;
+            int k = 4;
             int[] arr = new int[k];
             int start = 1;
             int end = 4; //n
@@ -35,6 +38,7 @@ namespace CombinationsWithoutDuplicates
 
         private static void Print(int[] arr, StringBuilder sb)
         {
+           
             sb.Append("(" + String.Join(" ", arr) + "),");
         }
     }

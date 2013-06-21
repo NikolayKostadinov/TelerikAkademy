@@ -39,8 +39,6 @@ namespace FindLargeArea
 
         static void DFS(int row, int col)
         {
-           
-
             if (row < 0 || col < 0 ||
                 row >= labyrinth.GetLength(0) || col >= labyrinth.GetLength(1) ||
                 labyrinth[row, col] != " ")
