@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace AcademyTasks
 {
-    class Program
+    internal class Program
     {
         private static int[] pleasantness =
             {
-               1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 999
+                1, 2, 3
             };
 
-        private static int variety = 1; // expected 26
-        static bool isSolved = false;
-        static HashSet<int> vizited = new HashSet<int>();
+        private static int variety = 2;
+        private static bool isSolved = false;
+        private static HashSet<int> vizited = new HashSet<int>();
 
-        static void Main()
+        private static void Main()
         {
             string[] input = Console.ReadLine().Split(',');
             variety = int.Parse(Console.ReadLine());
@@ -40,11 +40,6 @@ namespace AcademyTasks
             {
                 var currentNode = queue.Dequeue();
 
-                if (currentNode.Steps == 22)
-                {
-                    
-                }
-
                 if (Math.Abs(currentNode.Min - currentNode.Max) >= variety)
                 {
                     Console.WriteLine(currentNode.Steps);
@@ -53,7 +48,7 @@ namespace AcademyTasks
                 }
 
                 //i+1
-                if (currentNode.Index + 1< pleasantness.Count())
+                if (currentNode.Index + 1 < pleasantness.Count())
                 {
                     var nodeOne = new Node();
                     nodeOne.Steps = currentNode.Steps + 1;
@@ -61,7 +56,7 @@ namespace AcademyTasks
                     nodeOne.Index = currentNode.Index + 1;
                     nodeOne.Min = Math.Min(pleasantness[currentNode.Index + 1], currentNode.Min);
                     nodeOne.Max = Math.Max(pleasantness[currentNode.Index + 1], currentNode.Max);
-                    if(!vizited.Contains(nodeOne.Id))
+                    if (!vizited.Contains(nodeOne.Id))
                     {
                         queue.Enqueue(nodeOne);
                         vizited.Add(nodeOne.Id);
@@ -85,9 +80,8 @@ namespace AcademyTasks
         }
     }
 
-    class Node
+    internal class Node
     {
-        private int id = 0;
         public int Id
         {
             get { return this.Value + this.Steps + this.Index + this.Min + this.Max; }
@@ -102,6 +96,6 @@ namespace AcademyTasks
         public int Min { get; set; }
 
         public int Max { get; set; }
-        
+
     }
 }
