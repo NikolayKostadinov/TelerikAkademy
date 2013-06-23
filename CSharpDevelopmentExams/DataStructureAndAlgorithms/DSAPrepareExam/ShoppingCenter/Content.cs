@@ -8,25 +8,40 @@ namespace ShoppingCenter
         public double Price { get; set; }
         public string Producer { get; set; }
 
-        public Content(string name, double price, string producer)
-        {
-            this.Name = name;
-            this.Price = price;
-            this.Producer = producer;
-        }
+        //public Content(string name, double price, string producer)
+        //{
+        //    this.Name = name;
+        //    this.Price = price;
+        //    this.Producer = producer;
+        //}
 
         public int CompareTo(Content other)
         {
             int result = 0;
 
-            result = this.Name.CompareTo(other.Name);
-            if (result != 0) return result;
+            //if (this.Name == null)
+            //{
+            //    return 1;
+            //}
+            //else
+            //{
+            //    result = this.Name.CompareTo(other.Name);
+            //    if (result != 0) return result;
+            //}
 
             result = this.Price.CompareTo(other.Price);
             if (result != 0) return result;
 
-            result = this.Producer.CompareTo(other.Producer);
-            if (result != 0) return result;
+            //if (this.Producer != null)
+            //{
+            //    return 1;
+            //}
+            //else
+            //{
+            //    result = this.Producer.CompareTo(other.Producer);
+            //    if (result != 0) return result;
+            //}
+
 
             return result;
         }

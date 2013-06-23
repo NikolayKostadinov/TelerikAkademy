@@ -10,13 +10,13 @@ namespace ShoppingCenter
     {
         private readonly MultiDictionary<string, Content> name;
         private readonly MultiDictionary<string, Content> producer;
-        private readonly OrderedMultiDictionary<double, Content> price;
+        private readonly OrderedBag<Content> price;
         private readonly MultiDictionary<Tuple<string, string>, Content> nameAndProducer; 
 
         public Catalog()
         {
             this.name = new MultiDictionary<string, Content>(true);
-            this.price = new OrderedMultiDictionary<double, Content>(true);
+            this.price = new OrderedBag<Content>();
             this.producer = new MultiDictionary<string, Content>(true);
             this.nameAndProducer = new MultiDictionary<Tuple<string, string>, Content>(true);
         }
@@ -26,7 +26,7 @@ namespace ShoppingCenter
             this.name.Add(content.Name, content);
             this.producer.Add(content.Producer, content);
             this.nameAndProducer.Add(new Tuple<string, string>(content.Name, content.Producer), content);
-            this.price.Add(content.Price, content);
+            this.price.Add(content);
         }
 
         public int Delete(string name, string producer)
@@ -42,7 +42,7 @@ namespace ShoppingCenter
                 foreach (Content content in contentToList)
                 {
                     this.name.Remove(content.Name, content);
-                    this.price.Remove(content.Price, content);
+                    this.price.Remove(content);
                     this.producer.Remove(content.Producer, content);
                     
                 }
@@ -56,7 +56,7 @@ namespace ShoppingCenter
                 foreach (Content content in contentToList)
                 {
                     this.name.Remove(content.Name, content);
-                    this.price.Remove(content.Price, content);
+                    this.price.Remove(content);
                     this.nameAndProducer.Remove(new Tuple<string, string>(content.Name, content.Producer), content);
                 }
                 result = contentToList.Count;
@@ -78,7 +78,8 @@ namespace ShoppingCenter
 
         public IEnumerable<Content> GetContentByPriceRange(double minPrice, double maxPrice)
         {
-            return this.price.Range(minPrice, true, maxPrice, true).Values.OrderBy(c => c);
+            var result = this.price.Range(new Content() {Price = minPrice}, true, new Content() {Price = maxPrice}, true).OrderBy(s => s.Name).ThenBy(s => s.Producer);
+            return result;
         }
     }
 }

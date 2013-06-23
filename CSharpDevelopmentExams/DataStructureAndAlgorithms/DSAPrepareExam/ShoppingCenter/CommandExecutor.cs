@@ -32,9 +32,12 @@ namespace ShoppingCenter
 
         private static void AddProductCommand(Catalog catalog, Command command, StringBuilder output)
         {
-            catalog.Add(new Content(command.Parameters[(int)ContentItemTypes.Name],
-                double.Parse(command.Parameters[(int)ContentItemTypes.Price]),
-                command.Parameters[(int)ContentItemTypes.Producer]));
+            catalog.Add(new Content()
+                {
+                    Name = command.Parameters[(int) ContentItemTypes.Name],
+                    Price = double.Parse(command.Parameters[(int) ContentItemTypes.Price]),
+                    Producer = command.Parameters[(int) ContentItemTypes.Producer]
+                });
             output.AppendLine("Product added");
         }
 
