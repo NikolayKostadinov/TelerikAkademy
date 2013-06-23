@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShoppingCenter
 {
-    public class Command : ICommand
+    public class Command
     {
         readonly char[] separators = { ';' };
         private const char COMMAND_END = ' ';

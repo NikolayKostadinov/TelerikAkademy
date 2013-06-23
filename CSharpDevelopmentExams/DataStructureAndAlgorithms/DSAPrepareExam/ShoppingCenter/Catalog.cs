@@ -6,88 +6,79 @@ using Wintellect.PowerCollections;
 
 namespace ShoppingCenter
 {
-    public class Catalog : ICatalog
+    public class Catalog
     {
-        private readonly OrderedMultiDictionary<string, IContent> name;
-        private readonly OrderedMultiDictionary<string, IContent> producer;
-        private readonly OrderedMultiDictionary<double, IContent> price;
+        private readonly MultiDictionary<string, Content> name;
+        private readonly MultiDictionary<string, Content> producer;
+        private readonly OrderedMultiDictionary<double, Content> price;
+        private readonly MultiDictionary<Tuple<string, string>, Content> nameAndProducer; 
 
         public Catalog()
         {
-            this.name = new OrderedMultiDictionary<string, IContent>(true);
-            this.price = new OrderedMultiDictionary<double, IContent>(true);
-            this.producer = new OrderedMultiDictionary<string, IContent>(true);
+            this.name = new MultiDictionary<string, Content>(true);
+            this.price = new OrderedMultiDictionary<double, Content>(true);
+            this.producer = new MultiDictionary<string, Content>(true);
+            this.nameAndProducer = new MultiDictionary<Tuple<string, string>, Content>(true);
         }
 
-        public void Add(IContent content)
+        public void Add(Content content)
         {
             this.name.Add(content.Name, content);
-            this.price.Add(content.Price, content);
             this.producer.Add(content.Producer, content);
+            this.nameAndProducer.Add(new Tuple<string, string>(content.Name, content.Producer), content);
+            this.price.Add(content.Price, content);
         }
 
         public int Delete(string name, string producer)
         {
-            var theElements = 0;
-            ICollection<IContent> contentToList = new Collection<IContent>();
+            var result = 0;
+            ICollection<Content> contentToList = new Collection<Content>();
 
             if (!string.IsNullOrEmpty(name))
             {
                 //remove by name and producer
-                contentToList = this.name[name].Where(c => c.Producer == producer).ToList();
-                foreach (IContent content in contentToList)
+                var searchResult = new Tuple<string, string>(name, producer);
+                contentToList = this.nameAndProducer[searchResult];
+                foreach (Content content in contentToList)
                 {
+                    this.name.Remove(content.Name, content);
                     this.price.Remove(content.Price, content);
                     this.producer.Remove(content.Producer, content);
-                    this.name.Remove(content.Name, content);
-                    theElements++;
+                    
                 }
+                result = contentToList.Count;
+                this.nameAndProducer.Remove(searchResult);
             }
             else
             {
                 //remove by producer only
                 contentToList = this.producer[producer];
-                foreach (IContent content in contentToList)
+                foreach (Content content in contentToList)
                 {
                     this.name.Remove(content.Name, content);
                     this.price.Remove(content.Price, content);
-                    
-                    theElements++;
+                    this.nameAndProducer.Remove(new Tuple<string, string>(content.Name, content.Producer), content);
                 }
+                result = contentToList.Count;
+                this.producer.Remove(producer);
             }
 
-            this.producer.Remove(producer);
-
-            return theElements;
+            return result;
         }
 
-        public IEnumerable<IContent> GetContentByName(string value)
+        public IEnumerable<Content> GetContentByName(string value)
         {
-            return this.name[value];
-            //var result = from c in this.name[value]
-            //             select c;
-            //if (result == null)
-            //{
-            //    throw new NullReferenceException("GetListContent return null selected list");
-            //}
-            //return result;
+            return this.name[value].OrderBy(c => c);
         }
 
-        public IEnumerable<IContent> GetContentByProducer(string value)
+        public IEnumerable<Content> GetContentByProducer(string value)
         {
-            return this.producer[value];
-            //var result = from c in this.producer[value]
-            //             select c;
-            //if (result == null)
-            //{
-            //    throw new NullReferenceException("GetListContent return null selected list");
-            //}
-            //return result;
+            return this.producer[value].OrderBy(c => c);
         }
 
-        public IEnumerable<IContent> GetContentByPriceRange(double minPrice, double maxPrice)
+        public IEnumerable<Content> GetContentByPriceRange(double minPrice, double maxPrice)
         {
-            return this.price.Range(minPrice, true, maxPrice, true).Values;
+            return this.price.Range(minPrice, true, maxPrice, true).Values.OrderBy(c => c);
         }
     }
 }

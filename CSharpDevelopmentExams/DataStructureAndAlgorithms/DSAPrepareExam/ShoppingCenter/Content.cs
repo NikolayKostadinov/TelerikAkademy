@@ -2,43 +2,33 @@
 
 namespace ShoppingCenter
 {
-    public class Content : IContent
+    public class Content : IComparable<Content>
     {
         public string Name { get; set; }
-
         public double Price { get; set; }
-
         public string Producer { get; set; }
-        
-        public string TextRepresentation
+
+        public Content(string name, double price, string producer)
         {
-            get
-            {
-                return this.ToString();
-            }
-            set { }
+            this.Name = name;
+            this.Price = price;
+            this.Producer = producer;
         }
 
-        public Content(string[] commandParams)
+        public int CompareTo(Content other)
         {
-            this.Name = commandParams[(int)ContentItemTypes.Name];
-            this.Price = double.Parse(commandParams[(int)ContentItemTypes.Price]);
-            this.Producer = commandParams[(int)ContentItemTypes.Producer];
-        }
+            int result = 0;
 
-        public int CompareTo(object obj)
-        {
-            if (null == obj)
-                return 1;
+            result = this.Name.CompareTo(other.Name);
+            if (result != 0) return result;
 
-            Content otherContent = obj as Content;
-            if (otherContent != null)
-            {
-                int comparisonResul = this.TextRepresentation.CompareTo(otherContent.TextRepresentation);
-                return comparisonResul;
-            }
-            
-            throw new ArgumentException("Object is not a Content");
+            result = this.Price.CompareTo(other.Price);
+            if (result != 0) return result;
+
+            result = this.Producer.CompareTo(other.Producer);
+            if (result != 0) return result;
+
+            return result;
         }
 
         public override string ToString()

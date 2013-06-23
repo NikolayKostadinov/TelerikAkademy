@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ShoppingCenter
 {
-    public class CommandExecutor : ICommandExecutor
+    public class CommandExecutor
     {
-        public void ExecuteCommand(ICatalog catalog, ICommand command, StringBuilder output)
+        public void ExecuteCommand(Catalog catalog, Command command, StringBuilder output)
         {
             switch (command.Type)
             {
@@ -30,13 +30,15 @@ namespace ShoppingCenter
             }
         }
 
-        private static void AddProductCommand(ICatalog catalog, ICommand command, StringBuilder output)
+        private static void AddProductCommand(Catalog catalog, Command command, StringBuilder output)
         {
-            catalog.Add(new Content(command.Parameters));
+            catalog.Add(new Content(command.Parameters[(int)ContentItemTypes.Name],
+                double.Parse(command.Parameters[(int)ContentItemTypes.Price]),
+                command.Parameters[(int)ContentItemTypes.Producer]));
             output.AppendLine("Product added");
         }
 
-        private static void DeleteProductsCommand(ICatalog catalog, ICommand command, StringBuilder output)
+        private static void DeleteProductsCommand(Catalog catalog, Command command, StringBuilder output)
         {
             int updatedCount = 0;
 
@@ -48,18 +50,25 @@ namespace ShoppingCenter
             {
                 updatedCount = catalog.Delete(string.Empty, command.Parameters[0]);
             }
-            
-            output.AppendLine(String.Format("{0} products deleted", updatedCount));
+
+            if (updatedCount > 0)
+            {
+                output.AppendLine(String.Format("{0} products deleted", updatedCount));
+            }
+            else
+            {
+                output.AppendLine("No products found");
+            }
         }
 
-        private static void FindProductsByNameCommand(ICatalog catalog, ICommand command, StringBuilder output)
+        private static void FindProductsByNameCommand(Catalog catalog, Command command, StringBuilder output)
         {
             var contentList = catalog.GetContentByName(command.Parameters[0]);
             if (contentList != null && contentList.Count() > 0)
             {
-                foreach (IContent content in contentList)
+                foreach (var content in contentList)
                 {
-                    output.AppendLine(content.TextRepresentation);
+                    output.AppendLine(content.ToString());
                 }
             }
             else
@@ -68,14 +77,14 @@ namespace ShoppingCenter
             }
         }
 
-        private void FindProductsByPriceRangeCommand(ICatalog catalog, ICommand command, StringBuilder output)
+        private void FindProductsByPriceRangeCommand(Catalog catalog, Command command, StringBuilder output)
         {
             var contentList = catalog.GetContentByPriceRange(double.Parse(command.Parameters[0]), double.Parse(command.Parameters[1]));
             if (contentList != null && contentList.Count() > 0)
             {
-                foreach (IContent content in contentList)
+                foreach (var content in contentList)
                 {
-                    output.AppendLine(content.TextRepresentation);
+                    output.AppendLine(content.ToString());
                 }
             }
             else
@@ -84,27 +93,19 @@ namespace ShoppingCenter
             }
         }
 
-        private void FindProductsByProducerCommand(ICatalog catalog, ICommand command, StringBuilder output)
+        private void FindProductsByProducerCommand(Catalog catalog, Command command, StringBuilder output)
         {
             var contentList = catalog.GetContentByProducer(command.Parameters[0]);
             if (contentList != null && contentList.Count() > 0)
             {
-                foreach (IContent content in contentList)
+                foreach (var content in contentList)
                 {
-                    output.AppendLine(content.TextRepresentation);
+                    output.AppendLine(content.ToString());
                 }
             }
             else
             {
                 output.AppendLine("No products found");
-            }
-        }
-
-        private static void IsValidParameters(ICommand command)
-        {
-            if (command.Parameters.Length != 2)
-            {
-                throw new ArgumentOutOfRangeException("Invalid number of parameters for command " + command.Type.ToString());
             }
         }
     }

@@ -11,7 +11,7 @@ namespace ShoppingCenter
         {
             var output = new StringBuilder();
             var catalog = new Catalog();
-            ICommandExecutor c = new CommandExecutor();
+            var c = new CommandExecutor();
 
             var commands = ParseCommands();
             foreach (var command in commands)
@@ -22,9 +22,9 @@ namespace ShoppingCenter
             Console.Write(output);
         }
 
-        private static IEnumerable<ICommand> ParseCommands()
+        private static IEnumerable<Command> ParseCommands()
         {
-            var commandList = new List<ICommand>();
+            var commandList = new List<Command>();
 #if DEBUG
             string line;
             using (StreamReader reader = new StreamReader(@"..\..\test1.txt"))

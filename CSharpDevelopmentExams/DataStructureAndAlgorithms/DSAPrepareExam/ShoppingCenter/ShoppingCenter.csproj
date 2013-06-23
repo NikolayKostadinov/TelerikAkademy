@@ -50,10 +50,6 @@
     <Compile Include="Content.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="ICatalog.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="ICommandExecutor.cs" />
-    <Compile Include="IContent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
