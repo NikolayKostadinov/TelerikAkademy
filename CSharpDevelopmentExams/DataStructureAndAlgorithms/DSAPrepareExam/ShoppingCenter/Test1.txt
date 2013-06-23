@@ -10,6 +10,6 @@ AddProduct 320i;10000;BMW
 FindProductsByName 320i
 AddProduct G560;999;Lenovo
 FindProductsByProducer Lenovo
-DeleteProducts Lenovo
+DeleteProducts ThinkPad T410;Lenovo
 FindProductsByProducer Lenovo
 FindProductsByPriceRange 100000;200000

@@ -34,8 +34,14 @@ namespace ShoppingCenter
             if (!string.IsNullOrEmpty(name))
             {
                 //remove by name and producer
-                contentToList = this.name[name];
-
+                contentToList = this.name[name].Where(c => c.Producer == producer).ToList();
+                foreach (IContent content in contentToList)
+                {
+                    this.price.Remove(content.Price, content);
+                    this.producer.Remove(content.Producer, content);
+                    this.name.Remove(content.Name, content);
+                    theElements++;
+                }
             }
             else
             {
@@ -45,6 +51,7 @@ namespace ShoppingCenter
                 {
                     this.name.Remove(content.Name, content);
                     this.price.Remove(content.Price, content);
+                    
                     theElements++;
                 }
             }
