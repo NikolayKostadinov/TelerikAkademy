@@ -11,5 +11,6 @@ FindProductsByName 320i
 AddProduct G560;999;Lenovo
 FindProductsByProducer Lenovo
 DeleteProducts ThinkPad T410;Lenovo
+DeleteProducts Lenovo
 FindProductsByProducer Lenovo
 FindProductsByPriceRange 100000;200000

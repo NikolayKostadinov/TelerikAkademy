@@ -36,14 +36,10 @@ namespace ShoppingCenter
                 }
             }
 #else
-            while (true)
+            int n = int.Parse(Console.ReadLine());
+            for (int i = 0; i < n; i++)
             {
-                var line = Console.ReadLine();
-                if (line != null && line.Trim() == "End")
-                {
-                    break;
-                }
-                commandList.Add(new Command(line));
+                commandList.Add(new Command(Console.ReadLine()));
             }
 #endif
 
