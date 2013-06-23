@@ -1,29 +1,31 @@
-﻿//http://hardprogrammer.blogspot.com/2006/11/permutaciones-con-repeticin.html
+﻿using System;
 
-using System;
-
-namespace PermutationsWithRepetitions
+namespace ColorfulRowsOfBeads
 {
     class Program
     {
-        private static void Main(string[] args)
+        private static int count = 0;
+        private static void Main()
         {
-            //int[] numbers = { 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-            int[] numbers = {2,2,3,3,3};
-            PermutationsWithRepetition(numbers);
+            char[] arr = "RYYRYBY".ToCharArray();
+
+            arr = Console.ReadLine().ToCharArray();
+
+            PermutationsWithRepetition(arr);
+            Console.WriteLine(count);
         }
 
-        private static void PermutationsWithRepetition(int[] numbersSet)
+        private static void PermutationsWithRepetition(char[] numbersSet)
         {
             Array.Sort(numbersSet);
             Permute(numbersSet, 0, numbersSet.Length);
         }
 
-        private static void Permute(int[] numbersSet, int start, int end)
+        private static void Permute(char[] numbersSet, int start, int end)
         {
-            PrintNumbers(numbersSet);
+            count++;
 
-            int swapValue = 0;
+            char swapValue = new char();
 
             if (start < end)
             {
@@ -42,22 +44,13 @@ namespace PermutationsWithRepetitions
                     }
 
                     swapValue = numbersSet[i];
-                    for (int k = i; k < end - 1;)
+                    for (int k = i; k < end - 1; )
                     {
                         numbersSet[k] = numbersSet[++k];
                     }
                     numbersSet[end - 1] = swapValue;
                 }
             }
-        }
-
-        private static void PrintNumbers(int[] numbers)
-        {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                Console.Write("{0} ", numbers[i]);
-            }
-            Console.WriteLine();
         }
     }
 }

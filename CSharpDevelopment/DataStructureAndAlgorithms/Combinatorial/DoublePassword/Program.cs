@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoublePassword
 {
@@ -11,21 +8,14 @@ namespace DoublePassword
         static void Main()
         {
             string str = Console.ReadLine();
-            if (str.Contains("*"))
+            var asteriks = str.Count(c => c == '*');
+            if (asteriks == 0)
             {
-                var asteriks = from s in str
-                                group s by s
-                                into g
-                                select new
-                                    {
-                                        key = g.Key,
-                                        count = g.Count()
-                                    };
-
+                Console.WriteLine(1);
             }
             else
             {
-                Console.WriteLine(1);
+                Console.WriteLine(Math.Pow(2, asteriks));
             }
         }
     }
