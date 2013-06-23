@@ -88,10 +88,10 @@ namespace FriendsInPesho
 
                 for (int i = 0; i < node.Connections.Count; i++)
                 {
-                    var newDistanca = node.Distance + node.Connections[i].Distance;
-                    if (newDistanca < node.Connections[i].ToNode.Distance)
+                    var newDistance = node.Distance + node.Connections[i].Distance;
+                    if (newDistance < node.Connections[i].ToNode.Distance)
                     {
-                        node.Connections[i].ToNode.Distance = newDistanca;
+                        node.Connections[i].ToNode.Distance = newDistance;
                         nodes.Enqueue(node.Connections[i].ToNode);
                     }
                 }
