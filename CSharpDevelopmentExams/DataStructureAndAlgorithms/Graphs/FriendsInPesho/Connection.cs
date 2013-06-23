@@ -1,5 +1,4 @@
-﻿
-namespace FriendsInPesho
+﻿namespace FriendsInPesho
 {
     internal struct Connection
     {

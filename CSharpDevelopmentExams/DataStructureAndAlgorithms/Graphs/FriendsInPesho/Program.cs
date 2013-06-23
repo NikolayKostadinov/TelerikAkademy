@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Wintellect.PowerCollections;
 
 namespace FriendsInPesho
 {
@@ -9,9 +8,9 @@ namespace FriendsInPesho
         static void Main()
         {
             string[] input = Console.ReadLine().Split(' ');
-            int nodes = int.Parse(input[0]);
+            //int nodes = int.Parse(input[0]);
             int streets = int.Parse(input[1]);
-            int hospitals = int.Parse(input[2]);
+            //int hospitals = int.Parse(input[2]);
 
             string[] hospitalIds = Console.ReadLine().Split(' ');
 
