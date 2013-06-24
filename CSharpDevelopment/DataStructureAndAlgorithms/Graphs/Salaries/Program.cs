@@ -9,6 +9,9 @@ namespace Salaries
 
         static void Main()
         {
+#if DEBUG
+            Console.SetIn(new System.IO.StreamReader("../../input.txt"));
+#endif
             Dictionary<int, Employer> employers = new Dictionary<int, Employer>();
             int n = int.Parse(Console.ReadLine());
             for (int i = 0; i < n; i++)
@@ -29,7 +32,7 @@ namespace Salaries
                 }
             }
 
-            int sum = 0;
+            long sum = 0;
 
             for (int i = 0; i < n; i++)
             {

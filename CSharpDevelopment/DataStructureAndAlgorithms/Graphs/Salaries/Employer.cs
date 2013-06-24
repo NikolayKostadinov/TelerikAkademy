@@ -5,7 +5,7 @@ namespace Salaries
     class Employer
     {
         public int Id { get; set; }
-        public int Salary { get; set; }
+        public long Salary { get; set; }
         public List<Employer> Employers { get; set; }
 
         public Employer(int id)
