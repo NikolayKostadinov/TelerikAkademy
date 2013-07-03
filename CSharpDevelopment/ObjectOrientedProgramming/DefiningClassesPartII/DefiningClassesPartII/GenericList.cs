@@ -82,6 +82,7 @@ namespace DefiningClassesPartII
         public void Clear()
         {
             this.elements = new T[this.elements.Length]; 
+            this.count = 0;
         }
 
         public int Find(T element)
