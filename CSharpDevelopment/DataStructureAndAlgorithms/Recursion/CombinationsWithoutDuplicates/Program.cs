@@ -10,7 +10,7 @@ namespace CombinationsWithoutDuplicates
 
         static void Main()
         {
-            int k = 4;
+            int k = 2;
             int[] arr = new int[k];
             int start = 1;
             int end = 4; //n
@@ -39,7 +39,7 @@ namespace CombinationsWithoutDuplicates
         private static void Print(int[] arr, StringBuilder sb)
         {
            
-            sb.Append("(" + String.Join(" ", arr) + "),");
+            sb.Append("(" + String.Join(" ", arr) + ")," + Environment.NewLine);
         }
     }
 }

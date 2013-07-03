@@ -273,6 +273,12 @@
     <Content Include="JSApps\JQueryOverview\Slider.html" />
     <Content Include="JSApps\JQueryOverview\Styles\colorpicker.css" />
     <Content Include="JSApps\JQueryOverview\Styles\Slider.css" />
+    <Content Include="JSApps\JQueryPlugins\Default.html" />
+    <Content Include="JSApps\JQueryPlugins\Scripts\jquery-2.0.0.js" />
+    <Content Include="JSApps\JQueryPlugins\Scripts\TreeView.js" />
+    <Content Include="JSApps\ThirdPartyAPIs\OnlineMapTourism.html" />
+    <Content Include="JSApps\ThirdPartyAPIs\Scripts\gmap.js" />
+    <Content Include="JSApps\ThirdPartyAPIs\Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Web.config">

@@ -7,8 +7,8 @@ namespace Permutation
     {
         private static void Main()
         {
-            int n = 3;
-            int[] numbers = new int[3];
+            int n = 4;
+            int[] numbers = new int[n];
             for (int i = 0; i < n; i++)
             {
                 numbers[i] = i + 1;

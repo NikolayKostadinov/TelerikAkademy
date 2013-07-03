@@ -9,21 +9,21 @@ namespace PermutationsWithRepetitions
         private static void Main(string[] args)
         {
             //int[] numbers = { 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-            int[] numbers = {2,2,3,3,3};
+            string[] numbers = {"(2 3)", "(2 2)", "(3 2)"};
             PermutationsWithRepetition(numbers);
         }
 
-        private static void PermutationsWithRepetition(int[] numbersSet)
+        private static void PermutationsWithRepetition(string[] numbersSet)
         {
             Array.Sort(numbersSet);
             Permute(numbersSet, 0, numbersSet.Length);
         }
 
-        private static void Permute(int[] numbersSet, int start, int end)
+        private static void Permute(string[] numbersSet, int start, int end)
         {
             PrintNumbers(numbersSet);
 
-            int swapValue = 0;
+            string swapValue = string.Empty;
 
             if (start < end)
             {
@@ -51,7 +51,7 @@ namespace PermutationsWithRepetitions
             }
         }
 
-        private static void PrintNumbers(int[] numbers)
+        private static void PrintNumbers(string[] numbers)
         {
             for (int i = 0; i < numbers.Length; i++)
             {
