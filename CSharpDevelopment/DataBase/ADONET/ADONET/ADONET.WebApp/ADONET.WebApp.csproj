@@ -61,7 +61,7 @@
     <Content Include="01_GetNumberOfRowsForCategory.aspx" />
     <Content Include="03_GetCategoryNameByProduct.aspx" />
     <Content Include="04_AddProduct.aspx" />
-    <Content Include="AppendExcel.aspx" />
+    <Content Include="07_AppendExcel.aspx" />
     <Content Include="Images\MainImage.png" />
     <Content Include="05_RetrieveImagesFromSQL.aspx" />
     <Content Include="06_ReadFromExcel.aspx" />
@@ -96,12 +96,12 @@
     <Compile Include="04_AddProduct.aspx.designer.cs">
       <DependentUpon>04_AddProduct.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AppendExcel.aspx.cs">
-      <DependentUpon>AppendExcel.aspx</DependentUpon>
+    <Compile Include="07_AppendExcel.aspx.cs">
+      <DependentUpon>07_AppendExcel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AppendExcel.aspx.designer.cs">
-      <DependentUpon>AppendExcel.aspx</DependentUpon>
+    <Compile Include="07_AppendExcel.aspx.designer.cs">
+      <DependentUpon>07_AppendExcel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="05_RetrieveImagesFromSQL.aspx.cs">
@@ -120,6 +120,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="demo.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
