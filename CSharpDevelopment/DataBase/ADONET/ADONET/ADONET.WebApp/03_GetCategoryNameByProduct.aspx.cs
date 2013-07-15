@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using AdoNet.Data;
 
@@ -15,7 +14,7 @@ namespace ADONET.WebApp
             string query = 
                 "SELECT c.CategoryName, p.ProductName From Categories c JOIN Products p ON c.CategoryID = p.CategoryID";
 
-            boFunctions.ExecuteSqlQueryReturnValue(query, null, CommandType.Text, delegate(SqlDataReader reader)
+            SqlProvider.ExecuteSqlQueryReturnValue(query, null, delegate(SqlDataReader reader)
                 {
                     grdResult.DataSource = reader;
                     grdResult.DataBind();

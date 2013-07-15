@@ -39,6 +39,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.7.4\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.87.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.87.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\packages\System.Data.SQLite.1.0.87.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,10 +72,19 @@
     <Content Include="03_GetCategoryNameByProduct.aspx" />
     <Content Include="04_AddProduct.aspx" />
     <Content Include="07_AppendExcel.aspx" />
+    <Content Include="08_FindAllProducts.aspx" />
+    <Content Include="10_SQLiteBooks.aspx" />
     <Content Include="Images\MainImage.png" />
     <Content Include="05_RetrieveImagesFromSQL.aspx" />
     <Content Include="06_ReadFromExcel.aspx" />
+    <Content Include="09_MySQLBooks.aspx" />
     <Content Include="Web.config" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="02_GetNameAndDescriptionFromCategories.aspx.cs">
@@ -103,6 +122,27 @@
     <Compile Include="07_AppendExcel.aspx.designer.cs">
       <DependentUpon>07_AppendExcel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="08_FindAllProducts.aspx.cs">
+      <DependentUpon>08_FindAllProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="08_FindAllProducts.aspx.designer.cs">
+      <DependentUpon>08_FindAllProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="09_MySQLBooks.aspx.cs">
+      <DependentUpon>09_MySQLBooks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="09_MySQLBooks.aspx.designer.cs">
+      <DependentUpon>09_MySQLBooks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="10_SQLiteBooks.aspx.cs">
+      <DependentUpon>10_SQLiteBooks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="10_SQLiteBooks.aspx.designer.cs">
+      <DependentUpon>10_SQLiteBooks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="05_RetrieveImagesFromSQL.aspx.cs">
       <DependentUpon>05_RetrieveImagesFromSQL.aspx</DependentUpon>
@@ -121,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="demo.xlsx" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using AdoNet.Data;
 
@@ -12,7 +11,7 @@ namespace ADONET.WebApp
             Response.Write("Write a program that retrieves from the Northwind sample database in MS SQL Server the number of  rows in the Categories table.<br>");
 
             string query = "SELECT COUNT(*) from [dbo].[Categories]";
-            boFunctions.ExecuteSqlQueryReturnValue(query, null, CommandType.Text, delegate(SqlDataReader reader)
+            SqlProvider.ExecuteSqlQueryReturnValue(query, null, delegate(SqlDataReader reader)
                 {
                     grdResult.DataSource = reader;
                     grdResult.DataBind();

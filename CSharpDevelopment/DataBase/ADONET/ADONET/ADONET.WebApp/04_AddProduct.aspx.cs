@@ -20,7 +20,7 @@ namespace ADONET.WebApp
             parametters.Add("ProductName", txtProductName.Text);
             parametters.Add("Discontinued", false);
 
-            boFunctions.ExecuteSqlQueryInsert(query, parametters, delegate(int id)
+            SqlProvider.ExecuteSqlQueryInsert(query, parametters, delegate(int id)
             {
                 grdResult.DataSource = new List<int>(){ {id} };
                 grdResult.DataBind();

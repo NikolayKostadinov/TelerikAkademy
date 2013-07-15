@@ -27,9 +27,28 @@ namespace AdoNet.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=NORTHWND;Persist Security Info=True;User ID" +
             "=nw;Password=123456; MultipleActiveResultSets=True")]
-        public string AdoNetConnectionString {
+        public string SqlConnectionString {
             get {
-                return ((string)(this["AdoNetConnectionString"]));
+                return ((string)(this["SqlConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=localhost;Database=bookstore;Uid=books;Pwd=test1234;")]
+        public string MySqlConnectionString {
+            get {
+                return ((string)(this["MySqlConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=D:\\Projects\\VisualStudio2012\\Telerik\\TelerikAkademy\\CSharpDevelopment" +
+            "\\DataBase\\ADONET\\ADONET\\ADONET.WebApp\\books.db;Version=3;")]
+        public string SQLiteConnectionString {
+            get {
+                return ((string)(this["SQLiteConnectionString"]));
             }
         }
     }

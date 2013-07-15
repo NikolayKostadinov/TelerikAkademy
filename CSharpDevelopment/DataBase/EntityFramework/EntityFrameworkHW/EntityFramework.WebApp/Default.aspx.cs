@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using EntityFramework.Data;
 
 namespace EntityFramework.WebApp
@@ -12,8 +8,7 @@ namespace EntityFramework.WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            NORTHWNDEntities db = new NORTHWNDEntities();
-            var dbSearch = db.Customers.ToList();
+            var dbSearch = SessionState.db.Customers.ToList();
             foreach (var customer in dbSearch)
             {
                 Response.Write(customer.ContactName + "<br />");
