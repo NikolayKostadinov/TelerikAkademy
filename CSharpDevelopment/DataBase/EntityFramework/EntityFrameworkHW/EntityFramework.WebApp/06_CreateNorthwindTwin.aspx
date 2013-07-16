@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EntityFramework.WebApp.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="06_CreateNorthwindTwin.aspx.cs" Inherits="EntityFramework.WebApp.CreateNorthwindTwin" %>
 
 <!DOCTYPE html>
 

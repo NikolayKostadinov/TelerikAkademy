@@ -38,6 +38,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +60,7 @@
     <Compile Include="Employee.cs">
       <DependentUpon>NortwindDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeEx.cs" />
     <Compile Include="NortwindDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

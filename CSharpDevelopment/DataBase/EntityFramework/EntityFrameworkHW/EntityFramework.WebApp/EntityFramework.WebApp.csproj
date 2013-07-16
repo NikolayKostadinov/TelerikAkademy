@@ -43,6 +43,8 @@
       <HintPath>..\EntityFramework.Data\bin\Debug\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -61,18 +63,50 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="03_FindsAllCustomers.aspx" />
+    <Content Include="04_FindsAllCustomersSQL.aspx" />
+    <Content Include="05_FindsAllSales.aspx" />
+    <Content Include="08_InheritingEmployeeEntity.aspx" />
+    <Content Include="06_CreateNorthwindTwin.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Default.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="03_FindsAllCustomers.aspx.cs">
+      <DependentUpon>03_FindsAllCustomers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="03_FindsAllCustomers.aspx.designer.cs">
+      <DependentUpon>03_FindsAllCustomers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="04_FindsAllCustomersSQL.aspx.cs">
+      <DependentUpon>04_FindsAllCustomersSQL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="04_FindsAllCustomersSQL.aspx.designer.cs">
+      <DependentUpon>04_FindsAllCustomersSQL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="05_FindsAllSales.aspx.cs">
+      <DependentUpon>05_FindsAllSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="05_FindsAllSales.aspx.designer.cs">
+      <DependentUpon>05_FindsAllSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="08_InheritingEmployeeEntity.aspx.cs">
+      <DependentUpon>08_InheritingEmployeeEntity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="08_InheritingEmployeeEntity.aspx.designer.cs">
+      <DependentUpon>08_InheritingEmployeeEntity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="06_CreateNorthwindTwin.aspx.cs">
+      <DependentUpon>06_CreateNorthwindTwin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="06_CreateNorthwindTwin.aspx.designer.cs">
+      <DependentUpon>06_CreateNorthwindTwin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

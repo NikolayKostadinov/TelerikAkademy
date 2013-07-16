@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Data", "Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.WebApp", "EntityFramework.WebApp\EntityFramework.WebApp.csproj", "{E09A9E8B-8FED-43C9-9163-C096CD92F004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindTwin.Data", "NorthwindTwin.Data\NorthwindTwin.Data.csproj", "{D948F11A-B295-4A1C-9CA1-FC1AD4C4D721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Library", "EntityFramework.Library\EntityFramework.Library.csproj", "{626C0AE3-662D-49B6-8FB9-3C05D6432320}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,10 @@ Global
 		{E09A9E8B-8FED-43C9-9163-C096CD92F004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E09A9E8B-8FED-43C9-9163-C096CD92F004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E09A9E8B-8FED-43C9-9163-C096CD92F004}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D948F11A-B295-4A1C-9CA1-FC1AD4C4D721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D948F11A-B295-4A1C-9CA1-FC1AD4C4D721}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D948F11A-B295-4A1C-9CA1-FC1AD4C4D721}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D948F11A-B295-4A1C-9CA1-FC1AD4C4D721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626C0AE3-662D-49B6-8FB9-3C05D6432320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626C0AE3-662D-49B6-8FB9-3C05D6432320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626C0AE3-662D-49B6-8FB9-3C05D6432320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626C0AE3-662D-49B6-8FB9-3C05D6432320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
