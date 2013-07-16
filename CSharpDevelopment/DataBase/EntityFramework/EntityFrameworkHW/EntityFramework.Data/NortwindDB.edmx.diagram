@@ -28,6 +28,12 @@
         <AssociationConnector Association="NortwindModel.FK_Territories_Region" ManuallyRouted="false" />
         <AssociationConnector Association="NortwindModel.CustomerCustomerDemo" ManuallyRouted="false" />
         <AssociationConnector Association="NortwindModel.EmployeeTerritories" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NortwindModel.UsersInGroup" Width="1.5" PointX="6.0133704347598229" PointY="7.5548582261218034" />
+        <EntityTypeShape EntityType="NortwindModel.Group" Width="1.5" PointX="5.2798797997086675" PointY="18.764810034430031" />
+        <EntityTypeShape EntityType="NortwindModel.User" Width="1.5" PointX="9.9639526428486924" PointY="12.601566678193196" />
+        <AssociationConnector Association="NortwindModel.FK_Groups_Groups" />
+        <AssociationConnector Association="NortwindModel.FK_UsersInGroups_Groups" />
+        <AssociationConnector Association="NortwindModel.FK_UsersInGroups_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

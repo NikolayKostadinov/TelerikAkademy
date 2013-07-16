@@ -37,5 +37,8 @@ namespace EntityFramework.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Territory> Territories { get; set; }
+        public DbSet<UsersInGroup> UsersInGroups { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

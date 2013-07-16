@@ -61,6 +61,9 @@
       <DependentUpon>NortwindDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeEx.cs" />
+    <Compile Include="Group.cs">
+      <DependentUpon>NortwindDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="NortwindDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +103,12 @@
       <DependentUpon>NortwindDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Territory.cs">
+      <DependentUpon>NortwindDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>NortwindDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersInGroup.cs">
       <DependentUpon>NortwindDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>

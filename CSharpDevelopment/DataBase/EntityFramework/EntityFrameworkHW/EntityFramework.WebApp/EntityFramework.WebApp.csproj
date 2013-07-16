@@ -45,6 +45,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -68,6 +69,8 @@
     <Content Include="05_FindsAllSales.aspx" />
     <Content Include="08_InheritingEmployeeEntity.aspx" />
     <Content Include="06_CreateNorthwindTwin.aspx" />
+    <Content Include="09_AddOrderWithItems.aspx" />
+    <Content Include="UsersInGroups.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +109,21 @@
     <Compile Include="06_CreateNorthwindTwin.aspx.designer.cs">
       <DependentUpon>06_CreateNorthwindTwin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="09_AddOrderWithItems.aspx.cs">
+      <DependentUpon>09_AddOrderWithItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="09_AddOrderWithItems.aspx.designer.cs">
+      <DependentUpon>09_AddOrderWithItems.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsersInGroups.aspx.cs">
+      <DependentUpon>UsersInGroups.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsersInGroups.aspx.designer.cs">
+      <DependentUpon>UsersInGroups.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
