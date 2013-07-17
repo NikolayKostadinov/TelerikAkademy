@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Data", "Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.WebApp", "EntityFramework.WebApp\EntityFramework.WebApp.csproj", "{E09A9E8B-8FED-43C9-9163-C096CD92F004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework.Library", "EntityFramework.Library\EntityFramework.Library.csproj", "{626C0AE3-662D-49B6-8FB9-3C05D6432320}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_EntityFramework.Library", "EntityFramework.Library\02_EntityFramework.Library.csproj", "{626C0AE3-662D-49B6-8FB9-3C05D6432320}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

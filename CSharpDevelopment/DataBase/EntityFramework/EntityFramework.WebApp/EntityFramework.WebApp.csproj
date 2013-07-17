@@ -70,7 +70,8 @@
     <Content Include="08_InheritingEmployeeEntity.aspx" />
     <Content Include="06_CreateNorthwindTwin.aspx" />
     <Content Include="09_AddOrderWithItems.aspx" />
-    <Content Include="UsersInGroups.aspx" />
+    <Content Include="11_UsersInGroups.aspx" />
+    <Content Include="SpFindTotalIncome.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -117,12 +118,19 @@
       <DependentUpon>09_AddOrderWithItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsersInGroups.aspx.cs">
-      <DependentUpon>UsersInGroups.aspx</DependentUpon>
+    <Compile Include="11_UsersInGroups.aspx.cs">
+      <DependentUpon>11_UsersInGroups.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UsersInGroups.aspx.designer.cs">
-      <DependentUpon>UsersInGroups.aspx</DependentUpon>
+    <Compile Include="11_UsersInGroups.aspx.designer.cs">
+      <DependentUpon>11_UsersInGroups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SpFindTotalIncome.aspx.cs">
+      <DependentUpon>SpFindTotalIncome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SpFindTotalIncome.aspx.designer.cs">
+      <DependentUpon>SpFindTotalIncome.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

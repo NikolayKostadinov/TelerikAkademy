@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Objects;
 using System.Linq;
 using EntityFramework.Data;
 
@@ -27,10 +28,11 @@ namespace EntityFramework.WebApp
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             var dbSearch =
-                SessionState.db.Orders.Where(
-                    o =>
-                    o.ShipRegion == ddlRegion.SelectedValue && o.ShippedDate >= txtStartDate.SelectedDate &&
-                    o.ShippedDate <= txtEndDate.SelectedDate).ToList();
+                SessionState.db.Orders.Where(o =>
+                    o.ShipRegion == ddlRegion.SelectedValue &&
+                    o.ShippedDate.HasValue &&
+                    (o.ShippedDate.Value >= txtStartDate.SelectedDate && o.ShippedDate.Value <= txtEndDate.SelectedDate )).ToList();
+
             grdResult.DataSource = dbSearch;
             grdResult.DataBind();
         }
