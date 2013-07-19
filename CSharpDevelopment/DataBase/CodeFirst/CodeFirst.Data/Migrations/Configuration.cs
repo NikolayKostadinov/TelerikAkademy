@@ -5,7 +5,7 @@ namespace CodeFirst.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CodeFirst.Data.CodeFirstDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<CodeFirst.Data.CodeFirstDbContext>
     {
         public Configuration()
         {

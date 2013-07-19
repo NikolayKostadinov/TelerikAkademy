@@ -11,5 +11,8 @@
     <Setting Name="SQLiteConnectionString" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Data Source=D:\Projects\VisualStudio2012\Telerik\TelerikAkademy\CSharpDevelopment\DataBase\ADONET\ADONET\ADONET.WebApp\books.db;Version=3;</Value>
     </Setting>
+    <Setting Name="MONGOLAB_URI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mongodb://127.0.0.1/BookStore</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

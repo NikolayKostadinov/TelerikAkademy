@@ -15,11 +15,11 @@ namespace CodeFirst.Model
             set { this.cources = value; }
         }
 
-        //private ICollection<Homework> homeworks = new HashSet<Homework>();
-        //public virtual ICollection<Homework> Homeworks
-        //{
-        //    get { return this.homeworks; }
-        //    set { this.homeworks = value; }
-        //}
+        private ICollection<Homework> homeworks = new HashSet<Homework>();
+        public virtual ICollection<Homework> Homeworks
+        {
+            get { return this.homeworks; }
+            set { this.homeworks = value; }
+        }
     }
 }

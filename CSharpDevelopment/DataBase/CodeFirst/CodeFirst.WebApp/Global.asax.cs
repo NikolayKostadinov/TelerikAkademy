@@ -9,7 +9,8 @@ namespace CodeFirst.WebApp
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            Database.SetInitializer<CodeFirstDbContext>(null);
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CodeFirstDbContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CodeFirstDbContext, CodeFirst.Data.Migrations.Configuration>());
         }
 
         protected void Session_Start(object sender, EventArgs e)

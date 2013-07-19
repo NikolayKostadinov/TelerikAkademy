@@ -1,12 +1,12 @@
 ﻿using System.IO;
 
-namespace AdoNet.Data
+namespace AdoNet.Data.Helpers
 {
     public class Helpers
     {
-        public static bool DirectoryExist(string DirectoryPatch)
+        public static bool DirectoryExist(string directoryPatch)
         {
-            DirectoryInfo objDirectory = new DirectoryInfo(DirectoryPatch);
+            DirectoryInfo objDirectory = new DirectoryInfo(directoryPatch);
             if (objDirectory.Exists)
             {
                 return true;
@@ -15,7 +15,7 @@ namespace AdoNet.Data
             {
                 try
                 {
-                    Directory.CreateDirectory(DirectoryPatch);
+                    Directory.CreateDirectory(directoryPatch);
                     return true;
                 }
                 catch

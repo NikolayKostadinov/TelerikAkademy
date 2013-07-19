@@ -30,7 +30,15 @@ namespace CodeFirst.WebApp
                 student.Cources.Add(course);
                 db.Students.Add(student);
 
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+                    Response.Write(exception.InnerException.InnerException.Message);
+                }
+                
             }
         }
     }
