@@ -56,6 +56,8 @@
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\PDFBuilder.cs" />
     <Compile Include="Library\Book.cs" />
+    <Compile Include="Library\Bookmark.cs" />
+    <Compile Include="Library\Bookmarks.cs" />
     <Compile Include="MongoDbProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

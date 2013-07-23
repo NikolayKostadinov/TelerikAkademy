@@ -116,6 +116,15 @@ namespace MongodbDemo.WebApp
                 if (!File.Exists(tempFolder + tempFileName))
                     File.WriteAllBytes(tempFolder + tempFileName, file);
             }
+
+            //parse to xml
+            Bookmarks bookmarks = new Bookmarks();
+            //bookmarks.bookmarks = new List<Bookmark>();
+            //bookmarks.bookmarks.Add(new Bookmark() { Username = "saykor" });
+
+            string filePath = Server.MapPath("bookmark.xml");
+            //Helpers.SerializeToXml(bookmarks, filePath);
+            var result = Helpers.DeserializeFromXml<Bookmarks>(filePath);
         }
     }
 }
