@@ -21,8 +21,9 @@
             </asp:GridView>
             Search Book By Name:
             <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
-            <asp:LinkButton ID="btnSearch" runat="server" OnClick="btnSearch_Click">Search</asp:LinkButton><br />
-            <asp:LinkButton ID="btnGeneratePdf" runat="server" OnClick="btnGeneratePdf_Click1">Generate result to pdf</asp:LinkButton>
+            <asp:LinkButton ID="btnSearch" runat="server" OnClick="btnSearch_Click">Search</asp:LinkButton><br /><br />
+            <asp:LinkButton ID="btnGeneratePdf" runat="server" OnClick="btnGeneratePdf_Click1">Generate result to pdf</asp:LinkButton><br /><br />
+            <asp:LinkButton ID="btnGenerateJson" runat="server" OnClick="btnGenerateJson_Click" >Generate result to Json</asp:LinkButton><br /><br />
         </div>
     </form>
 </body>

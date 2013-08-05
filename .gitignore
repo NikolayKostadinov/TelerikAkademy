@@ -1,5 +1,6 @@
 ## Subversion
 .svn/
+packages/
 
 #################
 ## Eclipse

@@ -12,7 +12,7 @@ namespace MongodbDemo.Data
         {
             get
             {
-                var connectionstring = "mongodb://bookstoredemo:bookstoredemo123@ds035428.mongolab.com:35428/bookstoredemo";// dbSetting.Default.MONGOLAB_URI;
+                var connectionstring = dbSetting.Default.MONGOLAB_URI;//"mongodb://bookstoredemo:bookstoredemo123@ds035428.mongolab.com:35428/bookstoredemo";// ;
                 string dbName = MongoUrl.Create(connectionstring).DatabaseName;
                 MongoServer dbServer = MongoServer.Create(connectionstring);
                 MongoDatabase dbConnection = dbServer.GetDatabase(dbName, SafeMode.True);

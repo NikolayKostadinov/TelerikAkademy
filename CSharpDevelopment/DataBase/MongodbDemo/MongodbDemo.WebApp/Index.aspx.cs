@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongodbDemo.Data;
 using MongodbDemo.Data.Helpers;
-using MongodbDemo.Data.Library;
 using iTextSharp.text;
+using MongodbDemo.Data.Library.Xml;
+using Newtonsoft.Json;
+using Book = MongodbDemo.Data.Library.Book;
 
 namespace MongodbDemo.WebApp
 {
@@ -117,14 +120,50 @@ namespace MongodbDemo.WebApp
                     File.WriteAllBytes(tempFolder + tempFileName, file);
             }
 
-            //parse to xml
-            Bookmarks bookmarks = new Bookmarks();
-            //bookmarks.bookmarks = new List<Bookmark>();
-            //bookmarks.bookmarks.Add(new Bookmark() { Username = "saykor" });
+            
+        }
 
-            string filePath = Server.MapPath("bookmark.xml");
-            //Helpers.SerializeToXml(bookmarks, filePath);
-            var result = Helpers.DeserializeFromXml<Bookmarks>(filePath);
+        protected void btnGenerateJson_Click(object sender, EventArgs e)
+        {
+            List<Data.Library.Json.Book> bookList = new List<Data.Library.Json.Book>();
+
+            MongoDbProvider.db.LoadData<Book>().ToList().ForEach(b =>
+            {
+                bookList.Add(new Data.Library.Json.Book()
+                {
+                    Author = b.Author,
+                    PublishDate = DateTime.Parse(b.PublishDate.ToString()),
+                    Title = b.Title
+                });
+            });
+
+            string json = JsonConvert.SerializeObject(bookList, Formatting.Indented);
+            Response.Write(json);
+
+            List<Data.Library.Json.Book> jsonBooksList = JsonConvert.DeserializeObject<List<Data.Library.Json.Book>>(json);
+
+            Books books = new Books();
+            jsonBooksList.ForEach(j =>
+            {
+                books.BooklList.Add(new Data.Library.Xml.Book()
+                {
+                    Author = j.Author,
+                    PublishDate = j.PublishDate.ToString("dd-MMM-yyyy"),
+                    Title = j.Title
+                });
+            });
+
+            string filePath = Server.MapPath("books.xml");
+            Helpers.SerializeToXml(books, filePath);
+
+            Data.Library.Xml.Books newBooks = new Data.Library.Xml.Books();
+            newBooks = Helpers.DeserializeFromXml<Data.Library.Xml.Books>(filePath);
         }
     }
 }
+
+//<books>
+//  <book title="dadas">
+//     <author>fdafdsfds</author>
+//  </book>
+//</books>
