@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using Musicstore.Server.Models;
 using Musicstore.Server.Data;
+using WebGrease.Css.Extensions;
 
 namespace Musicstore.Server.WebApi.Controllers
 {
@@ -26,7 +28,7 @@ namespace Musicstore.Server.WebApi.Controllers
         // GET api/Album/5
         public Album GetAlbum(int id)
         {
-            Album album = db.Albums.Find(id);
+            Album album = db.Albums.Include("Artists").FirstOrDefault(a => a.Id == id);
             if (album == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -48,6 +50,17 @@ namespace Musicstore.Server.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
+            //var oldAlbum = db.Albums.FirstOrDefault(a => a.Id == album.Id);
+            //if (oldAlbum != null)
+            //{
+            //    oldAlbum.Title = album.Title;
+            //    oldAlbum.Year = album.Year;
+            //    oldAlbum.Producer = album.Producer;
+            //    CheckArtistsInAlbums(album);
+            //    oldAlbum.Artists = album.Artists;
+            //}
+
+            CheckArtistsInAlbums(album);
             db.Entry(album).State = EntityState.Modified;
 
             try
@@ -67,6 +80,8 @@ namespace Musicstore.Server.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                CheckArtistsInAlbums(album);
+
                 db.Albums.Add(album);
                 db.SaveChanges();
 
@@ -106,6 +121,22 @@ namespace Musicstore.Server.WebApi.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private void CheckArtistsInAlbums(Album album)
+        {
+            var artists = new List<Artist>();
+            album.Artists.ForEach(artist =>
+            {
+                var a = db.Artists.FirstOrDefault(x => x.Id == artist.Id);
+                if (a == null)
+                {
+                    a = new Artist();
+                    a.DateOfBirth = DateTime.Now;
+                }
+                artists.Add(a);
+            });
+            album.Artists = artists;
         }
     }
 }

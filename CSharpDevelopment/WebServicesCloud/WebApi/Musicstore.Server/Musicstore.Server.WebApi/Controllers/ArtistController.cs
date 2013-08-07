@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Http;
 using Musicstore.Server.Models;
 using Musicstore.Server.Data;
+using WebGrease.Css.Extensions;
 
 namespace Musicstore.Server.WebApi.Controllers
 {
@@ -26,7 +27,7 @@ namespace Musicstore.Server.WebApi.Controllers
         // GET api/Artist/5
         public Artist GetArtist(int id)
         {
-            Artist artist = db.Artists.Find(id);
+            Artist artist = db.Artists.Include("Albums").FirstOrDefault(a => a.Id == id);
             if (artist == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
@@ -48,6 +49,7 @@ namespace Musicstore.Server.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
+            CheckAlbumsInArtist(artist);
             db.Entry(artist).State = EntityState.Modified;
 
             try
@@ -67,6 +69,8 @@ namespace Musicstore.Server.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                CheckAlbumsInArtist(artist);
+
                 db.Artists.Add(artist);
                 db.SaveChanges();
 
@@ -106,6 +110,21 @@ namespace Musicstore.Server.WebApi.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private void CheckAlbumsInArtist(Artist artist)
+        {
+            var artists = new List<Album>();
+            artist.Albums.ForEach(album =>
+            {
+                var a = db.Albums.FirstOrDefault(x => x.Id == album.Id);
+                if (a == null)
+                {
+                    a = new Album();
+                }
+                artists.Add(a);
+            });
+            artist.Albums = artists;
         }
     }
 }

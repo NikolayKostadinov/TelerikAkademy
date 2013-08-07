@@ -10,12 +10,12 @@ namespace Musicstore.Client.WebApp
     {
         public static HttpClient Client { get; private set; }
 
-        private static List<Artist> artists = new List<Artist>();
-        public static List<Artist> Artists
-        {
-            get { return artists; }
-            set { artists = value; }
-        }
+        //private static List<Artist> artists = new List<Artist>();
+        //public static List<Artist> Artists
+        //{
+        //    get { return artists; }
+        //    set { artists = value; }
+        //}
 
         static SessionState()
         {

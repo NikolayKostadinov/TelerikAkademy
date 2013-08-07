@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Objects;
 using Musicstore.Server.Models;
 
 namespace Musicstore.Server.Data
@@ -9,6 +10,7 @@ namespace Musicstore.Server.Data
             : base("MusicstoreConnectionString")
         {
             this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.ValidateOnSaveEnabled = true;
         }
 
         public DbSet<Album> Albums { get; set; }
@@ -71,5 +73,6 @@ namespace Musicstore.Server.Data
         //        }
         //    }
         //}
+       
     }
 }

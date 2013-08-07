@@ -14,15 +14,15 @@ namespace Musicstore.Client.WebApp
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            if (SessionState.Artists.Count == 0)
-            {
-                var response = SessionState.Client.GetAsync("api/artist").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var artists = response.Content.ReadAsAsync<IEnumerable<Artist>>().Result.ToList();
-                    SessionState.Artists.AddRange(artists);
-                }
-            }
+            //if (SessionState.Artists.Count == 0)
+            //{
+            //    var response = SessionState.Client.GetAsync("api/artist").Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var artists = response.Content.ReadAsAsync<IEnumerable<Artist>>().Result.ToList();
+            //        SessionState.Artists.AddRange(artists);
+            //    }
+            //}
         }
 
         protected void Session_Start(object sender, EventArgs e)

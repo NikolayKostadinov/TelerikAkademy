@@ -40,6 +40,15 @@ namespace Musicstore.Client.WebApp {
         protected global::System.Web.UI.WebControls.ListBox lbAlbums;
         
         /// <summary>
+        /// hfAlbums control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfAlbums;
+        
+        /// <summary>
         /// lbSongs control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace Musicstore.Client.WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lbSongs;
+        
+        /// <summary>
+        /// hfSongs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSongs;
         
         /// <summary>
         /// btnArtistSave control.

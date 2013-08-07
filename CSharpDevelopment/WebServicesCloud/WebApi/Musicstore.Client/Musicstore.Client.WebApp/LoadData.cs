@@ -23,24 +23,39 @@ namespace Musicstore.Client.WebApp
             }
         }
 
-        public static void ddlArtistsFill(ListBox ddlArtists)
+        public static void ddlArtistsFill(ListBox ddlArtists, Action action)
         {
-            ddlArtists.DataTextField = "Name";
-            ddlArtists.DataValueField = "Id";
-            ddlArtists.DataSource = SessionState.Artists;
-            ddlArtists.DataBind();
+            var response = SessionState.Client.GetAsync("api/artist").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var artists = response.Content.ReadAsAsync<IEnumerable<Artist>>().Result.ToList();
+                ddlArtists.DataTextField = "Name";
+                ddlArtists.DataValueField = "Id";
+                ddlArtists.DataSource = artists.ToList();
+                ddlArtists.DataBind();
+
+                if (action != null)
+                {
+                    action();
+                }
+            }
         }
 
-        public static void ddlAlbumsFill(ListBox ddlAlbums)
+        public static void ddlAlbumsFill(ListBox ddlAlbums, Action action)
         {
             var response = SessionState.Client.GetAsync("api/album").Result;
             if (response.IsSuccessStatusCode)
             {
                 var artists = response.Content.ReadAsAsync<IEnumerable<Album>>().Result;
-                ddlAlbums.DataTextField = "Name";
+                ddlAlbums.DataTextField = "Title";
                 ddlAlbums.DataValueField = "Id";
                 ddlAlbums.DataSource = artists.ToList();
                 ddlAlbums.DataBind();
+
+                if (action != null)
+                {
+                    action();
+                }
             }
         }
     }
