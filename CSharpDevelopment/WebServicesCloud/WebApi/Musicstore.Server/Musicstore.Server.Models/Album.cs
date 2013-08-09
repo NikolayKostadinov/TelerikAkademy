@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Musicstore.Server.Models
 {
@@ -8,8 +9,10 @@ namespace Musicstore.Server.Models
         public string Title { get; set; }
         public int Year { get; set; }
         public string Producer { get; set; }
-        
+
+        [IgnoreDataMember]
         public ICollection<Artist> Artists { get; set; }
+        [IgnoreDataMember]
         public ICollection<Song> Songs { get; set; }
 
         public Album() 

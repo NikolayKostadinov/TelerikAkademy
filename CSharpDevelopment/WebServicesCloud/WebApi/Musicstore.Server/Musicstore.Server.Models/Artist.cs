@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Musicstore.Server.Models
 {
@@ -10,7 +11,9 @@ namespace Musicstore.Server.Models
         public string Country { get; set; }
         public DateTime DateOfBirth { get; set; }
 
+        [IgnoreDataMember]
         public ICollection<Album> Albums { get; set; }
+        [IgnoreDataMember]
         public ICollection<Song> Songs { get; set; }
 
         public Artist()

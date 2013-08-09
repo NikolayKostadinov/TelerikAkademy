@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Musicstore.Server.Models
 {
+    //[DataContract(IsReference = true)]
     public class Song
     {
         public int Id { get; set; }
@@ -11,6 +13,7 @@ namespace Musicstore.Server.Models
         public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
 
+        [IgnoreDataMember]
         public ICollection<Album> Albums { get; set; }
 
         public Song()
