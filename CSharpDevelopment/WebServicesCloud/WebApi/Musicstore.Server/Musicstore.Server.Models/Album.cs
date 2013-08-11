@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Musicstore.Server.Core;
 
 namespace Musicstore.Server.Models
 {
-    public class Album
+    public class Album: BaseEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public int Year { get; set; }
         public string Producer { get; set; }

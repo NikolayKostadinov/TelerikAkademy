@@ -1,9 +1,14 @@
 ﻿using System.Data.Entity;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Autofac;
+using Autofac.Integration.WebApi;
 using Musicstore.Server.Data;
+using Musicstore.Server.Data.Repositories;
+using Musicstore.Server.Models;
 
 namespace Musicstore.Server.WebApi
 {
@@ -26,6 +31,21 @@ namespace Musicstore.Server.WebApi
                                     Data.Migrations.Configuration>());
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            var builder = new ContainerBuilder();
+
+            #region data layer
+            //var dataSettingsManager = new DataSettingsManager();
+            //var dataProviderSettings = dataSettingsManager.LoadSettings();
+            #endregion
+
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            //builder.RegisterGeneric(typeof(EfRepository<>)).AsImplementedInterfaces();
+            builder.Register<IRepository<Album>>(c => new EfRepository<Album>(new MusicstoreContext())).InstancePerApiRequest();
+
+            var container = builder.Build();
+            var resolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = resolver;
         }
     }
 }

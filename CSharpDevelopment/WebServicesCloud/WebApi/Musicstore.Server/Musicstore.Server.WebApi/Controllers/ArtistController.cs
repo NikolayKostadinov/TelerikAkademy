@@ -16,8 +16,6 @@ namespace Musicstore.Server.WebApi.Controllers
 {
     public class ArtistController : ApiController
     {
-        private MusicstoreContext db = new MusicstoreContext();
-
         // GET api/Artist
         public IQueryable<Artist> GetArtists()
         {

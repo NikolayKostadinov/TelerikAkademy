@@ -6,29 +6,16 @@ namespace Musicstore.Server.Data
 {
     public static class SessionState
     {
-        private static MusicstoreContext _db = new MusicstoreContext();
-        public static MusicstoreContext db
-        {
-            get
-            {
-                return _db;
-            }
-        }
-
-        public static HttpClient Client { get; private set; }
-
-        //private static HttpClient _client = new HttpClient()
-        //{
-        //    BaseAddress = new Uri(Setting.Default.WebApi)
-        //};
-        //public static HttpClient Client
+        //private static MusicstoreContext _db = new MusicstoreContext();
+        //public static MusicstoreContext db
         //{
         //    get
         //    {
-        //        _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //        return _client;
+        //        return _db;
         //    }
         //}
+
+        public static HttpClient Client { get; private set; }
 
         static SessionState()
         {

@@ -21,8 +21,6 @@ namespace ConsumingWebServices
         {
             var response = await client.GetAsync("search.json?q=" + query +"&count=" + count);
             var json = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(json);
-            Console.WriteLine("----------------------------------");
             var result = JsonConvert.DeserializeObject<Articles>(json);
             Console.WriteLine(string.Join(Environment.NewLine,
                 result.articles.Select(
