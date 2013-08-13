@@ -34,8 +34,7 @@ namespace Musicstore.Client.WebApp
         {
             if (!string.IsNullOrEmpty(txtAlbumTitle.Text))
             {
-                var album = new Album();
-                album.Title = txtAlbumTitle.Text;
+                var album = new Album(txtAlbumTitle.Text);
 
                 int year = 0;
                 if (int.TryParse(txtAlbumYear.Text, out year))
@@ -50,10 +49,9 @@ namespace Musicstore.Client.WebApp
                         var values = item.Split(';');
                         if (values.Count() > 1)
                         {
-                            var artist = new Artist()
+                            var artist = new Artist(values[1])
                             {
-                                Id = int.Parse(values[0]),
-                                Name = values[1]
+                                Id = int.Parse(values[0])
                             };
                             album.Artists.Add(artist);
                         }
@@ -61,7 +59,7 @@ namespace Musicstore.Client.WebApp
                 });
 
                 album.Producer = txtAlbumProducer.Text;
-
+                
                 var response = new HttpResponseMessage();
                 if (!string.IsNullOrEmpty(btnAlbumSave.CommandArgument))
                 {

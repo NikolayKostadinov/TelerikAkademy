@@ -1,128 +1,155 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using System.Web.Http;
+﻿using Musicstore.Server.Data.Helpers;
+using Musicstore.Server.Data.Interfaces;
+using Musicstore.Server.Data.Services;
 using Musicstore.Server.Models;
-using Musicstore.Server.Data;
-using WebGrease.Css.Extensions;
 
 namespace Musicstore.Server.WebApi.Controllers
 {
-    public class ArtistController : ApiController
+    public class ArtistController : BaseApiController<Artist>
     {
-        // GET api/Artist
-        public IQueryable<Artist> GetArtists()
+        private readonly ArtistService _artistService;
+
+        public ArtistController(IRepository repository)
+            : base(repository)
         {
-            return db.Artists;
+            Includes = new[] {"Albums", "Songs"};
+            _artistService = new ArtistService(repository);
         }
 
-        // GET api/Artist/5
-        public Artist GetArtist(int id)
+        public override void Post(Artist value)
         {
-            Artist artist = db.Artists.Include("Albums").FirstOrDefault(a => a.Id == id);
-            if (artist == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-
-            return artist;
+            _artistService.PostService(value);
+            base.Post(value);
         }
 
-        // PUT api/Artist/5
-        public HttpResponseMessage PutArtist(int id, Artist artist)
+        public override void Put(Artist value)
         {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-
-            if (id != artist.Id)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            CheckAlbumsInArtist(artist);
-            db.Entry(artist).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.OK, artist);
+            _artistService.PutService(value);
+            base.Put(value);
         }
 
-        // POST api/Artist
-        public HttpResponseMessage PostArtist(Artist artist)
-        {
-            if (ModelState.IsValid)
-            {
-                CheckAlbumsInArtist(artist);
+        //private readonly IRepository<Artist> _artistRepository;
+        //private readonly IRepository<Album> _albumRepository;
 
-                db.Artists.Add(artist);
-                db.SaveChanges();
+        //public ArtistController(IRepository<Artist> artistRepository, IRepository<Album> albumRepository)
+        //{
+        //    _artistRepository = artistRepository;
+        //    _albumRepository = albumRepository;
+        //}
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, artist);
-                return response;
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-        }
+        //// GET api/Artist
+        //public IQueryable<Artist> GetArtists()
+        //{
+        //    return _artistRepository.GetAll;
+        //}
 
-        // DELETE api/Artist/5
-        public HttpResponseMessage DeleteArtist(int id)
-        {
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
+        //// GET api/Artist/5
+        //public Artist GetArtist(int id)
+        //{
+        //    Artist artist = _artistRepository.GetAll.Include(x=>x.Albums).Include(x=>x.Songs).FirstOrDefault(x => x.Id == id);//.GetById(id);// db.Artists.Include("Albums").FirstOrDefault(a => a.Id == id);
+        //    if (artist == null)
+        //    {
+        //        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+        //    }
 
-            db.Artists.Remove(artist);
+        //    return artist;
+        //}
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
+        //// PUT api/Artist/5
+        //public HttpResponseMessage PutArtist(int id, Artist artist)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            return Request.CreateResponse(HttpStatusCode.OK, artist);
-        }
+        //    if (id != artist.Id)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //    }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
+        //    //CheckAlbumsInArtist(artist);
+        //    //db.Entry(artist).State = EntityState.Modified;
 
-        private void CheckAlbumsInArtist(Artist artist)
-        {
-            var artists = new List<Album>();
-            artist.Albums.ForEach(album =>
-            {
-                var a = db.Albums.FirstOrDefault(x => x.Id == album.Id);
-                if (a == null)
-                {
-                    a = new Album();
-                }
-                artists.Add(a);
-            });
-            artist.Albums = artists;
-        }
+        //    try
+        //    {
+        //        var entity = _artistRepository.Update(artist);
+        //        return Request.CreateResponse(HttpStatusCode.OK, entity);
+        //        //db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException ex)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+        //    }
+
+        //    return Request.CreateResponse(HttpStatusCode.OK, artist);
+        //}
+
+        //// POST api/Artist
+        //public HttpResponseMessage PostArtist(Artist artist)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var entity = _artistRepository.Add(artist);
+
+        //        //CheckAlbumsInArtist(artist);
+
+        //        //db.Artists.Add(artist);
+        //        //db.SaveChanges();
+
+        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, artist);
+        //        return response;
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
+        //}
+
+        //// DELETE api/Artist/5
+        //public HttpResponseMessage DeleteArtist(int id)
+        //{
+        //    //Artist artist = db.Artists.Find(id);
+        //    //if (artist == null)
+        //    //{
+        //    //    return Request.CreateResponse(HttpStatusCode.NotFound);
+        //    //}
+
+        //    //db.Artists.Remove(artist);
+
+        //    try
+        //    {
+        //        _artistRepository.Delete(id);
+        //        //db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException ex)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+        //    }
+
+        //    return Request.CreateResponse(HttpStatusCode.OK);
+        //}
+
+        ////protected override void Dispose(bool disposing)
+        ////{
+        ////    db.Dispose();
+        ////    base.Dispose(disposing);
+        ////}
+
+        //private void CheckArtistsInAlbums(Album album)
+        //{
+        //    var artists = new List<Artist>();
+        //    album.Artists.ForEach(artist =>
+        //    {
+        //        var a = db.Artists.FirstOrDefault(x => x.Id == artist.Id);
+        //        if (a == null)
+        //        {
+        //            a = new Artist();
+        //            a.DateOfBirth = DateTime.Now;
+        //        }
+        //        artists.Add(a);
+        //    });
+        //    album.Artists = artists;
+        //}
     }
 }

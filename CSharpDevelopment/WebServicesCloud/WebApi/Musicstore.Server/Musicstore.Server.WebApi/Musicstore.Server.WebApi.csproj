@@ -171,7 +171,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -300,10 +302,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Musicstore.Server.Core\Musicstore.Server.Core.csproj">
-      <Project>{2A4FD90C-4624-4C35-8B5B-3B0B97ABA243}</Project>
-      <Name>Musicstore.Server.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Musicstore.Server.Data\Musicstore.Server.Data.csproj">
       <Project>{7F0EB63B-9FA9-4487-A7B4-00D4F2C1EDE9}</Project>
       <Name>Musicstore.Server.Data</Name>

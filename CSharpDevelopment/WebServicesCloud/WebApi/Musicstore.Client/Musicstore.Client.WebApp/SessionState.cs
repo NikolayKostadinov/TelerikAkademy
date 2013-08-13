@@ -20,7 +20,7 @@ namespace Musicstore.Client.WebApp
         static SessionState()
         {
             Client = new HttpClient() { BaseAddress = new Uri("http://localhost:9428/") };
-            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
 

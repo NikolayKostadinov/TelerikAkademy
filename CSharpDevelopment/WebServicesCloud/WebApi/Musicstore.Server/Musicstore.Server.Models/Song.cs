@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Musicstore.Server.Models.Interfaces;
 
 namespace Musicstore.Server.Models
 {
     //[DataContract(IsReference = true)]
-    public class Song
+    public class Song : IIdentifier
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,12 +12,13 @@ namespace Musicstore.Server.Models
         public string Genre { get; set; }
         public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
+        public virtual ICollection<Album> Albums { get; set; }
 
-        [IgnoreDataMember]
-        public ICollection<Album> Albums { get; set; }
+        protected Song(){}
 
-        public Song()
+        public Song(string title)
         {
+            Title = title;
             Albums = new HashSet<Album>();
         }
     }

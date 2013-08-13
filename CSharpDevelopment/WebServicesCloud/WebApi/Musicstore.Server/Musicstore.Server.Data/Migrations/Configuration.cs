@@ -1,11 +1,8 @@
 namespace Musicstore.Server.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<Musicstore.Server.Data.MusicstoreContext>
+    public sealed class Configuration : DbMigrationsConfiguration<MusicstoreContext>
     {
         public Configuration()
         {
@@ -13,7 +10,7 @@ namespace Musicstore.Server.Data.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Musicstore.Server.Data.MusicstoreContext context)
+        protected override void Seed(MusicstoreContext context)
         {
             //  This method will be called after migrating to the latest version.
 

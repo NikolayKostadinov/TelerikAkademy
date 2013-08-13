@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Musicstore.Server.Data;
+using Musicstore.Server.Data.Interfaces;
 using Musicstore.Server.Data.Repositories;
 using Musicstore.Server.Models;
 
@@ -26,9 +27,10 @@ namespace Musicstore.Server.WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            Database.SetInitializer<MusicstoreContext>(null);
             Database.SetInitializer(new CreateDatabaseIfNotExists<MusicstoreContext>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MusicstoreContext,
-                                    Data.Migrations.Configuration>());
+                Data.Migrations.Configuration>());
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
@@ -39,9 +41,13 @@ namespace Musicstore.Server.WebApi
             //var dataProviderSettings = dataSettingsManager.LoadSettings();
             #endregion
 
+            var db = new MusicstoreContext();
+
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             //builder.RegisterGeneric(typeof(EfRepository<>)).AsImplementedInterfaces();
-            builder.Register<IRepository<Album>>(c => new EfRepository<Album>(new MusicstoreContext())).InstancePerApiRequest();
+            builder.Register<IRepository>(c => new EfRepository(db)).InstancePerApiRequest();
+            //builder.Register<IRepository<Artist>>(c => new EfRepository<Artist>(new MusicstoreContext())).InstancePerApiRequest();
+            //builder.Register<IRepository<Song>>(c => new EfRepository<Song>(new MusicstoreContext())).InstancePerApiRequest();
 
             var container = builder.Build();
             var resolver = new AutofacWebApiDependencyResolver(container);

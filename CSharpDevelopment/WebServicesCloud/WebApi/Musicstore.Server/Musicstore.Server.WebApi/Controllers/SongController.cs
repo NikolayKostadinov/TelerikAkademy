@@ -1,112 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using System.Web.Http;
+﻿using Musicstore.Server.Data.Helpers;
+using Musicstore.Server.Data.Interfaces;
 using Musicstore.Server.Models;
-using Musicstore.Server.Data;
 
 namespace Musicstore.Server.WebApi.Controllers
 {
-    public class SongController : ApiController
+    public class SongController : BaseApiController<Song>
     {
-        private MusicstoreContext db = new MusicstoreContext();
-
-        // GET api/Song
-        public IQueryable<Song> GetSongs()
+        public SongController(IRepository repository)
+            : base(repository)
         {
-            var songs = db.Songs.Include(s => s.Artist);
-            return songs;
+            Includes = new[] { "Artist", "Albums" };
         }
 
-        // GET api/Song/5
-        public Song GetSong(int id)
-        {
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
+        //private readonly IRepository<Song> _songRepository;
 
-            return song;
-        }
+        //public SongController(IRepository<Song> songRepository)
+        //{
+        //    _songRepository = songRepository;
+        //}
 
-        // PUT api/Song/5
-        public HttpResponseMessage PutSong(int id, Song song)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //// GET api/Song
+        //public IQueryable<Song> GetSongs()
+        //{
+        //    var songs = _songRepository.GetAll.Include("Artist").Include("Albums");
+        //    return songs;
+        //}
 
-            if (id != song.Id)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
+        //// GET api/Song/5
+        //public Song GetSong(int id)
+        //{
+        //    Song song = _songRepository.GetById(id);// db.Songs.Find(id);
+        //    if (song == null)
+        //    {
+        //        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+        //    }
 
-            db.Entry(song).State = EntityState.Modified;
+        //    return song;
+        //}
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
+        //// PUT api/Song/5
+        //public HttpResponseMessage PutSong(int id, Song song)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
+        //    if (id != song.Id)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //    }
 
-        // POST api/Song
-        public HttpResponseMessage PostSong(Song song)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Songs.Add(song);
-                db.SaveChanges();
+        //    //db.Entry(song).State = EntityState.Modified;
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, song);
-                return response;
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-        }
+        //    try
+        //    {
+        //        var entity = _songRepository.Update(song);
+        //        return Request.CreateResponse(HttpStatusCode.OK, entity);
+        //        //db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException ex)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+        //    }
+        //}
 
-        // DELETE api/Song/5
-        public HttpResponseMessage DeleteSong(int id)
-        {
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
+        //// POST api/Song
+        //public HttpResponseMessage PostSong(Song song)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var entity = _songRepository.Add(song);
 
-            db.Songs.Remove(song);
+        //        //db.Songs.Add(song);
+        //        //db.SaveChanges();
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
+        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, entity);
+        //        return response;
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
+        //}
 
-            return Request.CreateResponse(HttpStatusCode.OK, song);
-        }
+        //// DELETE api/Song/5
+        //public HttpResponseMessage DeleteSong(int id)
+        //{
+        //    //Song song = db.Songs.Find(id);
+        //    //if (song == null)
+        //    //{
+        //    //    return Request.CreateResponse(HttpStatusCode.NotFound);
+        //    //}
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
+        //    //db.Songs.Remove(song);
+
+        //    try
+        //    {
+        //        _songRepository.Delete(id);
+        //        //db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException ex)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+        //    }
+
+        //    return Request.CreateResponse(HttpStatusCode.OK);
+        //}
+
+        ////protected override void Dispose(bool disposing)
+        ////{
+        ////    db.Dispose();
+        ////    base.Dispose(disposing);
+        ////}
     }
 }

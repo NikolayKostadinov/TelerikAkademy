@@ -34,9 +34,8 @@ namespace Musicstore.Client.WebApp
         {
             if (!string.IsNullOrEmpty(txtArtistName.Text))
             {
-                var artist = new Artist
+                var artist = new Artist(txtArtistName.Text)
                 {
-                    Name = txtArtistName.Text,
                     Country = txtArtistCountry.Text,
                     DateOfBirth = DateTime.Now
                 };
@@ -48,10 +47,9 @@ namespace Musicstore.Client.WebApp
                         var values = item.Split(';');
                         if (values.Count() > 1)
                         {
-                            var album = new Album()
+                            var album = new Album(Title = values[1])
                             {
-                                Id = int.Parse(values[0]),
-                                Title = values[1]
+                                Id = int.Parse(values[0])
                             };
                             artist.Albums.Add(album);
                         }

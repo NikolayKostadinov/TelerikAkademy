@@ -1,20 +1,26 @@
 ﻿using System.Data.Entity;
-using Musicstore.Server.Core;
 using Musicstore.Server.Data.Mapping;
+using Musicstore.Server.Models;
+using Musicstore.Server.Models.Interfaces;
 
 namespace Musicstore.Server.Data
 {
-    public class MusicstoreContext : DbContext
+    public class MusicstoreContext : DbContext, IIdentifier
     {
         public MusicstoreContext()
-            : base("MusicstoreConnectionString")
+            : base("Name=MusicstoreConnectionString")
         {
+            
         }
 
-        public MusicstoreContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
-        {
-        }
+        //public MusicstoreContext(string nameOrConnectionString)
+        //    : base(nameOrConnectionString)
+        //{
+        //}
+
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+        public DbSet<Song> Songs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,9 +31,11 @@ namespace Musicstore.Server.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public new IDbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
-        {
-            return base.Set<TEntity>();
-        }
+        //public new IDbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
+        //{
+        //    return base.Set<TEntity>();
+        //}
+
+        public int Id { get; set; }
     }
 }
