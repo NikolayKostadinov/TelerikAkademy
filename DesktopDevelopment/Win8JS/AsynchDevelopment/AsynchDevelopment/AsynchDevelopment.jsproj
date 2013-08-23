@@ -60,6 +60,7 @@
     <Content Include="images\storelogo.png" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\helpers\calculations.js" />
     <Content Include="js\primeNumbersCalculator.js" />
     <Content Include="js\workers\calculateFromRange.js" />
     <Content Include="js\workers\calculateFirstNumbers.js" />

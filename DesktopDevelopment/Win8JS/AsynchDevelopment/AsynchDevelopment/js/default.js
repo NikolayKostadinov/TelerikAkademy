@@ -34,7 +34,7 @@
             
             var btnCalculateFirstNumbers = document.getElementById("btnCalculateFirstNumbers");
             btnCalculateFirstNumbers.addEventListener("click", function (e) {
-                var txtToNumber = document.getElementById("txtToNumber");
+                var txtToNumber = document.getElementById("txtNumber");
                 var txtStopNumber = document.getElementById("txtStopNumber");
                 var pnlResult = document.getElementById("result-calculateFirstNumbers");
                 calculate.calculateFirstNumbers(txtToNumber.value, txtStopNumber.value).then(function (result) {

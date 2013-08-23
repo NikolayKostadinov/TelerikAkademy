@@ -2,27 +2,21 @@
 
 var PrimeNumbersCalculator = WinJS.Class.define(function() {
     this._workerCount = 0;
+    this._workerCalculatePrimeNumberTo = Worker("/js/workers/calculatePrimeNumberTo.js");
+    this._workerCalculateFirstNumbers = Worker("/js/workers/calculateFirstNumbers.js");
+    this._workerCalculateFromRange = Worker("/js/workers/calculateFromRange.js");
 }, {
-    //workerCount: {
-    //    get: function() {
-    //         return this._workerCount;
-    //    },
-    //    set: function (val) {
-    //        this._workerCount = val;
-    //    }
-    //},
     calculatePrimeNumberTo: function(number) {
         var self = this;
         return new WinJS.Promise(function(complete, error) {
             if (self._workerCount < 3) {
                 self._workerCount++;
-                var worker = Worker("/js/workers/calculatePrimeNumberTo.js");
-                worker.onmessage = function(event) {
+                self._workerCalculatePrimeNumberTo.onmessage = function (event) {
                     self._workerCount--;
                     var primesList = event.data;
                     complete(primesList);
                 };
-                worker.postMessage({
+                self._workerCalculatePrimeNumberTo.postMessage({
                     toNumber: number
                 });
             } else {
@@ -35,13 +29,12 @@ var PrimeNumbersCalculator = WinJS.Class.define(function() {
         return new WinJS.Promise(function(complete, error) {
             if (self._workerCount < 3) {
                 self._workerCount++;
-                var worker = Worker("/js/workers/calculateFirstNumbers.js");
-                worker.onmessage = function(event) {
+                self._workerCalculateFirstNumbers.onmessage = function (event) {
                     self._workerCount--;
                     var primesList = event.data;
                     complete(primesList);
                 };
-                worker.postMessage({
+                self._workerCalculateFirstNumbers.postMessage({
                     toNumber: toNumber,
                     stopNumber: stopNumber
                 });
@@ -55,13 +48,12 @@ var PrimeNumbersCalculator = WinJS.Class.define(function() {
         return new WinJS.Promise(function(complete, error) {
             if (self._workerCount < 3) {
                 self._workerCount++;
-                var worker = Worker("/js/workers/calculateFromRange.js");
-                worker.onmessage = function(event) {
+                self._workerCalculateFromRange.onmessage = function (event) {
                     self._workerCount--;
                     var primesList = event.data;
                     complete(primesList);
                 };
-                worker.postMessage({
+                self._workerCalculateFromRange.postMessage({
                     startNumber: startNumber,
                     endNumber: endNumber
                 });
