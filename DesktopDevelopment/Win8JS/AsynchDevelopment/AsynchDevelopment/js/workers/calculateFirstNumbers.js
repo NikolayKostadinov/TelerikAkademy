@@ -8,12 +8,16 @@ var isPrime = function(number) {
     return true;
 };
 
-var calculatePrimes = function(toNumber) {
+var calculatePrimes = function(toNumber, stopNumber) {
     var primesList = new Array();
 
     for (var ind = 1; ind < toNumber; ind++) {
         if (isPrime(ind)) {
-            primesList.push(ind);
+            if (primesList.length < stopNumber) {
+                primesList.push(ind);
+            } else {
+                break;
+            }
         }
     }
 
@@ -21,7 +25,7 @@ var calculatePrimes = function(toNumber) {
 };
 
 onmessage = function(event) {
-    var result = calculatePrimes(event.data.toNumber);
+    var result = calculatePrimes(event.data.toNumber, event.data.stopNumber);
 
     postMessage(result);
 };

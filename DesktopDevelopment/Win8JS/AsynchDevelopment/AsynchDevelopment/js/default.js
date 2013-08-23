@@ -18,6 +18,43 @@
                 // Restore application state here.
             }
             args.setPromise(WinJS.UI.processAll());
+            
+            var calculate = new PrimeNumbersCalculator();
+
+            var btnCalculatePrimeNumberTo = document.getElementById("btnCalculatePrimeNumberTo");
+            btnCalculatePrimeNumberTo.addEventListener("click", function (e) {
+                var txtToNumber = document.getElementById("txtToNumber");
+                var pnlResult = document.getElementById("result-calculatePrimeNumberTo");
+                calculate.calculatePrimeNumberTo(txtToNumber.value).then(function (result) {
+                    pnlResult.innerHTML = result;
+                }, function (error) {
+                    pnlResult.innerHTML = error;
+                });
+            });
+            
+            var btnCalculateFirstNumbers = document.getElementById("btnCalculateFirstNumbers");
+            btnCalculateFirstNumbers.addEventListener("click", function (e) {
+                var txtToNumber = document.getElementById("txtToNumber");
+                var txtStopNumber = document.getElementById("txtStopNumber");
+                var pnlResult = document.getElementById("result-calculateFirstNumbers");
+                calculate.calculateFirstNumbers(txtToNumber.value, txtStopNumber.value).then(function (result) {
+                    pnlResult.innerHTML = result;
+                }, function (error) {
+                    pnlResult.innerHTML = error;
+                });
+            });
+            
+            var btnCalculateFromRange = document.getElementById("btnCalculateFromRange");
+            btnCalculateFromRange.addEventListener("click", function (e) {
+                var txtStartNumber = document.getElementById("txtStartNumber");
+                var txtEndNumber = document.getElementById("txtEndNumber");
+                var pnlResult = document.getElementById("result-calculateFromRange");
+                calculate.calculateFromRange(txtStartNumber.value, txtEndNumber.value).then(function (result) {
+                    pnlResult.innerHTML = result;
+                }, function (error) {
+                    pnlResult.innerHTML = error;
+                });
+            });
         }
     };
 

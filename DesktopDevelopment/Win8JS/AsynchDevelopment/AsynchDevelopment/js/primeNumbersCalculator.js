@@ -1,56 +1,73 @@
-﻿var PrimeNumbersCalculator = WinJS.Class.define(function() {
+﻿/// <reference path="//Microsoft.WinJS.1.0/js/base.js" />
 
+var PrimeNumbersCalculator = WinJS.Class.define(function() {
+    this._workerCount = 0;
 }, {
+    //workerCount: {
+    //    get: function() {
+    //         return this._workerCount;
+    //    },
+    //    set: function (val) {
+    //        this._workerCount = val;
+    //    }
+    //},
     calculatePrimeNumberTo: function(number) {
-        return new WinJS.Promise(function (complete) {
-            var primesList = new Array();
-
-            for (var ind = 1; ind < number; ind++) {
-                if (isPrime(ind)) {
-                    primesList.push(ind);
-                }
+        var self = this;
+        return new WinJS.Promise(function(complete, error) {
+            if (self._workerCount < 3) {
+                self._workerCount++;
+                var worker = Worker("/js/workers/calculatePrimeNumberTo.js");
+                worker.onmessage = function(event) {
+                    self._workerCount--;
+                    var primesList = event.data;
+                    complete(primesList);
+                };
+                worker.postMessage({
+                    toNumber: number
+                });
+            } else {
+                error("only 3 workers is allowed at some time");
             }
-
-            complete(primesList);
         });
     },
     calculateFirstNumbers: function(toNumber, stopNumber) {
-        return new WinJS.Promise(function (complete) {
-            var primesList = new Array();
-
-            for (var ind = 1; ind < toNumber; ind++) {
-                if (isPrime(ind)) {
-                    if (primesList.length < stopNumber) {
-                        primesList.push(ind);
-                    } else {
-                        break;
-                    }
-                }
+        var self = this;
+        return new WinJS.Promise(function(complete, error) {
+            if (self._workerCount < 3) {
+                self._workerCount++;
+                var worker = Worker("/js/workers/calculateFirstNumbers.js");
+                worker.onmessage = function(event) {
+                    self._workerCount--;
+                    var primesList = event.data;
+                    complete(primesList);
+                };
+                worker.postMessage({
+                    toNumber: toNumber,
+                    stopNumber: stopNumber
+                });
+            } else {
+                error("only 3 workers is allowed at some time");
             }
-
-            complete(primesList);
         });
     },
     calculateFromRange: function(startNumber, endNumber) {
-        return new WinJS.Promise(function (complete) {
-            var primesList = new Array();
-
-            for (var ind = startNumber; ind < endNumber; ind++) {
-                if (isPrime(ind)) {
-                    primesList.push(ind);
-                }
+        var self = this;
+        return new WinJS.Promise(function(complete, error) {
+            if (self._workerCount < 3) {
+                self._workerCount++;
+                var worker = Worker("/js/workers/calculateFromRange.js");
+                worker.onmessage = function(event) {
+                    self._workerCount--;
+                    var primesList = event.data;
+                    complete(primesList);
+                };
+                worker.postMessage({
+                    startNumber: startNumber,
+                    endNumber: endNumber
+                });
+            } else {
+                error("only 3 workers is allowed at some time");
             }
-
-            complete(primesList);
         });
     }
 });
-
-var isPrime = function (number) {
-    for (var i = 2; i < number; i++) {
-        if (number % i == 0) {
-            return false;
-        }
-    }
-    return true;
-}

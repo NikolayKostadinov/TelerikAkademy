@@ -8,10 +8,10 @@ var isPrime = function(number) {
     return true;
 };
 
-var calculatePrimes = function(toNumber) {
+var calculatePrimes = function (startNumber, endNumber) {
     var primesList = new Array();
 
-    for (var ind = 1; ind < toNumber; ind++) {
+    for (var ind = startNumber; ind < endNumber; ind++) {
         if (isPrime(ind)) {
             primesList.push(ind);
         }
@@ -21,7 +21,7 @@ var calculatePrimes = function(toNumber) {
 };
 
 onmessage = function(event) {
-    var result = calculatePrimes(event.data.toNumber);
+    var result = calculatePrimes(event.data.startNumber, event.data.endNumber);
 
     postMessage(result);
 };
