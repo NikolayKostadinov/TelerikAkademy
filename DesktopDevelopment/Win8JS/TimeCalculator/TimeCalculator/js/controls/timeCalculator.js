@@ -9,7 +9,8 @@ WinJS.Namespace.define("Saykor.Controls", {
     },
         {
             _element: null,
-            _buildVisualTree: function() {
+            _buildVisualTree: function () {
+                var self = this;
                 var fieldset = document.createElement("fieldset");
                 this._element.appendChild(fieldset);
 
@@ -88,7 +89,7 @@ WinJS.Namespace.define("Saykor.Controls", {
                 var btnCalculateDays = document.createElement("button");
                 btnCalculateDays.textContent = "Calculate Days";
                 btnCalculateDays.addEventListener("click", function (e) {
-                    var result = Date.daysBetween(startDatePicker.current, endDatePicker.current);
+                    var result = Saykor.Controls.TimeCalculator.daysBetween(startDatePicker.current, endDatePicker.current);
                     pnlResultMessage.innerHTML = result;
                     menu.hide();
                 });
@@ -97,7 +98,7 @@ WinJS.Namespace.define("Saykor.Controls", {
                 var btnCalculateHours = document.createElement("button");
                 btnCalculateHours.textContent = "Calculate Hours";
                 btnCalculateHours.addEventListener("click", function (e) {
-                    var result = Date.daysBetween(startDatePicker.current, endDatePicker.current) * 24;
+                    var result = Saykor.Controls.TimeCalculator.daysBetween(startDatePicker.current, endDatePicker.current) * 24;
                     pnlResultMessage.innerHTML = result;
                     menu.hide();
                 });
@@ -106,8 +107,8 @@ WinJS.Namespace.define("Saykor.Controls", {
                 var btnCalculateDaysHours = document.createElement("button");
                 btnCalculateDaysHours.textContent = "Calculate Days & Hours";
                 btnCalculateDaysHours.addEventListener("click", function (e) {
-                    var resultDays = Date.daysBetween(startDatePicker.current, endDatePicker.current);
-                    var resultHours = Date.hoursBetween(startTimePicker.current, endTimePicker.current);
+                    var resultDays = Saykor.Controls.TimeCalculator.daysBetween(startDatePicker.current, endDatePicker.current);
+                    var resultHours = Saykor.Controls.TimeCalculator.hoursBetween(startTimePicker.current, endTimePicker.current);
                     pnlResultMessage.innerHTML = "Days: " + resultDays + " Hours: " + resultHours;
                     menu.hide();
                 });
@@ -118,35 +119,34 @@ WinJS.Namespace.define("Saykor.Controls", {
                 var pnlResultMessage = document.createElement("div");
                 pnlButtons.appendChild(pnlResultMessage);
             }
+        }, {
+            daysBetween: function(date1, date2) {
+                //Get 1 day in milliseconds
+                var oneDay = 1000 * 60 * 60 * 24;
+
+                // Convert both dates to milliseconds
+                var date1Ms = date1.getTime();
+                var date2Ms = date2.getTime();
+
+                // Calculate the difference in milliseconds
+                var differenceMs = date2Ms - date1Ms;
+
+                // Convert back to days and return
+                return Math.round(differenceMs / oneDay);
+            },
+            hoursBetween: function(date1, date2) {
+                //Get 1 hour in milliseconds
+                var oneHour = 1000 * 60 * 60;
+
+                // Convert both dates to milliseconds
+                var date1Ms = date1.getTime();
+                var date2Ms = date2.getTime();
+
+                // Calculate the difference in milliseconds
+                var differenceMs = date2Ms - date1Ms;
+
+                // Convert back to days and return
+                return Math.round(differenceMs / oneHour);
+            }
         })
 });
-
-Date.daysBetween = function(date1, date2) {
-    //Get 1 day in milliseconds
-    var oneDay = 1000 * 60 * 60 * 24;
-
-    // Convert both dates to milliseconds
-    var date1Ms = date1.getTime();
-    var date2Ms = date2.getTime();
-
-    // Calculate the difference in milliseconds
-    var differenceMs = date2Ms - date1Ms;
-
-    // Convert back to days and return
-    return Math.round(differenceMs / oneDay);
-};
-
-Date.hoursBetween = function(date1, date2) {
-    //Get 1 day in milliseconds
-    var oneHour = 1000 * 60 * 60;
-
-    // Convert both dates to milliseconds
-    var date1Ms = date1.getTime();
-    var date2Ms = date2.getTime();
-
-    // Calculate the difference in milliseconds
-    var differenceMs = date2Ms - date1Ms;
-
-    // Convert back to days and return
-    return Math.round(differenceMs / oneHour);
-};
