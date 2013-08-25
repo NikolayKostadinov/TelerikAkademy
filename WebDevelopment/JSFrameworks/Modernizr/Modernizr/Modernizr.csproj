@@ -57,6 +57,23 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="01. SupportedFeatures.html" />
+    <Content Include="02. CanvasForOlderBrowsers.html" />
+    <Content Include="03. DatePicker.html" />
+    <Content Include="scripts\cupcake.js" />
+    <Content Include="scripts\excanvas.js" />
+    <Content Include="scripts\external\jquery-1.10.2.js" />
+    <None Include="scripts\external\jquery-2.0.3.intellisense.js" />
+    <Content Include="scripts\external\jquery-2.0.3.js" />
+    <Content Include="scripts\external\modernizr-2.6.2-full.js" />
+    <Content Include="scripts\external\ua-parser.js" />
+    <Content Include="scripts\external\ua-parser.min.js" />
+    <Content Include="scripts\flashcanvas.js" />
+    <Content Include="scripts\geolocation.js" />
+    <Content Include="scripts\gistfile1.js" />
+    <Content Include="scripts\modernizr.custom.91041.js" />
+    <Content Include="scripts\modernizr.custom.datePicker.js" />
+    <Content Include="scripts\persist.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
