@@ -39,8 +39,8 @@ define(["jquery", "rsvp"], function ($) {
 		return promise;
 	}
 
-	return {
-		getJSON: getJSON,
-		postJSON: postJSON
-	}
+    return {
+        getJSON: getJSON,
+        postJSON: postJSON
+    };
 });
