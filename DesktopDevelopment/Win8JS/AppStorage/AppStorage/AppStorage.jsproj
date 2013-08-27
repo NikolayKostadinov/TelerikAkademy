@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>738bb31d-8123-4cbe-adaf-c8ce5faa2891</ProjectGuid>
+    <ProjectGuid>2f8e253b-06c2-4fd6-9a99-087319bf4c19</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">
     <VisualStudioVersion>11.0</VisualStudioVersion>
@@ -53,21 +53,27 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="default.html" />
+    <Content Include="css\default.css" />
     <Content Include="images\logo.png" />
     <Content Include="images\smalllogo.png" />
     <Content Include="images\splashscreen.png" />
     <Content Include="images\storelogo.png" />
     <Content Include="js\default.js" />
-    <Content Include="css\default.css" />
     <Content Include="js\helpers\appCache.js" />
     <Content Include="js\helpers\calculations.js" />
+    <Content Include="js\navigator.js" />
     <Content Include="js\primeNumbersCalculator.js" />
     <Content Include="js\WorkerData.js" />
     <Content Include="js\workers\calculateFirstNumbers.js" />
     <Content Include="js\workers\calculateFromRange.js" />
     <Content Include="js\workers\calculatePrimeNumberTo.js" />
-    <Content Include="packages.config" />
+    <Content Include="pages\home\home.css" />
+    <Content Include="pages\home\home.html" />
+    <Content Include="pages\home\home.js" />
+    <Content Include="default.html" />
+    <Content Include="pages\settings\preferences.css" />
+    <Content Include="pages\settings\preferences.html" />
+    <Content Include="pages\settings\preferences.js" />
     <Content Include="Scripts\linq-vsdoc.js" />
     <Content Include="Scripts\linq.js" />
     <Content Include="Scripts\linq.min.js" />
