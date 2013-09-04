@@ -7,8 +7,7 @@
             modelName: "",
             frequencyGHz: 0
         },
-        manufacturer: "",
-        html: "<h1>This is a heading</h1>"
+        manufacturer: ""
     };
 
     var ObservableComputer = WinJS.Binding.define(computer);
