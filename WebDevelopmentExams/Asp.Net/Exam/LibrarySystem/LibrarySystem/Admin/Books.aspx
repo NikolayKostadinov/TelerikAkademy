@@ -12,12 +12,18 @@
             <asp:BoundField DataField="Isbn" HeaderText="ISBN" SortExpression="Isbn" />
             <asp:HyperLinkField DataNavigateUrlFields="WebSite" DataTextField="WebSite" HeaderText="Web Site" SortExpression="WebSite" />
             <asp:BoundField DataField="Category.Name" HeaderText="Category" SortExpression="Category.Name" />
+             <asp:TemplateField HeaderText="Action">
+                <ItemTemplate>
+                    <%#: Item.IsApproved %>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Action">
                 <ItemTemplate>
                     <asp:LinkButton ID="btnEdit" CommandName="Edit" runat="server" CssClass="link-button">Edit</asp:LinkButton>
                     <asp:LinkButton ID="btnDelete" CommandName="Select" runat="server" CssClass="link-button">Delete</asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
+            
         </Columns>
     </asp:GridView>
     <div class="create-link">

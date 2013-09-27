@@ -32,7 +32,7 @@ namespace HiddenTruth.Store
         /// </summary>
         public App()
         {
-            this.InitializeComponent(); 
+            this.InitializeComponent();
             App.Current.RequestedTheme = ApplicationTheme.Light;
             this.Suspending += OnSuspending;
         }
@@ -88,7 +88,7 @@ namespace HiddenTruth.Store
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(ItemsPage)))
+                if (!rootFrame.Navigate(typeof(MainPage)))
                 {
                     throw new Exception("Failed to create initial page");
                 }

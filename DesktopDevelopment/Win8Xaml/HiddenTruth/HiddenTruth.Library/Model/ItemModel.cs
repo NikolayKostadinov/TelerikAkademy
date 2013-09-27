@@ -1,19 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Google.Apis.Blogger.v3.Data;
 
 namespace HiddenTruth.Library.Model
 {
     public class ItemModel
     {
-        public int GroupIndex { get; set; }
+        public string Id { get; set; }
 
         public string ImagePath { get; set; }
 
         public string Title { get; set; }
 
-        public Post Post { get; set; }
+        public virtual string Content { get; set; }
+
+        public dynamic OriginalItem { get; set; }
+
+        public PageModel Parent { get; set; }
+
+        public ItemModel()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
     }
 }

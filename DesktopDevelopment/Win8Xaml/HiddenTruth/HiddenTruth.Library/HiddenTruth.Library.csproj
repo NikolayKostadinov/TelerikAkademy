@@ -33,12 +33,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Model\DataService.cs" />
+    <Compile Include="Helpers\DynamicDictionary.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Model\AlterInformation\RootObject.cs" />
+    <Compile Include="Model\AlterInformation\Content.cs" />
+    <Compile Include="Model\AlterInformation\Entry.cs" />
+    <Compile Include="Model\AlterInformation\Feed.cs" />
+    <Compile Include="Model\AlterInformation\MediaGroup.cs" />
+    <Compile Include="Model\AlterInformation\ResponseData.cs" />
+    <Compile Include="Services\ServiceManager.cs" />
     <Compile Include="Model\PageModel.cs" />
+    <Compile Include="Model\SiteModel.cs" />
     <Compile Include="Model\ItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceManager.cs" />
+    <Compile Include="ViewModel\ItemViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\SiteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
@@ -55,6 +66,9 @@
     </Reference>
     <Reference Include="HtmlAgilityPack-PCL">
       <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.4.4\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>

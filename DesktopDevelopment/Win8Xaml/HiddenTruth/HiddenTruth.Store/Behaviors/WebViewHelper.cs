@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using HtmlAgilityPack;
 
 namespace HiddenTruth.Store.Behaviors
 {
@@ -36,33 +35,8 @@ namespace HiddenTruth.Store.Behaviors
             {
                 var html = e.NewValue.ToString();
 
-                var document = new HtmlDocument();
-                document.LoadHtml(html);
-                var iframes = document.DocumentNode.Descendants().Where(doc => doc.Name == "iframe");
-                foreach (var htmlNode in iframes)
-                {
-                    var url = htmlNode.Attributes["src"].Value;
-                    if (!url.StartsWith("http://"))
-                    {
-                        url = CheckUrl(url);
-                        htmlNode.Attributes["src"].Value = "http://" + url;
-                    }
-                }
-                //html = "<iframe frameborder='0' height='350' src='http://www.youtube.com/embed/2zfqw8nhUwA' width='450'></iframe>";
-                browser.NavigateToString(document.DocumentNode.OuterHtml);
-                //browser.Visibility = Visibility.Visible;
+                browser.NavigateToString(html);
             }
-            //browser.Visibility = Visibility.Collapsed;
-        }
-
-        private static string CheckUrl(string url)
-        {
-            if (!url.StartsWith("w"))
-            {
-                url = url.Remove(0, 1);
-                url = CheckUrl(url);
-            }
-            return url;
         }
     }
 }
