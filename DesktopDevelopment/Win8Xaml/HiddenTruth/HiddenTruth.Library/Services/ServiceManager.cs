@@ -78,7 +78,8 @@ namespace HiddenTruth.Library.Services
                             Id = item.Id,
                             Title = item.Title,
                             OriginalItem = item,
-                            Parent = result
+                            Parent = result,
+                            OriginalUrl = item.Url
                         };
 
                         var document = new HtmlDocument();
@@ -151,7 +152,8 @@ namespace HiddenTruth.Library.Services
                         {
                             Title = item.title,
                             OriginalItem = item,
-                            Parent = result
+                            Parent = result,
+                            OriginalUrl = item.link
                         };
 
                         var document = new HtmlDocument();

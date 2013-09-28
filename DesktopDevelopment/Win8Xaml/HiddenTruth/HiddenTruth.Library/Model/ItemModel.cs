@@ -10,7 +10,9 @@ namespace HiddenTruth.Library.Model
 
         public string Title { get; set; }
 
-        public virtual string Content { get; set; }
+        public string Content { get; set; }
+
+        public string OriginalUrl { get; set; }
 
         public dynamic OriginalItem { get; set; }
 
@@ -20,5 +22,6 @@ namespace HiddenTruth.Library.Model
         {
             Id = Guid.NewGuid().ToString();
         }
+
     }
 }

@@ -103,6 +103,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -113,7 +114,8 @@
                 <StackPanel x:Name="itemDetailTitlePanel" Grid.Row="1" Grid.Column="1">
                     <TextBlock x:Name="itemTitle" Margin="0,-10,0,0" Text="{Binding Title}" Style="{StaticResource SubheaderTextBlockStyle}"/>
                 </StackPanel>
-                <WebView Grid.Row="2" Grid.ColumnSpan="2" Margin="0,20,0,0" x:Name="contentView" behaviors:WebViewHelper.Html="{Binding Content}"  />
+                <WebView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0" x:Name="contentView" behaviors:WebViewHelper.Html="{Binding Content}"  />
+                <HyperlinkButton Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="btnOriginalUrl" Content="Click here to open original link" NavigateUri="{Binding OriginalUrl}" HorizontalAlignment="Right" Margin="10"></HyperlinkButton>
             </Grid>
         </ScrollViewer>
         <VisualStateManager.VisualStateGroups>
