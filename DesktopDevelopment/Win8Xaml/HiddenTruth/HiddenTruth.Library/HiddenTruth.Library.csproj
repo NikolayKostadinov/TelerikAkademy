@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helpers\DynamicDictionary.cs" />
+    <Compile Include="Helpers\WebContentHelper.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Model\AlterInformation\RootObject.cs" />
     <Compile Include="Model\AlterInformation\Content.cs" />
@@ -66,9 +67,6 @@
     </Reference>
     <Reference Include="HtmlAgilityPack-PCL">
       <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp">
-      <HintPath>..\packages\iTextSharp.5.4.4\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>

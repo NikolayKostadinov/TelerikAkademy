@@ -13,7 +13,7 @@ namespace HiddenTruth.Library.ViewModel
         private PageModel _currentPage;
         private ItemModel _selectedItem = new ItemModel();
 
-        public RelayCommand<string> GoOriginalUrlCommand { get; private set; }
+        public RelayCommand DownloadPdfCommand { get; private set; }
 
         public PageModel CurrentPage
         {
@@ -43,12 +43,12 @@ namespace HiddenTruth.Library.ViewModel
         {
             _navigationService = navigationService;
             _serviceManager = serviceManager;
-            this.GoOriginalUrlCommand = new RelayCommand<string>(ExecuteGoOriginalUrlCommand);
+            this.DownloadPdfCommand = new RelayCommand(this.ExecuteDownloadPdfCommand);
         }
 
-        private void ExecuteGoOriginalUrlCommand(string obj)
+        private void ExecuteDownloadPdfCommand()
         {
-            //Windows.System.Launcher.LaunchUriAsync(new Uri(link.Tag.ToString()));
+
         }
     }
 }

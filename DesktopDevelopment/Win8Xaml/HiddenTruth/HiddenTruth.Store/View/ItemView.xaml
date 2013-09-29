@@ -9,8 +9,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:behaviors="using:HiddenTruth.Store.Behaviors"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    xmlns:view="using:HiddenTruth.Store.View"
+    xmlns:myToolkit="using:MyToolkit.Controls"
     mc:Ignorable="d" DataContext="{Binding Item, Source={StaticResource Locator}}">
 
+    <Page.BottomAppBar>
+        <CommandBar><!--IsOpen="{Binding SelectedItem, Converter={StaticResource NullToBooleanConverter}}" IsSticky="{Binding SelectedItem, Converter={StaticResource NullToBooleanConverter}}"-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="btnPrint" Label="Print" Icon="Scan" Click="BtnPrint_OnClick" IsEnabled="True" />
+                <AppBarButton x:Name="btnDownloadPdf" Label="Download as PDF" Icon="Download"/>
+                <AppBarSeparator/>
+                <AppBarButton x:Name="btnFacebook" Label="Share on Facebook" Tag="{Binding SelectedItem}" Click="BtnFacebook_OnClick">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="ms-appx:///Assets/Icons/facebook.png" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="btnTwitter" Label="Share on Twitter" Tag="{Binding SelectedItem}" Click="BtnTwitter_OnClick">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="ms-appx:///Assets/Icons/twitter.png" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="btnGoogle" Label="Share on Google+" Tag="{Binding SelectedItem}" Click="BtnGoogle_OnClick">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="ms-appx:///Assets/Icons/google_plus.png" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="btnComments" Label="Post Comments" Icon="World" Tag="{Binding SelectedItem}" Click="BtnComments_OnClick"/>
+                <AppBarButton x:Name="btnGoToOriginalUrl" Label="Open Original Article" Icon="World" Tag="{Binding SelectedItem}" Click="BtnGoToOriginalUrl_OnClick"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
@@ -33,6 +65,10 @@
             <ColumnDefinition x:Name="secondaryColumn" Width="*"/>
         </Grid.ColumnDefinitions>
 
+           
+
+        <Canvas x:Name="printingRoot" Opacity="0" />
+        
         <!-- Back button and page title -->
         <Grid x:Name="titlePanel">
             <Grid.ColumnDefinitions>
@@ -98,26 +134,36 @@
             ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Enabled"
             ScrollViewer.ZoomMode="Disabled">
 
-            <Grid x:Name="itemDetailGrid" Margin="0,60,0,50">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <myToolkit:Pivot x:Name="PnlPivot" Margin="0,60,0,50" >
+                <myToolkit:PivotItem Header="Article">
+                    <Grid x:Name="itemDetailGrid" Margin="0,60,0,50">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding ImagePath}" Grid.Row="1" Margin="0,0,20,0" Width="180" Height="180" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                <StackPanel x:Name="itemDetailTitlePanel" Grid.Row="1" Grid.Column="1">
-                    <TextBlock x:Name="itemTitle" Margin="0,-10,0,0" Text="{Binding Title}" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                </StackPanel>
-                <WebView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0" x:Name="contentView" behaviors:WebViewHelper.Html="{Binding Content}"  />
-                <HyperlinkButton Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Name="btnOriginalUrl" Content="Click here to open original link" NavigateUri="{Binding OriginalUrl}" HorizontalAlignment="Right" Margin="10"></HyperlinkButton>
-            </Grid>
+                        <Image Source="{Binding ImagePath}" Grid.Row="1" Margin="0,0,20,0" Width="180" Height="180" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
+                        <StackPanel x:Name="itemDetailTitlePanel" Grid.Row="1" Grid.Column="1">
+                            <TextBlock x:Name="itemTitle" Margin="0,-10,0,0" Text="{Binding Title}" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                        </StackPanel>
+                        <ProgressBar x:Name="PnlProgressBar" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsIndeterminate="True" />
+                        <WebView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0" x:Name="contentView" behaviors:WebViewHelper.Html="{Binding Content}" LoadCompleted="contentView_LoadCompleted" ContentLoading="contentView_ContentLoading" Loaded="ContentView_OnLoaded" />
+                    </Grid>
+                </myToolkit:PivotItem>
+                <myToolkit:PivotItem Header="Comments">
+                    <WebView x:Name="ContentView" Source="{Binding CommentUrl}"></WebView>
+                </myToolkit:PivotItem>
+            </myToolkit:Pivot>
+            
+            
         </ScrollViewer>
+        
         <VisualStateManager.VisualStateGroups>
             <!-- Visual states reflect the application's view state -->
             <VisualStateGroup x:Name="ViewStates">
@@ -172,5 +218,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        
     </Grid>
 </Page>

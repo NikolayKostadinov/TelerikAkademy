@@ -18,10 +18,11 @@ namespace HiddenTruth.Library.Model
 
         public PageModel Parent { get; set; }
 
+        public string CommentUrl { get; set; }
+
         public ItemModel()
         {
             Id = Guid.NewGuid().ToString();
         }
-
     }
 }

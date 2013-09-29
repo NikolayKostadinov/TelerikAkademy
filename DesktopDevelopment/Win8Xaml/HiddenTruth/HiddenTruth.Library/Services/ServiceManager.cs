@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Google.Apis.Blogger.v3;
 using Google.Apis.Services;
+using HiddenTruth.Library.Helpers;
 using HiddenTruth.Library.Model;
 using HiddenTruth.Library.Model.AlterInformation;
 using HtmlAgilityPack;
@@ -79,11 +80,12 @@ namespace HiddenTruth.Library.Services
                             Title = item.Title,
                             OriginalItem = item,
                             Parent = result,
-                            OriginalUrl = item.Url
+                            OriginalUrl = item.Url,
+                            CommentUrl = "http://www.blogger.com/comment.g?blogID=" + site.Id + "&postID="+ item.Id +"&isPopup=true"
                         };
 
                         var document = new HtmlDocument();
-                        document.LoadHtml(item.Content);
+                        document.LoadHtml(WebContentHelper.WrapHtml(item.Content, 0, 0));
 
                         itemModel.Content = RefactorContent(document);
 
@@ -153,11 +155,12 @@ namespace HiddenTruth.Library.Services
                             Title = item.title,
                             OriginalItem = item,
                             Parent = result,
-                            OriginalUrl = item.link
+                            OriginalUrl = item.link,
+                            CommentUrl = item.link +"/feed/"
                         };
 
                         var document = new HtmlDocument();
-                        document.LoadHtml(item.content);
+                        document.LoadHtml(WebContentHelper.WrapHtml(item.content, 0, 0));
 
                         itemModel.Content = RefactorContent(document);
 
@@ -196,7 +199,19 @@ namespace HiddenTruth.Library.Services
                     htmlNode.Attributes["src"].Value = "http://" + url;
                 }
             }
-            return document.DocumentNode.OuterHtml;
+
+            var link = document.DocumentNode.Descendants().Where(doc => doc.Name == "a");
+            foreach (var htmlNode in link)
+            {
+                if (htmlNode.Attributes["target"] == null)
+                {
+                    htmlNode.SetAttributeValue("target", "_blank");
+                }
+            }
+
+            StringWriter stringWriter = new StringWriter();
+            document.Save(stringWriter);
+            return stringWriter.ToString(); 
         }
 
         public static async Task<SiteModel> GetSiteAsync(string siteId)

@@ -113,6 +113,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\WebViewHelper.cs" />
+    <Compile Include="Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Services\Helpers\DisplayContent.cs" />
+    <Compile Include="Services\Helpers\PageLoadState.cs" />
+    <Compile Include="Services\Helpers\PrintServiceEventArgs.cs" />
+    <Compile Include="View\PrintPage.xaml.cs">
+      <DependentUpon>PrintPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SitesView.xaml.cs">
       <DependentUpon>SitesView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +144,10 @@
     </AppxManifest>
     <None Include="Common\ReadMe.txt" />
     <None Include="HiddenTruth.Store_TemporaryKey.pfx" />
+    <Content Include="Assets\ArticleStyle.css" />
+    <Content Include="Assets\Icons\facebook.png" />
+    <Content Include="Assets\Icons\google_plus.png" />
+    <Content Include="Assets\Icons\twitter.png" />
     <Content Include="DataModel\SampleData.json" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -157,6 +168,10 @@
     <Page Include="Common\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PrintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SitesView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -184,6 +199,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="MyToolkit">
+      <HintPath>..\packages\MyToolkit.1.24.0\lib\netcore45\MyToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.15\lib\win8\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
@@ -193,6 +211,9 @@
     </Reference>
     <Reference Include="Windows.UI.Interactivity">
       <HintPath>..\packages\Windows.UI.Interactivity.1.3.0.0\lib\win8\Windows.UI.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\packages\WinRTXamlToolkit.1.5.2.0\lib\netcore451\WinRTXamlToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />
