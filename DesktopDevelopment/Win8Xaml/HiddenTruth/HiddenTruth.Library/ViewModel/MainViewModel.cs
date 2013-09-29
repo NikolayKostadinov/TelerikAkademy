@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using HiddenTruth.Library.Helpers;
 using HiddenTruth.Library.Model;
 using HiddenTruth.Library.Services;
+using HiddenTruth.Library.Utils;
 
 namespace HiddenTruth.Library.ViewModel
 {
@@ -122,38 +123,13 @@ namespace HiddenTruth.Library.ViewModel
                 {
                     System.Diagnostics.Debug.WriteLine(err.ToString());
                 }
-                else
-                {
-                    //this.CurrentPage = model;
-                    //SiteModel site = Sites.FirstOrDefault(x => x.Title == "Блог за сериозни хора");
-                    //if (site != null)
-                    //{
-                    //    foreach (var item in response.Items)
-                    //    {
-                    //        site.Items.Add(item);
-                    //    }
-
-                    //}
-                }
             });
 
-            await _serviceManager.GetDataAlterInformation(pageToken, (model, exception) =>
+            await _serviceManager.GetDataAlterInformation(pageToken.ToInt(1), (model, exception) =>
             {
                 if (exception != null)
                 {
                     System.Diagnostics.Debug.WriteLine(exception.ToString());
-                }
-                else
-                {
-                    //this.CurrentPage = model;
-                    //SiteModel site = Sites.FirstOrDefault(x => x.Title == "Alter Information");
-                    //if (site != null)
-                    //{
-                    //    foreach (var item in model.Items)
-                    //    {
-                    //        site.Items.Add(item);
-                    //    }
-                    //}
                 }
             });
         }

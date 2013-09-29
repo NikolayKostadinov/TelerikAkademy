@@ -8,44 +8,23 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using HiddenTruth.Library.Model;
 using HiddenTruth.Library.Services;
+using HiddenTruth.Library.Utils;
 
 namespace HiddenTruth.Library.ViewModel
 {
     public class SiteViewModel: ViewModelBase
     {
-        private INavigationService _navigationService;
-        private IServiceManager _serviceManager;
-        private PageModel _currentPage;
-        private ItemModel _selectedItem = new ItemModel();
+        public INavigationService _navigationService;
+        public IServiceManager _serviceManager;
+        private SiteModel _currentSite;
 
-        protected string CurrentSiteId { get; set; }
-        public RelayCommand GoNextCommand { get; private set; }
-
-        public PageModel CurrentPage
+        public SiteModel CurrentSite
         {
-            get { return _currentPage; }
+            get { return _currentSite; }
             set
             {
-                _currentPage = value;
-                RaisePropertyChanged(() => CurrentPage);
-            }
-        }
-
-        public const string SelectedItemPropertyName = "SelectedItem";
-
-        public ItemModel SelectedItem
-        {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                if (Set(SelectedItemPropertyName, ref _selectedItem, value)
-                    && value != null)
-                {
-                    _navigationService.Navigate<ItemViewModel>(value);
-                }
+                _currentSite = value;
+                RaisePropertyChanged(() => CurrentSite);
             }
         }
 
@@ -53,32 +32,17 @@ namespace HiddenTruth.Library.ViewModel
         {
             _navigationService = navigationService;
             _serviceManager = serviceManager;
-            this.GoNextCommand = new RelayCommand(this.ExecuteGoNextCommand);
         }
 
-        private async void ExecuteGoNextCommand()
+        public async Task LoadData(string siteId, string pageToken)
         {
-            if (!string.IsNullOrEmpty(CurrentPage.NextPageToken))
+            CurrentSite = ServiceManager.Sites.FirstOrDefault(x => x.Id == siteId);
+            if (CurrentSite != null)
             {
-                await LoadData(CurrentSiteId, CurrentPage.PageIndex.ToString());
-            }
-        }
-
-        public async Task LoadData(string siteId, string pageIndex)
-        {
-            CurrentSiteId = siteId;
-            var site = ServiceManager.Sites.FirstOrDefault(x => x.Id == siteId);
-            if (site != null)
-            {
-                string pageToken = null;
-                if (pageIndex != null)
-                {
-                    pageToken = site.Pages[Convert.ToInt16(pageIndex)].NextPageToken;
-                }
-                switch (site.Title)
+                switch (CurrentSite.Title)
                 {
                     case "Alter Information":
-                        await _serviceManager.GetDataAlterInformation(pageToken, (response, err) => LoadDataCompleted(err, response));
+                        await _serviceManager.GetDataAlterInformation(pageToken.ToInt(1), (response, err) => LoadDataCompleted(err, response));
                         break;
                     default:
                         await _serviceManager.GetDataBlogZaSeriozniHora(pageToken, (response, err) => LoadDataCompleted(err, response));
@@ -92,10 +56,6 @@ namespace HiddenTruth.Library.ViewModel
             if (err != null)
             {
                 System.Diagnostics.Debug.WriteLine(err.ToString());
-            }
-            else
-            {
-                this.CurrentPage = response;
             }
         }
     }

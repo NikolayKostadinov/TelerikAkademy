@@ -24,6 +24,6 @@ namespace HiddenTruth.Library.Services
         /// Loads the top dvd movies async.
         /// </summary>
         /// <returns>Represents an asynchronous operation that return a IEnumerable.</returns>
-        Task GetDataAlterInformation(string pageToken, Action<PageModel, Exception> callback);
+        Task GetDataAlterInformation(int? pageToken, Action<PageModel, Exception> callback);
     }
 }

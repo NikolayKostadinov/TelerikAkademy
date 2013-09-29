@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Google.Apis.Blogger.v3;
+using Google.Apis.Blogger.v3.Data;
 using Google.Apis.Services;
 using HiddenTruth.Library.Helpers;
 using HiddenTruth.Library.Model;
@@ -112,8 +113,12 @@ namespace HiddenTruth.Library.Services
             callback(result, err);
         }
 
-        public async Task GetDataAlterInformation(string pageToken, Action<PageModel, Exception> callback)
+        public async Task GetDataAlterInformation(int? pageToken, Action<PageModel, Exception> callback)
         {
+            if (pageToken == null)
+            {
+                pageToken = 1;
+            }
             HttpClient client = new HttpClient();
             string uri = "http://alterinformation.wordpress.com/feed/?paged=" + pageToken;
 
@@ -138,7 +143,7 @@ namespace HiddenTruth.Library.Services
                     Sites.Add(site);
                 }
 
-                PageModel page = site.Pages.FirstOrDefault(x => x.CurrentPageToken == pageToken);
+                PageModel page = site.Pages.FirstOrDefault(x => x.CurrentPageToken == pageToken.ToString());
                 if (page != null)
                 {
                     result = page;
@@ -146,8 +151,8 @@ namespace HiddenTruth.Library.Services
                 else
                 {
                     result.PageIndex = site.Pages.Count;
-                    result.CurrentPageToken = pageToken;
-                    result.NextPageToken = Convert.ToInt16(result.PageIndex + 1).ToString();
+                    result.CurrentPageToken = pageToken.ToString();
+                    result.NextPageToken = (pageToken + 1).ToString();
                     foreach (var item in responseRootObject.responseData.feed.entries)
                     {
                         var itemModel = new ItemModel()
@@ -171,7 +176,7 @@ namespace HiddenTruth.Library.Services
                         }
 
                         result.Items.Add(itemModel);
-                        if (string.IsNullOrEmpty(pageToken))
+                        if (pageToken < 2)
                         {
                             site.Items.Add(itemModel);
                         }
@@ -234,11 +239,15 @@ namespace HiddenTruth.Library.Services
 
         private static string CheckUrl(string url)
         {
-            if (!url.StartsWith("w"))
+            if (url.StartsWith("//"))
             {
-                url = url.Remove(0, 1);
-                url = CheckUrl(url);
+                url = url.Remove(0, 2);
             }
+            //else if (!url.StartsWith("w"))
+            //{
+            //    url = url.Remove(0, 1);
+            //    url = CheckUrl(url);
+            //}
             return url;
         }
 

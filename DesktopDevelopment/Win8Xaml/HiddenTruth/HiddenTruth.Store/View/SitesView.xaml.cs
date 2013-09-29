@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using HiddenTruth.Library.Model;
 using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Common;
 using HiddenTruth.Store.Data;
-
 // The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
+using MyToolkit.Controls;
 
 namespace HiddenTruth.Store.View
 {
@@ -103,9 +105,76 @@ namespace HiddenTruth.Store.View
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            var titleDetailsViewModel = DataContext as SiteViewModel;
+            if (titleDetailsViewModel != null)
+            {
+                titleDetailsViewModel.CurrentSite.SelectedIndex = PnlPivot.SelectedIndex;
+            }
             navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
+
+        private async void PnlPivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var actionPivot = sender as ExtendedListBox;
+            if (actionPivot != null)
+            {
+                var titleDetailsViewModel = DataContext as SiteViewModel;
+                if (titleDetailsViewModel != null)
+                {
+                    if (actionPivot.SelectedIndex == titleDetailsViewModel.CurrentSite.Pages.Count - 1)
+                    {
+                        await titleDetailsViewModel.LoadData(titleDetailsViewModel.CurrentSite.Id, 
+                                                    titleDetailsViewModel.CurrentSite.Pages[actionPivot.SelectedIndex].NextPageToken);
+                        if (actionPivot.SelectedIndex + 1 < titleDetailsViewModel.CurrentSite.Pages.Count)
+                        {
+                            int pageIndex = actionPivot.SelectedIndex + 1;
+                            AddPivotItem(pageIndex, titleDetailsViewModel);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void PnlPivot_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var titleDetailsViewModel = DataContext as SiteViewModel;
+            if (titleDetailsViewModel != null)
+            {
+                if (titleDetailsViewModel.CurrentSite.Pages.Count > 0)
+                {
+                    //PnlPivot.Items[0].DataContext = new PivotItemViewModel(titleDetailsViewModel.CurrentSite.Pages[0]);
+                    var pivotItemTemplate = PnlPivot.Items[0].Content as PivotItemTemplate;
+                    if (pivotItemTemplate != null)
+                    {
+                        pivotItemTemplate.DataContext = new PivotItemViewModel(titleDetailsViewModel._navigationService, titleDetailsViewModel._serviceManager, titleDetailsViewModel.CurrentSite.Pages[0]);
+                    }
+                    if (PnlPivot.Items.Count < titleDetailsViewModel.CurrentSite.Pages.Count)
+                    {
+                        for (int i = PnlPivot.Items.Count; i < titleDetailsViewModel.CurrentSite.Pages.Count; i++)
+                        {
+                            AddPivotItem(i, titleDetailsViewModel);
+                        }
+                    }
+                    if (titleDetailsViewModel.CurrentSite.SelectedIndex < PnlPivot.Items.Count)
+                    {
+                        PnlPivot.SelectedIndex = titleDetailsViewModel.CurrentSite.SelectedIndex;
+                    }
+                }
+            }
+        }
+
+        private void AddPivotItem(int pageIndex, SiteViewModel titleDetailsViewModel)
+        {
+            PnlPivot.Items.Add(new PivotItem()
+            {
+                Content = new PivotItemTemplate()
+                {
+                    DataContext = new PivotItemViewModel(titleDetailsViewModel._navigationService, titleDetailsViewModel._serviceManager, titleDetailsViewModel.CurrentSite.Pages[pageIndex])
+                },
+                Header = "Page" + (pageIndex + 1),
+            });
+        }
     }
 }

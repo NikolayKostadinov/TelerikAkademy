@@ -1,10 +1,11 @@
-﻿<Page
+﻿<Page xmlns:View="using:HiddenTruth.Store.View" 
     x:Name="pageRoot"
     x:Class="HiddenTruth.Store.View.SitesView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:MyToolkit.Controls"
     mc:Ignorable="d" DataContext="{Binding Site, Source={StaticResource Locator}}">
 
     <!--
@@ -24,35 +25,15 @@
         </Grid.RowDefinitions>
 
         <!-- Horizontal scrolling grid -->
-        <GridView
-            x:Name="itemGridView"
-            AutomationProperties.AutomationId="ItemsGridView"
-            AutomationProperties.Name="Items"
-            TabIndex="1"
-            Grid.RowSpan="2"
-            Padding="116,136,116,46"
-            DataContext="{Binding}"
-            ItemsSource="{Binding CurrentPage.Items}"
-            SelectionMode="Single"
-            IsSwipeEnabled="false"
-            IsItemClickEnabled="False"
-            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Left" Width="250" Height="250">
-                        <Border Background="WhiteSmoke">
-                            <!--{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}-->
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
-                        </Border>
-                        <StackPanel VerticalAlignment="Bottom" Background="DarkRed">
-                            <!--{ThemeResource ListViewItemOverlayBackgroundThemeBrush}-->
-                            <TextBlock Text="{Binding Title}" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource BaseTextBlockStyle}" Height="60" Margin="10" FontWeight="SemiBold"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
 
+        <controls:Pivot x:Name="PnlPivot" TabIndex="1" Grid.RowSpan="2" Margin="116,136,116,46"
+                        Loaded="PnlPivot_OnLoaded" 
+                        SelectionChanged="PnlPivot_OnSelectionChanged" >
+            <controls:PivotItem Header="Page 1">
+                <View:PivotItemTemplate/>
+            </controls:PivotItem>
+        </controls:Pivot>
+        
         <!-- Back button and page title -->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -68,12 +49,13 @@
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-            <Button x:Name="nextButton" Margin="39,59,39,0" Command="{Binding ElementName=pageRoot, Path=DataContext.GoNextCommand}" Grid.Column="2" 
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Next"
-                        AutomationProperties.AutomationId="NextButton"
-                        AutomationProperties.ItemType="Navigation Button">
+            <Button x:Name="nextButton" Margin="39,59,39,0" Grid.Column="2" Visibility="Collapsed"
+                    Command="{Binding ElementName=pageRoot, Path=DataContext.GoNextCommand}" 
+                    Style="{StaticResource NavigationBackButtonNormalStyle}"
+                    VerticalAlignment="Top"
+                    AutomationProperties.Name="Next"
+                    AutomationProperties.AutomationId="NextButton"
+                    AutomationProperties.ItemType="Navigation Button">
                 <Button.RenderTransform>
                     <ScaleTransform ScaleX="-1" />
                 </Button.RenderTransform>

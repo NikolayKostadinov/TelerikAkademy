@@ -48,6 +48,7 @@ namespace HiddenTruth.Store.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SiteViewModel>();
             SimpleIoc.Default.Register<ItemViewModel>();
+            SimpleIoc.Default.Register<PivotItemViewModel>();
         }
 
         public MainViewModel Main
@@ -71,6 +72,14 @@ namespace HiddenTruth.Store.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ItemViewModel>();
+            }
+        }
+
+        public PivotItemViewModel PivotItem
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PivotItemViewModel>();
             }
         }
 
