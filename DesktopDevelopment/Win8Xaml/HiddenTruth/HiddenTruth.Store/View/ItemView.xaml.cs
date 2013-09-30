@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Graphics.Printing;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
@@ -24,6 +28,7 @@ using HiddenTruth.Store.Data;
 using HiddenTruth.Store.Services;
 using HiddenTruth.Store.Services.Helpers;
 using MyToolkit.Controls;
+using NotificationsExtensions.ToastContent;
 using WinRTXamlToolkit.Controls.Extensions;
 using AppBarButton = Windows.UI.Xaml.Controls.AppBarButton;
 
@@ -848,31 +853,6 @@ namespace HiddenTruth.Store.View
             }
         }
 
-        private void BtnComments_OnClick(object sender, RoutedEventArgs e)
-        {
-            ////First we need to find out how big our window is, so we can center to it.
-            //CoreWindow currentWindow = Window.Current.CoreWindow;
-
-            ////Set our background rectangle to fill the entire window
-            //rectBackgroundHide.Height = currentWindow.Bounds.Height;
-            //rectBackgroundHide.Width = currentWindow.Bounds.Width;
-            //rectBackgroundHide.Margin = new Thickness(0, 0, 0, 0);
-
-            ////Make sure the background is visible
-            //rectBackgroundHide.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
-            ////Here is where I get a bit tricky.  You see popMessage.ActualWidth will show
-            ////the full screen width, and not the actual width of the popup, and popMessage.Width
-            ////will show 0 at this point.  So we needed to calculate the actual
-            ////display width.  I do this by using a calculation that determines the
-            ////scaling percentage from the height, and then calculates that against my
-            ////original width coding.
-            //popMessage.HorizontalOffset = (currentWindow.Bounds.Width / 2) - (400 / 2);
-            //popMessage.VerticalOffset = (currentWindow.Bounds.Height / 2) - (150 / 2);
-            //popMessage.IsOpen = true;
-        }
-
-
         private void ContentView_OnLoaded(object sender, RoutedEventArgs e)
         {
             thisWebView = sender as WebView;
@@ -893,6 +873,47 @@ namespace HiddenTruth.Store.View
         private void PnlProgressBar_OnLayoutUpdated(object sender, object e)
         {
             thisPnlProgressBar = sender as ProgressBar;
+        }
+
+        private async void BtnDownloadImage_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ms = new InMemoryRandomAccessStream();
+            await thisWebView.CapturePreviewToStreamAsync(ms);
+
+            // Launch file picker
+            var picker = new FileSavePicker();
+            picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            picker.FileTypeChoices.Add("JPeg", new List<string>() { ".jpg", ".jpeg" });
+            StorageFile file = await picker.PickSaveFileAsync();
+
+            if (file == null)
+                return;
+
+            using (var fileStream1 = await file.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                await RandomAccessStream.CopyAndCloseAsync(ms.GetInputStreamAt(0), fileStream1.GetOutputStreamAt(0));
+                DisplayTextToast();
+            }
+        }
+
+        void DisplayTextToast()
+        {
+            // Creates a toast using the notification object model, which is another project
+            // in this solution.  For an example using Xml manipulation, see the function
+            // DisplayToastUsingXmlManipulation below.
+            IToastNotificationContent toastContent = null;
+
+            IToastText01 templateContent = ToastContentFactory.CreateToastText01();
+            templateContent.TextBodyWrap.Text = "Файлът е записан успешно.";
+            toastContent = templateContent;
+            
+            // Create a toast, then create a ToastNotifier object to show
+            // the toast
+            ToastNotification toast = toastContent.CreateNotification();
+
+            // If you have other applications in your package, you can specify the AppId of
+            // the app to create a ToastNotifier for that application
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
     }
 }

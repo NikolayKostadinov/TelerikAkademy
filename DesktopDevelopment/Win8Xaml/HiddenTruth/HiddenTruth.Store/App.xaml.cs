@@ -1,4 +1,5 @@
-﻿using HiddenTruth.Store.Common;
+﻿using Windows.ApplicationModel.Search;
+using HiddenTruth.Store.Common;
 
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
 // The Split App template is documented at http://go.microsoft.com/fwlink/?LinkId=234228
+using HiddenTruth.Store.View;
 
 namespace HiddenTruth.Store
 {
@@ -109,6 +110,28 @@ namespace HiddenTruth.Store
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
+
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        {
+            
+            base.OnWindowCreated(args);
+            SearchPane.GetForCurrentView().ShowOnKeyboardInput = true;
+            SearchPane.GetForCurrentView().QuerySubmitted += App_QuerySubmitted;
+        }
+
+        void App_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
+        {
+            var previousContent = Window.Current.Content;
+            var frame = previousContent as Frame;
+            if (frame != null)
+            {
+                frame.Navigate(typeof(SearchResultView), args.QueryText);
+                Window.Current.Content = frame;
+
+                // Ensure the current window is active
+                Window.Current.Activate();
+            }
         }
     }
 }

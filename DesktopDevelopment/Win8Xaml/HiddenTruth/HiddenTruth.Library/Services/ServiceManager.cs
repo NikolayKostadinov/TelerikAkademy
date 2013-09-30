@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -183,6 +184,74 @@ namespace HiddenTruth.Library.Services
                     }
                     site.Pages.Add(result);
                 }
+            }
+            catch (Exception ex)
+            {
+                err = ex;
+            }
+
+            callback(result, err);
+        }
+
+        public async Task Search(string searchQuery, Action<PageModel, Exception> callback)
+        {
+            string uri = "http://blogzaserioznihora.blogspot.com/";
+
+            Exception err = null;
+            var result = new PageModel();
+            try
+            {
+                BloggerService _service = new BloggerService(new BaseClientService.Initializer()
+                {
+                    ApiKey = "AIzaSyCkyf5p4x_2tW-Bwmqt7Bbj-HhFIC_kXvw",
+                });
+
+                SiteModel site = Sites.FirstOrDefault(x => x.Title == "Блог за сериозни хора");
+                if (site == null)
+                {
+                    var blog = await _service.Blogs.GetByUrl(uri).ExecuteAsync();
+                    site = new SiteModel()
+                    {
+                        Title = "Блог за сериозни хора",
+                        Id = blog.Id
+                    };
+
+                    //group.ImagePath = blog.
+                    Sites.Add(site);
+                }
+                var response = await _service.Posts.Search(site.Id, searchQuery).ExecuteAsync();
+                result.NextPageToken = response.NextPageToken;
+                result.PrevPageToken = response.PrevPageToken;
+                result.PageIndex = site.Pages.Count;
+
+                foreach (var item in response.Items)
+                {
+                    var itemModel = new ItemModel()
+                    {
+                        Id = item.Id,
+                        Title = item.Title,
+                        OriginalItem = item,
+                        Parent = result,
+                        OriginalUrl = item.Url,
+                        CommentUrl =
+                            "http://www.blogger.com/comment.g?blogID=" + site.Id + "&postID=" + item.Id +
+                            "&isPopup=true"
+                    };
+
+                    var document = new HtmlDocument();
+                    document.LoadHtml(WebContentHelper.WrapHtml(item.Content, 0, 0));
+
+                    itemModel.Content = RefactorContent(document);
+
+                    var img = document.DocumentNode.Descendants().FirstOrDefault(doc => doc.Name == "img");
+                    if (img != null)
+                    {
+                        itemModel.ImagePath = img.Attributes["src"].Value;
+                    }
+
+                    result.Items.Add(itemModel);
+                }
+                site.Pages.Add(result);
             }
             catch (Exception ex)
             {

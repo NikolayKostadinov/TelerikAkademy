@@ -25,5 +25,7 @@ namespace HiddenTruth.Library.Services
         /// </summary>
         /// <returns>Represents an asynchronous operation that return a IEnumerable.</returns>
         Task GetDataAlterInformation(int? pageToken, Action<PageModel, Exception> callback);
+
+        Task Search(string searchQuery, Action<PageModel, Exception> callback);
     }
 }

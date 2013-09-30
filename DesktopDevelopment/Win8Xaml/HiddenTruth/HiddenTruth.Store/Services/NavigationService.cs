@@ -26,6 +26,9 @@ namespace HiddenTruth.Store.Services
             },
             {
                 typeof (PivotItemViewModel), typeof (PivotItemTemplate)
+            },
+            {
+                typeof (SearchResultViewModel), typeof (SearchResultView)
             }
         };
 

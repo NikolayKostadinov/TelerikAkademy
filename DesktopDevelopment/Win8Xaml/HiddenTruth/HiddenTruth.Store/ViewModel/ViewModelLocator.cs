@@ -18,6 +18,7 @@ using HiddenTruth.Library.Model;
 using HiddenTruth.Library.Services;
 using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Services;
+using HiddenTruth.Store.View;
 using Microsoft.Practices.ServiceLocation;
 
 namespace HiddenTruth.Store.ViewModel
@@ -49,6 +50,7 @@ namespace HiddenTruth.Store.ViewModel
             SimpleIoc.Default.Register<SiteViewModel>();
             SimpleIoc.Default.Register<ItemViewModel>();
             SimpleIoc.Default.Register<PivotItemViewModel>();
+            SimpleIoc.Default.Register<SearchResultViewModel>();
         }
 
         public MainViewModel Main
@@ -80,6 +82,14 @@ namespace HiddenTruth.Store.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<PivotItemViewModel>();
+            }
+        }
+
+        public SearchResultViewModel SearchResult
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SearchResultViewModel>();
             }
         }
 

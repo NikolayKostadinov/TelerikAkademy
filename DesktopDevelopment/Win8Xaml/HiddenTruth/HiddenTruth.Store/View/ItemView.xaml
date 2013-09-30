@@ -18,7 +18,7 @@
         <CommandBar><!--IsOpen="{Binding SelectedItem, Converter={StaticResource NullToBooleanConverter}}" IsSticky="{Binding SelectedItem, Converter={StaticResource NullToBooleanConverter}}"-->
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="btnPrint" Label="Print" Icon="Scan" Click="BtnPrint_OnClick" IsEnabled="True" />
-                <AppBarButton x:Name="btnDownloadPdf" Label="Download as PDF" Icon="Download"/>
+                <AppBarButton x:Name="btnDownloadImage" Label="Download as Image" Icon="Download" Click="BtnDownloadImage_OnClick"/>
                 <AppBarSeparator/>
                 <AppBarButton x:Name="btnFacebook" Label="Share on Facebook" Tag="{Binding SelectedItem}" Click="BtnFacebook_OnClick">
                     <AppBarButton.Icon>
@@ -37,7 +37,6 @@
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="btnComments" Label="Post Comments" Icon="World" Tag="{Binding SelectedItem}" Click="BtnComments_OnClick"/>
                 <AppBarButton x:Name="btnGoToOriginalUrl" Label="Open Original Article" Icon="World" Tag="{Binding SelectedItem}" Click="BtnGoToOriginalUrl_OnClick"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
