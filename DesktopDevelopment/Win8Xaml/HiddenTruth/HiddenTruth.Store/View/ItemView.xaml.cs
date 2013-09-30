@@ -907,6 +907,8 @@ namespace HiddenTruth.Store.View
             }
         }
 
+        const String TOAST_IMAGE_SRC = "Assets/Images/toast.png";
+
         void DisplayTextToast(string message)
         {
             // Creates a toast using the notification object model, which is another project
@@ -914,9 +916,12 @@ namespace HiddenTruth.Store.View
             // DisplayToastUsingXmlManipulation below.
             IToastNotificationContent toastContent = null;
 
-            IToastText01 templateContent = ToastContentFactory.CreateToastText01();
+            IToastImageAndText01 templateContent = ToastContentFactory.CreateToastImageAndText01();
+            templateContent.TextBodyWrap.Text = "Body text that wraps";
+            templateContent.Image.Src = TOAST_IMAGE_SRC;
             templateContent.TextBodyWrap.Text = message;
             toastContent = templateContent;
+
             
             // Create a toast, then create a ToastNotifier object to show
             // the toast
