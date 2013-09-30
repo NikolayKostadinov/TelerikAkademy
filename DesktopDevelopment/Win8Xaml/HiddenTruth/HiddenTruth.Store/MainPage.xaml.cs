@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.UI.Notifications;
+using HiddenTruth.Library.Model;
 using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Common;
 using System;
@@ -16,8 +18,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using NotificationsExtensions.TileContent;
 
 namespace HiddenTruth.Store
 {
@@ -46,7 +48,6 @@ namespace HiddenTruth.Store
         {
             get { return this.navigationHelper; }
         }
-
 
         public MainPage()
         {
@@ -112,6 +113,47 @@ namespace HiddenTruth.Store
                 }
             }
 
+            await RegisterBackgroundNotifications();
+
+            var ds = this.DataContext as MainViewModel;
+            if (ds != null)
+            {
+                ds.Sites.CollectionChanged += Sites_CollectionChanged;
+            }
+
+            navigationHelper.OnNavigatedTo(e);
+        }
+
+        void Sites_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems.Count > 0)
+            {
+                foreach (SiteModel item in e.NewItems)
+                {
+                    item.Pages.CollectionChanged += Pages_CollectionChanged;
+                }
+            }
+        }
+
+        void Pages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems.Count > 0)
+            {
+                foreach (PageModel page in e.NewItems)
+                {
+                    foreach (var item in page.Items)
+                    {
+                        if (ValidateAndGetUri(item.ImagePath))
+                        {
+                            AddInitTiles(item.Title, item.ImagePath);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static async Task RegisterBackgroundNotifications()
+        {
             var result = await BackgroundExecutionManager.RequestAccessAsync();
             if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
                 result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
@@ -128,8 +170,6 @@ namespace HiddenTruth.Store
                 builder.SetTrigger(new TimeTrigger(15, false));
                 var registration = builder.Register();
             }
-
-            navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -142,5 +182,47 @@ namespace HiddenTruth.Store
         private const string TASK_NAME = "TileUpdater";
         private const string TASK_ENTRY = "BackgroundTasks.TileUpdater";
 
+        private bool ValidateAndGetUri(string uriString)
+        {
+            Uri uri = null;
+            try
+            {
+                uri = new Uri(uriString);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        private static void AddInitTiles(string title, string imageUri)
+        {
+            // Create notification square310x310 content based on a visual template.
+            ITileSquare310x310Image tileContent = TileContentFactory.CreateTileSquare310x310Image();
+            tileContent.AddImageQuery = true;
+            tileContent.Image.Src = imageUri;
+            tileContent.Image.Alt = title;
+
+            // create the notification for a wide310x150 template.
+            ITileWide310x150ImageAndText01 wide310x150Content = TileContentFactory.CreateTileWide310x150ImageAndText01();
+            wide310x150Content.TextCaptionWrap.Text = title;
+            wide310x150Content.Image.Src = imageUri;
+            wide310x150Content.Image.Alt = title;
+
+            // create the square150x150 template and attach it to the wide310x150 template.
+            ITileSquare150x150Image square150x150Content = TileContentFactory.CreateTileSquare150x150Image();
+            square150x150Content.Image.Src = imageUri;
+            square150x150Content.Image.Alt = title;
+
+            // add the square150x150 template to the wide310x150 template.
+            wide310x150Content.Square150x150Content = square150x150Content;
+
+            // add the wide310x150 to the Square310x310 template.
+            tileContent.Wide310x150Content = wide310x150Content;
+
+            // send the notification to the app's application tile.
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
+        }
     }
 }

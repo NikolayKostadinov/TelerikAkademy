@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.Foundation;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using HiddenTruth.Library.Model;
 using HiddenTruth.Library.ViewModel;
@@ -175,6 +178,43 @@ namespace HiddenTruth.Store.View
                 },
                 Header = "Page" + (pageIndex + 1),
             });
+        }
+
+        public static string page;
+        public static int counter = 1;
+        private static Guid logoSecondaryTileId = Guid.NewGuid();
+        public static string dynamicTileId = "SecondaryTile.LiveTile";
+        public static string appbarTileId = "SecondaryTile.AppBar";
+
+        private async void BtnPinSecondaryTile_OnClick(object sender, RoutedEventArgs e)
+        {
+            Uri logo = new Uri("ms-appx:///Assets/Images/150x150.png");
+            Uri smallLogo = new Uri("ms-appx:///Assets/Images/310x150.png");
+
+            // During creation of secondary tile, an application may set additional arguments on the tile that will be passed in during activation.
+            // These arguments should be meaningful to the application. In this sample, we'll pass in the date and time the secondary tile was pinned.
+            string tileActivationArguments = logoSecondaryTileId + " WasPinnedAt=" + DateTime.Now.ToLocalTime().ToString();
+            counter++;
+            // Create a 1x1 Secondary tile
+            SecondaryTile s = new SecondaryTile(logoSecondaryTileId.ToString(),
+                                                                "Hidden Truth Blog page",
+                                                                "Hidden Truth Blog page",
+                                                                tileActivationArguments,
+                                                                TileOptions.ShowNameOnLogo,
+                                                                logo);
+            s.DisplayName = "Hidden Truth";
+            // Specify a foreground text value.
+            s.ForegroundText = ForegroundText.Dark;
+            bool isPinned = await s.RequestCreateForSelectionAsync(GetElementRect((FrameworkElement)sender), Windows.UI.Popups.Placement.Below);
+            // OK, the tile is created and we can now attempt to pin the tile.
+            // Note that the status message is updated when the async operation to pin the tile completes.
+        }
+
+        public static Rect GetElementRect(FrameworkElement element)
+        {
+            GeneralTransform buttonTransform = element.TransformToVisual(null);
+            Point point = buttonTransform.TransformPoint(new Point());
+            return new Rect(point, new Size(element.ActualWidth, element.ActualHeight));
         }
     }
 }
