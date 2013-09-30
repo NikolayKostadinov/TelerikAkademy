@@ -1,4 +1,6 @@
-﻿using Windows.ApplicationModel.Search;
+﻿using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Search;
 using HiddenTruth.Store.Common;
 
 using System;
@@ -19,6 +21,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 // The Split App template is documented at http://go.microsoft.com/fwlink/?LinkId=234228
 using HiddenTruth.Store.View;
+using Parse;
 
 namespace HiddenTruth.Store
 {
@@ -36,6 +39,7 @@ namespace HiddenTruth.Store
             this.InitializeComponent();
             App.Current.RequestedTheme = ApplicationTheme.Light;
             this.Suspending += OnSuspending;
+            ParseClient.Initialize("uitRZ57uZs6MSj0NJky0HpUTsjgnZz4WHtJGpxou", "XKwGODuZLB8efwOIJrN5OwcQcJCHxYpgPmr3ghFz");
         }
 
         /// <summary>
@@ -112,13 +116,17 @@ namespace HiddenTruth.Store
             deferral.Complete();
         }
 
-        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        protected override async void OnWindowCreated(WindowCreatedEventArgs args)
         {
             
             base.OnWindowCreated(args);
             SearchPane.GetForCurrentView().ShowOnKeyboardInput = true;
             SearchPane.GetForCurrentView().QuerySubmitted += App_QuerySubmitted;
+
+            
         }
+
+        
 
         void App_QuerySubmitted(SearchPane sender, SearchPaneQuerySubmittedEventArgs args)
         {

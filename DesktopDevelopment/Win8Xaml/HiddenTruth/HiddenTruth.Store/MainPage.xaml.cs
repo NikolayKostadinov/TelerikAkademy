@@ -1,4 +1,6 @@
-﻿using HiddenTruth.Library.ViewModel;
+﻿using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Common;
 using System;
 using System.Collections.Generic;
@@ -98,7 +100,7 @@ namespace HiddenTruth.Store
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.Back)
             {
@@ -109,6 +111,24 @@ namespace HiddenTruth.Store
                     titleDetailsViewModel.NavigationModeIsBack = true;
                 }
             }
+
+            var result = await BackgroundExecutionManager.RequestAccessAsync();
+            if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == TASK_NAME)
+                        task.Value.Unregister(true);
+                }
+
+                BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+                builder.Name = TASK_NAME;
+                builder.TaskEntryPoint = TASK_ENTRY;
+                builder.SetTrigger(new TimeTrigger(15, false));
+                var registration = builder.Register();
+            }
+
             navigationHelper.OnNavigatedTo(e);
         }
 
@@ -118,5 +138,9 @@ namespace HiddenTruth.Store
         }
 
         #endregion
+
+        private const string TASK_NAME = "TileUpdater";
+        private const string TASK_ENTRY = "BackgroundTasks.TileUpdater";
+
     }
 }

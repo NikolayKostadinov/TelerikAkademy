@@ -37,8 +37,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <View:TopCustomAppBarUserControl />
-        
         <!-- Horizontal scrolling grid 
         ItemClick="ItemView_ItemClick"
         -->
@@ -108,5 +106,7 @@
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+
+        <View:TopCustomAppBarUserControl />
     </Grid>
 </Page>
