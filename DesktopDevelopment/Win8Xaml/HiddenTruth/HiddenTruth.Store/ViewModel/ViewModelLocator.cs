@@ -51,6 +51,7 @@ namespace HiddenTruth.Store.ViewModel
             SimpleIoc.Default.Register<ItemViewModel>();
             SimpleIoc.Default.Register<PivotItemViewModel>();
             SimpleIoc.Default.Register<SearchResultViewModel>();
+            SimpleIoc.Default.Register<CustomAppBarViewModel>();
         }
 
         public MainViewModel Main
@@ -90,6 +91,14 @@ namespace HiddenTruth.Store.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<SearchResultViewModel>();
+            }
+        }
+
+        public CustomAppBarViewModel CustomAppBar
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CustomAppBarViewModel>();
             }
         }
 

@@ -21,6 +21,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <local:TopCustomAppBarUserControl />
+
         <!-- Horizontal scrolling grid 
         ItemClick="ItemView_ItemClick"
         -->

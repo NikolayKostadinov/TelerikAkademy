@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Graphics.Printing;
 using Windows.Storage;
@@ -45,6 +47,8 @@ namespace HiddenTruth.Store.View
         private WebView thisWebView;
         private AppBarButton thisPrint;
         private ProgressBar thisPnlProgressBar;
+        private DataTransferManager dataTransferManager;
+
         /// <summary>
         /// NavigationHelper is used on each page to aid in navigation and 
         /// process lifetime management
@@ -304,12 +308,21 @@ namespace HiddenTruth.Store.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             RegisterForPrinting();
+
+            // Register the current page as a share source.
+            this.dataTransferManager = DataTransferManager.GetForCurrentView();
+            this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+            
             navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             UnregisterForPrinting();
+
+            // Unregister the current page as a share source.
+            this.dataTransferManager.DataRequested -= new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+
             navigationHelper.OnNavigatedFrom(e);
         }
 
@@ -868,8 +881,6 @@ namespace HiddenTruth.Store.View
             thisPrint = sender as AppBarButton;
         }
 
-       
-
         private void PnlProgressBar_OnLayoutUpdated(object sender, object e)
         {
             thisPnlProgressBar = sender as ProgressBar;
@@ -892,11 +903,11 @@ namespace HiddenTruth.Store.View
             using (var fileStream1 = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 await RandomAccessStream.CopyAndCloseAsync(ms.GetInputStreamAt(0), fileStream1.GetOutputStreamAt(0));
-                DisplayTextToast();
+                DisplayTextToast("Файлът е записан успешно.");
             }
         }
 
-        void DisplayTextToast()
+        void DisplayTextToast(string message)
         {
             // Creates a toast using the notification object model, which is another project
             // in this solution.  For an example using Xml manipulation, see the function
@@ -904,7 +915,7 @@ namespace HiddenTruth.Store.View
             IToastNotificationContent toastContent = null;
 
             IToastText01 templateContent = ToastContentFactory.CreateToastText01();
-            templateContent.TextBodyWrap.Text = "Файлът е записан успешно.";
+            templateContent.TextBodyWrap.Text = message;
             toastContent = templateContent;
             
             // Create a toast, then create a ToastNotifier object to show
@@ -914,6 +925,84 @@ namespace HiddenTruth.Store.View
             // If you have other applications in your package, you can specify the AppId of
             // the app to create a ToastNotifier for that application
             ToastNotificationManager.CreateToastNotifier().Show(toast);
+        }
+
+        private ItemModel ShareItem = new ItemModel();
+        private void BtnSahreWebPage_OnClick(object sender, RoutedEventArgs e)
+        {
+            var btnAction = sender as AppBarButton;
+            if (btnAction != null && btnAction.Tag != null)
+            {
+                var item = btnAction.Tag as ItemModel;
+                if (item != null)
+                {
+                    ShareItem = item;
+                    DataTransferManager.ShowShareUI();
+                }
+            }
+           
+        }
+
+        private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs e)
+        {
+            // Call the scenario specific function to populate the datapackage with the data to be shared.
+            if (GetShareContent(e.Request))
+            {
+                // Out of the datapackage properties, the title is required. If the scenario completed successfully, we need
+                // to make sure the title is valid since the sample scenario gets the title from the user.
+                if (String.IsNullOrEmpty(e.Request.Data.Properties.Title))
+                {
+                    //e.Request.FailWithDisplayText(MainPage.MissingTitleError);
+                }
+            }
+        }
+
+        bool GetShareContent(DataRequest request)
+        {
+            bool succeeded = false;
+
+             //The URI used in this sample is provided by the user so we need to ensure it's a well formatted absolute URI
+             //before we try to share it.
+            Uri dataPackageUri = ValidateAndGetUri(ShareItem.OriginalUrl);
+            if (dataPackageUri != null)
+            {
+                DataPackage requestData = request.Data;
+                requestData.Properties.Title = ShareItem.Title;
+                requestData.Properties.ContentSourceApplicationLink = ApplicationLink;
+                requestData.SetWebLink(dataPackageUri);
+                succeeded = true;
+            }
+            else
+            {
+                request.FailWithDisplayText("Enter the web link you would like to share and try again.");
+            }
+            return succeeded;
+        }
+
+        protected Uri ApplicationLink
+        {
+            get
+            {
+                return GetApplicationLink(GetType().Name);
+            }
+        }
+
+        public static Uri GetApplicationLink(string sharePageName)
+        {
+            return new Uri("ms-sdk-sharesourcecs:navigate?page=" + sharePageName);
+        }
+
+        private Uri ValidateAndGetUri(string uriString)
+        {
+            Uri uri = null;
+            try
+            {
+                uri = new Uri(uriString);
+            }
+            catch (FormatException)
+            {
+            }
+            return uri;
         }
     }
 }

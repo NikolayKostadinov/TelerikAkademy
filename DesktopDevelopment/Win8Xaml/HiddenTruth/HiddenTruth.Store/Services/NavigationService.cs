@@ -29,6 +29,9 @@ namespace HiddenTruth.Store.Services
             },
             {
                 typeof (SearchResultViewModel), typeof (SearchResultView)
+            },
+            {
+                typeof (CustomAppBarViewModel), typeof (TopCustomAppBarUserControl)
             }
         };
 

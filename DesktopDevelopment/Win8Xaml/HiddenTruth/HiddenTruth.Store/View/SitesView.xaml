@@ -24,8 +24,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Horizontal scrolling grid -->
+        <View:TopCustomAppBarUserControl />
 
+        <!-- Horizontal scrolling grid -->
         <controls:Pivot x:Name="PnlPivot" TabIndex="1" Grid.RowSpan="2" Margin="116,136,116,46"
                         Loaded="PnlPivot_OnLoaded" 
                         SelectionChanged="PnlPivot_OnSelectionChanged" >

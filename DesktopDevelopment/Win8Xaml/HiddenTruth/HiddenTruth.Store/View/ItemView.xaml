@@ -17,27 +17,28 @@
     <Page.BottomAppBar>
         <CommandBar><!--IsOpen="{Binding SelectedItem, Converter={StaticResource NullToBooleanConverter}}" IsSticky="{Binding SelectedItem, Converter={StaticResource NullToBooleanConverter}}"-->
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="btnPrint" Label="Print" Icon="Scan" Click="BtnPrint_OnClick" IsEnabled="True" />
-                <AppBarButton x:Name="btnDownloadImage" Label="Download as Image" Icon="Download" Click="BtnDownloadImage_OnClick"/>
+                <AppBarButton x:Name="btnPrint" Label="Принтирай" Icon="Scan" Click="BtnPrint_OnClick" IsEnabled="True" />
+                <AppBarButton x:Name="btnDownloadImage" Label="Смъкни като картинка" Icon="Download" Click="BtnDownloadImage_OnClick"/>
                 <AppBarSeparator/>
-                <AppBarButton x:Name="btnFacebook" Label="Share on Facebook" Tag="{Binding SelectedItem}" Click="BtnFacebook_OnClick">
+                <AppBarButton x:Name="btnFacebook" Label="Шерни в Facebook" Tag="{Binding SelectedItem}" Click="BtnFacebook_OnClick">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Icons/facebook.png" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton x:Name="btnTwitter" Label="Share on Twitter" Tag="{Binding SelectedItem}" Click="BtnTwitter_OnClick">
+                <AppBarButton x:Name="btnTwitter" Label="Шерни в Twitter" Tag="{Binding SelectedItem}" Click="BtnTwitter_OnClick">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Icons/twitter.png" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton x:Name="btnGoogle" Label="Share on Google+" Tag="{Binding SelectedItem}" Click="BtnGoogle_OnClick">
+                <AppBarButton x:Name="btnGoogle" Label="Шерни в Google+" Tag="{Binding SelectedItem}" Click="BtnGoogle_OnClick">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Icons/google_plus.png" />
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="btnGoToOriginalUrl" Label="Open Original Article" Icon="World" Tag="{Binding SelectedItem}" Click="BtnGoToOriginalUrl_OnClick"/>
+                <AppBarButton x:Name="btnSahreWebPage" Label="Изпрати статията на приятел" Icon="Mail" Tag="{Binding SelectedItem}" Click="BtnSahreWebPage_OnClick"/>
+                <AppBarButton x:Name="btnGoToOriginalUrl" Label="Отвори оригиналната стаия" Icon="World" Tag="{Binding SelectedItem}" Click="BtnGoToOriginalUrl_OnClick"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -64,7 +65,9 @@
             <ColumnDefinition x:Name="secondaryColumn" Width="*"/>
         </Grid.ColumnDefinitions>
 
-           
+        <StackPanel Grid.ColumnSpan="2">
+            <view:TopCustomAppBarUserControl />
+        </StackPanel>
 
         <Canvas x:Name="printingRoot" Opacity="0" />
         
