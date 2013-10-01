@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 using GalaSoft.MvvmLight.Command;
 
 namespace HiddenTruth.Library.Model
 {
-    public class SiteModel
+    [DataContract]
+    public class SiteModel: ResultContract
     {
-
+        [DataMember]
         public string Id { get; set; }
+        [DataMember]
         public string ImagePath { get; set; }
-
+        [DataMember]
         public string Title { get; set; }
-
+        [DataMember]
         public int SelectedIndex { get; set; }
-        public ObservableCollection<ItemModel> Items { get; set; } 
-
+        [DataMember]
+        public ObservableCollection<ItemModel> Items { get; set; }
+        [DataMember]
         public ObservableCollection<PageModel> Pages { get; set; } 
 
         public SiteModel()
@@ -24,24 +28,6 @@ namespace HiddenTruth.Library.Model
             SelectedIndex = 0;
             Items = new ObservableCollection<ItemModel>();
             Pages = new ObservableCollection<PageModel>();
-        }
-
-        private RelayCommand<string> _goToCommand;
-        public RelayCommand<string> GoToCommand
-        {
-            get
-            {
-                if (_goToCommand == null)
-                {
-                    _goToCommand = new RelayCommand<string>(NavigateAway);
-                }
-                return _goToCommand;
-            }
-        }
-
-        private void NavigateAway(string parameter)
-        {
-
         }
     }
 }

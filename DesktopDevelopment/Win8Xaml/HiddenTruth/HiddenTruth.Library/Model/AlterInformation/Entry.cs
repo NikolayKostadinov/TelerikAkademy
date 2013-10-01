@@ -1,16 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace HiddenTruth.Library.Model.AlterInformation
 {
+    [DataContract]
     public class Entry
     {
-        public List<MediaGroup> mediaGroups { get; set; }
-        public string title { get; set; }
-        public string link { get; set; }
-        public string author { get; set; }
-        public string publishedDate { get; set; }
-        public string contentSnippet { get; set; }
-        public string content { get; set; }
-        public List<string> categories { get; set; }
+        [DataMember]
+        public List<MediaGroup> MediaGroups { get; set; }
+        [DataMember]
+        public string Title { get; set; }
+        [DataMember]
+        public string Link { get; set; }
+        [DataMember]
+        public string Author { get; set; }
+        [DataMember]
+        public string PublishedDate { get; set; }
+        [DataMember]
+        public string ContentSnippet { get; set; }
+        [DataMember]
+        public string Content { get; set; }
+        [DataMember]
+        public List<string> Categories { get; set; }
     }
 }

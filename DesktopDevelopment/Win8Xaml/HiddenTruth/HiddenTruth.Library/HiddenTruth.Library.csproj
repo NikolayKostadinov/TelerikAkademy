@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Helpers\DynamicDictionary.cs" />
     <Compile Include="Helpers\WebContentHelper.cs" />
+    <Compile Include="Model\ResultContract.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Model\AlterInformation\RootObject.cs" />
     <Compile Include="Model\AlterInformation\Content.cs" />

@@ -1,7 +1,11 @@
-﻿namespace HiddenTruth.Library.Model.AlterInformation
+﻿using System.Runtime.Serialization;
+
+namespace HiddenTruth.Library.Model.AlterInformation
 {
+    [DataContract]
     public class ResponseData
     {
-        public Feed feed { get; set; }
+        [DataMember]
+        public Feed Feed { get; set; }
     }
 }

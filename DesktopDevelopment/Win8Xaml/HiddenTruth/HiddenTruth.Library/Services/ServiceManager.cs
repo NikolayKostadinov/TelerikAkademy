@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Google.Apis.Blogger.v3;
 using Google.Apis.Blogger.v3.Data;
@@ -18,11 +19,13 @@ using Newtonsoft.Json;
 
 namespace HiddenTruth.Library.Services
 {
-
+    [KnownType(typeof(ObservableCollection<SiteModel>))]
+    [DataContract]
     public class ServiceManager : IServiceManager
     {
         public static IDictionary<string, string> TileModels { get; set; }
 
+        [DataMember]
         public static ObservableCollection<SiteModel> Sites { get; set; }
 
         static ServiceManager()
@@ -85,7 +88,7 @@ namespace HiddenTruth.Library.Services
                             Id = item.Id,
                             Title = item.Title,
                             OriginalItem = item,
-                            Parent = result,
+                            //Parent = result,
                             OriginalUrl = item.Url,
                             CommentUrl = "http://www.blogger.com/comment.g?blogID=" + site.Id + "&postID="+ item.Id +"&isPopup=true"
                         };
@@ -169,19 +172,19 @@ namespace HiddenTruth.Library.Services
                     result.PageIndex = site.Pages.Count;
                     result.CurrentPageToken = pageToken.ToString();
                     result.NextPageToken = (pageToken + 1).ToString();
-                    foreach (var item in responseRootObject.responseData.feed.entries)
+                    foreach (var item in responseRootObject.ResponseData.Feed.Entries)
                     {
                         var itemModel = new ItemModel()
                         {
-                            Title = item.title,
+                            Title = item.Title,
                             OriginalItem = item,
-                            Parent = result,
-                            OriginalUrl = item.link,
-                            CommentUrl = item.link +"/feed/"
+                            //Parent = result,
+                            OriginalUrl = item.Link,
+                            CommentUrl = item.Link +"/feed/"
                         };
 
                         var document = new HtmlDocument();
-                        document.LoadHtml(WebContentHelper.WrapHtml(item.content, 0, 0));
+                        document.LoadHtml(WebContentHelper.WrapHtml(item.Content, 0, 0));
 
                         itemModel.Content = RefactorContent(document);
 
@@ -246,7 +249,7 @@ namespace HiddenTruth.Library.Services
                         Id = item.Id,
                         Title = item.Title,
                         OriginalItem = item,
-                        Parent = result,
+                        //Parent = result,
                         OriginalUrl = item.Url,
                         CommentUrl =
                             "http://www.blogger.com/comment.g?blogID=" + site.Id + "&postID=" + item.Id +

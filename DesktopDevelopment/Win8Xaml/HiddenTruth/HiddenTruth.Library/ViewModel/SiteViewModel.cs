@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using HiddenTruth.Library.Model;
 using HiddenTruth.Library.Services;
 using HiddenTruth.Library.Utils;
@@ -14,8 +10,8 @@ namespace HiddenTruth.Library.ViewModel
 {
     public class SiteViewModel: ViewModelBase
     {
-        public INavigationService _navigationService;
-        public IServiceManager _serviceManager;
+        public readonly INavigationService _navigationService;
+        public readonly IServiceManager _serviceManager;
         private SiteModel _currentSite;
 
         public SiteModel CurrentSite
@@ -23,8 +19,11 @@ namespace HiddenTruth.Library.ViewModel
             get { return _currentSite; }
             set
             {
-                _currentSite = value;
-                RaisePropertyChanged(() => CurrentSite);
+                if (value != _currentSite)
+                {
+                    _currentSite = value;
+                    RaisePropertyChanged(() => CurrentSite);
+                }
             }
         }
 

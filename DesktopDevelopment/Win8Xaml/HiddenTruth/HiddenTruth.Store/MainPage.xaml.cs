@@ -1,29 +1,13 @@
-﻿using System.Globalization;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Notifications;
 using HiddenTruth.BackgroundTasks;
-using HiddenTruth.Library.Model;
-using HiddenTruth.Library.Utils;
 using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Common;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using HiddenTruth.Library.Helpers;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
-using NotificationsExtensions.TileContent;
 
 namespace HiddenTruth.Store
 {
@@ -38,8 +22,7 @@ namespace HiddenTruth.Store
 
         //private const string TASK_NAME = "TileUpdater";
         //private const string TASK_ENTRY = "HiddenTruth.BackgroundTasks.TileUpdater";
-        private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private readonly NavigationHelper _navigationHelper;
 
         /// <summary>
         /// NavigationHelper is used on each page to aid in navigation and 
@@ -47,87 +30,60 @@ namespace HiddenTruth.Store
         /// </summary>
         public NavigationHelper NavigationHelper
         {
-            get { return this.navigationHelper; }
+            get { return this._navigationHelper; }
         }
 
         public MainPage()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
-            this.Loaded += MainPage_Loaded;
-        }
-
-        void MainPage_LayoutUpdated(object sender, object e)
-        {
-            
-        }
-
-        async void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            //await RegisterBackgroundNotifications();
-            
+            this._navigationHelper = new NavigationHelper(this);
+            this._navigationHelper.LoadState += navigationHelper_LoadState;
+            this._navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
         private static async void CreateClockTask()
         {
             var result = await BackgroundExecutionManager.RequestAccessAsync();
-            if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
-                result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            switch (result)
             {
-                await Task.Run(() => ClockTileScheduler.CreateSchedule());
-
-                EnsureUserPresentTask();
-                EnsureTimerTask();
+                case BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity:
+                case BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity:
+                    await Task.Run(() => ClockTileScheduler.CreateSchedule());
+                    EnsureUserPresentTask();
+                    EnsureTimerTask();
+                    break;
             }
         }
 
         private static void EnsureUserPresentTask()
         {
-            foreach (var task in BackgroundTaskRegistration.AllTasks)
-                if (task.Value.Name == TASKNAMEUSERPRESENT)
-                    return;
+            if (BackgroundTaskRegistration.AllTasks.Any(task => task.Value.Name == TASKNAMEUSERPRESENT))
+            {
+                return;
+            }
 
-            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
-            builder.Name = TASKNAMEUSERPRESENT;
-            builder.TaskEntryPoint = TASKENTRYPOINT;
+            var builder = new BackgroundTaskBuilder
+            {
+                Name = TASKNAMEUSERPRESENT, TaskEntryPoint = TASKENTRYPOINT
+            };
             builder.SetTrigger(new SystemTrigger(SystemTriggerType.UserPresent, false));
             builder.Register();
         }
 
         private static void EnsureTimerTask()
         {
-            foreach (var task in BackgroundTaskRegistration.AllTasks)
-                if (task.Value.Name == TASKNAMETIMER)
-                    return;
+            if (BackgroundTaskRegistration.AllTasks.Any(task => task.Value.Name == TASKNAMETIMER))
+            {
+                return;
+            }
 
-            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
-            builder.Name = TASKNAMETIMER;
-            builder.TaskEntryPoint = TASKENTRYPOINT;
+            var builder = new BackgroundTaskBuilder
+            {
+                Name = TASKNAMETIMER, TaskEntryPoint = TASKENTRYPOINT
+            };
             builder.SetTrigger(new TimeTrigger(180, false));
             builder.Register();
         }
-
-        //private static async Task RegisterBackgroundNotifications()
-        //{
-        //    var result = await BackgroundExecutionManager.RequestAccessAsync();
-        //    if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
-        //        result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
-        //    {
-        //        foreach (var task in BackgroundTaskRegistration.AllTasks)
-        //        {
-        //            if (task.Value.Name == TASK_NAME)
-        //                task.Value.Unregister(true);
-        //        }
-
-        //        BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
-        //        builder.Name = TASK_NAME;
-        //        builder.TaskEntryPoint = TASK_ENTRY;
-        //        builder.SetTrigger(new TimeTrigger(15, false));
-        //        var registration = builder.Register();
-        //    }
-        //}
 
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
@@ -142,11 +98,10 @@ namespace HiddenTruth.Store
         /// session. The state will be null the first time a page is visited.</param>
         private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var titleDetailsViewModel = DataContext as MainViewModel;
-            if (titleDetailsViewModel != null)
+            var ds = DataContext as MainViewModel;
+            if (ds != null)
             {
-                await titleDetailsViewModel.LoadData(null);
-               
+                await ds.LoadData(null);
             }
         }
 
@@ -182,97 +137,20 @@ namespace HiddenTruth.Store
                 if (titleDetailsViewModel != null)
                 {
                     itemGridView.SelectedIndex = -1;
-                    titleDetailsViewModel.NavigationModeIsBack = true;
                 }
             }
 
-            //var ds = this.DataContext as MainViewModel;
-            //if (ds != null)
-            //{
-            //    ds.Sites.CollectionChanged += Sites_CollectionChanged;
-            //}
-
             CreateClockTask();
 
-            navigationHelper.OnNavigatedTo(e);
+            _navigationHelper.OnNavigatedTo(e);
         }
-
-        //void Sites_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.NewItems.Count > 0)
-        //    {
-        //        foreach (SiteModel item in e.NewItems)
-        //        {
-        //            item.Pages.CollectionChanged += Pages_CollectionChanged;
-        //        }
-        //    }
-        //}
-
-        //void Pages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.NewItems.Count > 0)
-        //    {
-        //        foreach (PageModel page in e.NewItems)
-        //        {
-        //            foreach (var item in page.Items)
-        //            {
-        //                if (ValidateAndGetUri(item.ImagePath))
-        //                {
-        //                    ClockTileScheduler.TileModels.AddSafe(item.Title, item.ImagePath);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            _navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
 
-        private bool ValidateAndGetUri(string uriString)
-        {
-            Uri uri = null;
-            try
-            {
-                uri = new Uri(uriString);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
-        //private static void AddInitTiles(string title, string imageUri)
-        //{
-        //    // Create notification square310x310 content based on a visual template.
-        //    ITileSquare310x310Image tileContent = TileContentFactory.CreateTileSquare310x310Image();
-        //    tileContent.AddImageQuery = true;
-        //    tileContent.Image.Src = imageUri;
-        //    tileContent.Image.Alt = title;
-
-        //    // create the notification for a wide310x150 template.
-        //    ITileWide310x150ImageAndText01 wide310x150Content = TileContentFactory.CreateTileWide310x150ImageAndText01();
-        //    wide310x150Content.TextCaptionWrap.Text = title;
-        //    wide310x150Content.Image.Src = imageUri;
-        //    wide310x150Content.Image.Alt = title;
-
-        //    // create the square150x150 template and attach it to the wide310x150 template.
-        //    ITileSquare150x150Image square150x150Content = TileContentFactory.CreateTileSquare150x150Image();
-        //    square150x150Content.Image.Src = imageUri;
-        //    square150x150Content.Image.Alt = title;
-
-        //    // add the square150x150 template to the wide310x150 template.
-        //    wide310x150Content.Square150x150Content = square150x150Content;
-
-        //    // add the wide310x150 to the Square310x310 template.
-        //    tileContent.Wide310x150Content = wide310x150Content;
-
-        //    // send the notification to the app's application tile.
-        //    TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
-        //}
     }
 }

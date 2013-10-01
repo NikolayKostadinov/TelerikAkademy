@@ -26,12 +26,10 @@ namespace HiddenTruth.Library.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private PageModel _currentPage;
-        private ItemModel _selectedItem = new ItemModel();
         private readonly INavigationService _navigationService;
         private readonly IServiceManager _serviceManager;
-
-        public bool NavigationModeIsBack { get; set; }
+        private PageModel _currentPage;
+        private ItemModel _selectedItem = new ItemModel();
 
         public RelayCommand HeaderClickCommand { get; set; }
 
@@ -50,10 +48,7 @@ namespace HiddenTruth.Library.ViewModel
 
         private void NavigateAway(string parameter)
         {
-            var parameters = new List<string>();
-            parameters.Add(parameter);
-            parameters.Add(null);
-            _navigationService.Navigate<SiteViewModel>(parameters);
+            _navigationService.Navigate<SiteViewModel>(parameter);
         }
 
         public PageModel CurrentPage
@@ -61,8 +56,11 @@ namespace HiddenTruth.Library.ViewModel
             get { return _currentPage; }
             set
             {
-                _currentPage = value;
-                RaisePropertyChanged(() => CurrentPage);
+                if (value != _currentPage)
+                {
+                    _currentPage = value;
+                    RaisePropertyChanged(() => CurrentPage);
+                }
             }
         }
 
@@ -100,18 +98,10 @@ namespace HiddenTruth.Library.ViewModel
             }
             set
             {
-                //if (NavigationModeIsBack)
-                //{
-                //    value = null;
-                //}
-                //_selectedItem = value;
-                //RaisePropertyChanged("SelectedItem");
-                if (Set(SelectedItemPropertyName, ref _selectedItem, value)
-                    && value != null)
+                if (Set(SelectedItemPropertyName, ref _selectedItem, value) && value != null)
                 {
                     _navigationService.Navigate<ItemViewModel>(value);
                 }
-                //NavigationModeIsBack = false;
             }
         }
 

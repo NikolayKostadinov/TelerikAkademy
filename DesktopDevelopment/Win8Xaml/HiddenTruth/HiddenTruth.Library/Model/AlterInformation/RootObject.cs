@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace HiddenTruth.Library.Model.AlterInformation
 {
+    [DataContract]
     public class RootObject
     {
-        public ResponseData responseData { get; set; }
-        public object responseDetails { get; set; }
-        public int responseStatus { get; set; }
+        [DataMember]
+        public ResponseData ResponseData { get; set; }
+        [DataMember]
+        public object ResponseDetails { get; set; }
+        [DataMember]
+        public int ResponseStatus { get; set; }
     }
 }

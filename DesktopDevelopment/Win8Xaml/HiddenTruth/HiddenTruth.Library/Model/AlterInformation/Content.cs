@@ -1,9 +1,15 @@
-﻿namespace HiddenTruth.Library.Model.AlterInformation
+﻿using System.Runtime.Serialization;
+
+namespace HiddenTruth.Library.Model.AlterInformation
 {
+    [DataContract]
     public class Content
     {
-        public string url { get; set; }
-        public string medium { get; set; }
-        public string title { get; set; }
+        [DataMember]
+        public string Url { get; set; }
+        [DataMember]
+        public string Medium { get; set; }
+        [DataMember]
+        public string Title { get; set; }
     }
 }

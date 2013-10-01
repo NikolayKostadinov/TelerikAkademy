@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using HiddenTruth.Library.Model;
@@ -10,6 +13,7 @@ namespace HiddenTruth.Library.Services
     /// <summary>
     /// Defines the service manager interface
     /// </summary>
+    [ServiceKnownType(typeof(ObservableCollection<SiteModel>))]
     public interface IServiceManager
     {
         /// <summary>

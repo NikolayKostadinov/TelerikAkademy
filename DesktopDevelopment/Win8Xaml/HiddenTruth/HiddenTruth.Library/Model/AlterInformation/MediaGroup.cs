@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace HiddenTruth.Library.Model.AlterInformation
 {
+    [DataContract]
     public class MediaGroup
     {
-        public List<Content> contents { get; set; }
+        [DataMember]
+        public List<Content> Contents { get; set; }
     }
 }
