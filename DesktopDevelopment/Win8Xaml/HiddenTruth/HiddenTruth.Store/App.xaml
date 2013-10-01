@@ -15,7 +15,8 @@
             <x:String x:Key="AppName">HiddenTruth.Store</x:String>
 
             <converters:NullToBooleanConverter x:Name="NullToBooleanConverter"/>
-
+            <converters:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter"/>
+            
             <!--Image Button with simple pressed state -->
             <Style x:Key="ImageButtonStyle" TargetType="Button">
                 <Setter Property="Template">

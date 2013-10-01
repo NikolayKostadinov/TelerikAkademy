@@ -28,8 +28,9 @@
       </m2:VisualElements>
       <Extensions>
         <Extension Category="windows.search" />
-        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasks.TileUpdater">
+        <Extension Category="windows.backgroundTasks" EntryPoint="HiddenTruth.BackgroundTasks.TileSchedulerTask">
           <BackgroundTasks>
+            <Task Type="systemEvent" />
             <Task Type="timer" />
           </BackgroundTasks>
         </Extension>

@@ -6,7 +6,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HiddenTruth.BackgroundTasks;
 using HiddenTruth.Library.Model;
+using HiddenTruth.Library.Utils;
 using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Common;
 using HiddenTruth.Store.Data;
@@ -68,6 +70,13 @@ namespace HiddenTruth.Store.View
                 if (parameters != null && parameters.Count == 2)
                 {
                     await titleDetailsViewModel.LoadData(parameters[0], parameters[1]);
+                    //foreach (var pageModel in titleDetailsViewModel.CurrentSite.Pages)
+                    //{
+                    //    foreach (var itemModel in pageModel.Items)
+                    //    {
+                    //        ClockTileScheduler.TileModels.AddSafe(itemModel.Title, itemModel.ImagePath);
+                    //    }
+                    //}
                 }
             }
 

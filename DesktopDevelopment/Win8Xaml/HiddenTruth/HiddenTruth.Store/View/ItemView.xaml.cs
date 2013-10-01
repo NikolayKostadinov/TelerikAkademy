@@ -88,18 +88,22 @@ namespace HiddenTruth.Store.View
 
         void contentView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-            //thisPrint.IsEnabled = false;
-            //thisPnlProgressBar.Visibility = Visibility.Visible;
-            //thisPnlProgressBar.IsIndeterminate = true;
+            var ds = this.DataContext as ItemViewModel;
+            if (ds != null)
+            {
+                ds.IsPrintEnable = false;
+            }
         }
 
         Image image = new Image();
 
         async void contentView_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            //thisPrint.IsEnabled = true;
-            //thisPnlProgressBar.Visibility = Visibility.Collapsed;
-            //thisPnlProgressBar.IsIndeterminate = false;
+            var ds = this.DataContext as ItemViewModel;
+            if (ds != null)
+            {
+                ds.IsPrintEnable = true;
+            }
         }
 
         async Task<BitmapSource> resize(int width, int height, Windows.Storage.Streams.IRandomAccessStream source)

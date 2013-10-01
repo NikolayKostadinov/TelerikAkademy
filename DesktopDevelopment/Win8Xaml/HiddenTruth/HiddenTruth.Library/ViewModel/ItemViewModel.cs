@@ -12,8 +12,19 @@ namespace HiddenTruth.Library.ViewModel
         private IServiceManager _serviceManager;
         private PageModel _currentPage;
         private ItemModel _selectedItem = new ItemModel();
+        private bool _isPrintEnable;
 
         public RelayCommand DownloadPdfCommand { get; private set; }
+
+        public bool IsPrintEnable
+        {
+            get { return _isPrintEnable; }
+            set
+            {
+                _isPrintEnable = value;
+                RaisePropertyChanged(() => IsPrintEnable);
+            }
+        }
 
         public PageModel CurrentPage
         {

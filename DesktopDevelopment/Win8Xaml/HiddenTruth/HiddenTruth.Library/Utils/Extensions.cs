@@ -7,6 +7,14 @@ namespace HiddenTruth.Library.Utils
 {
     public static class Extensions
     {
+        public static void AddSafe<TKey, TValue>(this IDictionary<TKey, TValue> d, TKey key, TValue value)
+        {
+            if (!d.ContainsKey(key))
+            {
+                d.Add(key, value);
+            }
+        }
+
         public static int ToInt(this string str)
         {
             int num;

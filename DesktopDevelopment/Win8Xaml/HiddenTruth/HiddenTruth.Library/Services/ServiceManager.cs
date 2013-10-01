@@ -12,6 +12,7 @@ using Google.Apis.Services;
 using HiddenTruth.Library.Helpers;
 using HiddenTruth.Library.Model;
 using HiddenTruth.Library.Model.AlterInformation;
+using HiddenTruth.Library.Utils;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 
@@ -20,11 +21,14 @@ namespace HiddenTruth.Library.Services
 
     public class ServiceManager : IServiceManager
     {
+        public static IDictionary<string, string> TileModels { get; set; }
+
         public static ObservableCollection<SiteModel> Sites { get; set; }
 
         static ServiceManager()
         {
             Sites = new ObservableCollection<SiteModel>();
+            TileModels = new Dictionary<string, string>();
         }
 
         public async Task GetDataBlogZaSeriozniHora(string pageToken, Action<PageModel, Exception> callback)
@@ -91,11 +95,14 @@ namespace HiddenTruth.Library.Services
 
                         itemModel.Content = RefactorContent(document);
 
-                        var img = document.DocumentNode.Descendants().FirstOrDefault(doc => doc.Name == "img");
+                        var img = document.DocumentNode.Descendants().FirstOrDefault(doc => doc.Name == "img" &&
+                            (doc.Attributes["src"].Value.EndsWith(".jpg") || doc.Attributes["src"].Value.EndsWith(".gif") || doc.Attributes["src"].Value.EndsWith(".png")));
                         if (img != null)
                         {
                             itemModel.ImagePath = img.Attributes["src"].Value;
                         }
+
+                        AddItemToTiles(itemModel);
 
                         result.Items.Add(itemModel);
                         if (string.IsNullOrEmpty(pageToken))
@@ -112,6 +119,14 @@ namespace HiddenTruth.Library.Services
             }
 
             callback(result, err);
+        }
+
+        private static void AddItemToTiles(ItemModel itemModel)
+        {
+            if (!string.IsNullOrEmpty(itemModel.ImagePath))
+            {
+                TileModels.AddSafe(EscapingText(itemModel.Title), EscapingText(itemModel.ImagePath));
+            }
         }
 
         public async Task GetDataAlterInformation(int? pageToken, Action<PageModel, Exception> callback)
@@ -249,6 +264,7 @@ namespace HiddenTruth.Library.Services
                         itemModel.ImagePath = img.Attributes["src"].Value;
                     }
 
+                    AddItemToTiles(itemModel);
                     result.Items.Add(itemModel);
                 }
                 site.Pages.Add(result);
@@ -286,6 +302,14 @@ namespace HiddenTruth.Library.Services
             StringWriter stringWriter = new StringWriter();
             document.Save(stringWriter);
             return stringWriter.ToString(); 
+        }
+
+        public static string EscapingText(string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return source;
+
+            return source.Replace("\"", "").Replace("'", "").Replace("<", "").Replace(">", "").Replace("&", "");
         }
 
         public static async Task<SiteModel> GetSiteAsync(string siteId)

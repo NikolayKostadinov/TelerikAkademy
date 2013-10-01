@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
+using HiddenTruth.BackgroundTasks;
 using HiddenTruth.Library.Model;
+using HiddenTruth.Library.Utils;
 using HiddenTruth.Library.ViewModel;
 using HiddenTruth.Store.Common;
 using System;
@@ -18,6 +21,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HiddenTruth.Library.Helpers;
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 using NotificationsExtensions.TileContent;
 
@@ -28,17 +32,14 @@ namespace HiddenTruth.Store
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private const string TASKNAMEUSERPRESENT = "TileSchedulerTaskUserPresent";
+        private const string TASKNAMETIMER = "TileSchedulerTaskTimer";
+        private const string TASKENTRYPOINT = "HiddenTruth.BackgroundTasks.TileSchedulerTask";
 
+        //private const string TASK_NAME = "TileUpdater";
+        //private const string TASK_ENTRY = "HiddenTruth.BackgroundTasks.TileUpdater";
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
-        /// <summary>
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
 
         /// <summary>
         /// NavigationHelper is used on each page to aid in navigation and 
@@ -55,7 +56,78 @@ namespace HiddenTruth.Store
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            this.Loaded += MainPage_Loaded;
         }
+
+        void MainPage_LayoutUpdated(object sender, object e)
+        {
+            
+        }
+
+        async void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            //await RegisterBackgroundNotifications();
+            
+        }
+
+        private static async void CreateClockTask()
+        {
+            var result = await BackgroundExecutionManager.RequestAccessAsync();
+            if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                await Task.Run(() => ClockTileScheduler.CreateSchedule());
+
+                EnsureUserPresentTask();
+                EnsureTimerTask();
+            }
+        }
+
+        private static void EnsureUserPresentTask()
+        {
+            foreach (var task in BackgroundTaskRegistration.AllTasks)
+                if (task.Value.Name == TASKNAMEUSERPRESENT)
+                    return;
+
+            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+            builder.Name = TASKNAMEUSERPRESENT;
+            builder.TaskEntryPoint = TASKENTRYPOINT;
+            builder.SetTrigger(new SystemTrigger(SystemTriggerType.UserPresent, false));
+            builder.Register();
+        }
+
+        private static void EnsureTimerTask()
+        {
+            foreach (var task in BackgroundTaskRegistration.AllTasks)
+                if (task.Value.Name == TASKNAMETIMER)
+                    return;
+
+            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+            builder.Name = TASKNAMETIMER;
+            builder.TaskEntryPoint = TASKENTRYPOINT;
+            builder.SetTrigger(new TimeTrigger(180, false));
+            builder.Register();
+        }
+
+        //private static async Task RegisterBackgroundNotifications()
+        //{
+        //    var result = await BackgroundExecutionManager.RequestAccessAsync();
+        //    if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+        //        result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+        //    {
+        //        foreach (var task in BackgroundTaskRegistration.AllTasks)
+        //        {
+        //            if (task.Value.Name == TASK_NAME)
+        //                task.Value.Unregister(true);
+        //        }
+
+        //        BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+        //        builder.Name = TASK_NAME;
+        //        builder.TaskEntryPoint = TASK_ENTRY;
+        //        builder.SetTrigger(new TimeTrigger(15, false));
+        //        var registration = builder.Register();
+        //    }
+        //}
 
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
@@ -74,6 +146,7 @@ namespace HiddenTruth.Store
             if (titleDetailsViewModel != null)
             {
                 await titleDetailsViewModel.LoadData(null);
+               
             }
         }
 
@@ -113,64 +186,44 @@ namespace HiddenTruth.Store
                 }
             }
 
-            await RegisterBackgroundNotifications();
+            //var ds = this.DataContext as MainViewModel;
+            //if (ds != null)
+            //{
+            //    ds.Sites.CollectionChanged += Sites_CollectionChanged;
+            //}
 
-            var ds = this.DataContext as MainViewModel;
-            if (ds != null)
-            {
-                ds.Sites.CollectionChanged += Sites_CollectionChanged;
-            }
+            CreateClockTask();
 
             navigationHelper.OnNavigatedTo(e);
         }
 
-        void Sites_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems.Count > 0)
-            {
-                foreach (SiteModel item in e.NewItems)
-                {
-                    item.Pages.CollectionChanged += Pages_CollectionChanged;
-                }
-            }
-        }
+        //void Sites_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        //{
+        //    if (e.NewItems.Count > 0)
+        //    {
+        //        foreach (SiteModel item in e.NewItems)
+        //        {
+        //            item.Pages.CollectionChanged += Pages_CollectionChanged;
+        //        }
+        //    }
+        //}
 
-        void Pages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems.Count > 0)
-            {
-                foreach (PageModel page in e.NewItems)
-                {
-                    foreach (var item in page.Items)
-                    {
-                        if (ValidateAndGetUri(item.ImagePath))
-                        {
-                            AddInitTiles(item.Title, item.ImagePath);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static async Task RegisterBackgroundNotifications()
-        {
-            var result = await BackgroundExecutionManager.RequestAccessAsync();
-            if (result == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
-                result == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
-            {
-                foreach (var task in BackgroundTaskRegistration.AllTasks)
-                {
-                    if (task.Value.Name == TASK_NAME)
-                        task.Value.Unregister(true);
-                }
-
-                BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
-                builder.Name = TASK_NAME;
-                builder.TaskEntryPoint = TASK_ENTRY;
-                builder.SetTrigger(new TimeTrigger(15, false));
-                var registration = builder.Register();
-            }
-        }
+        //void Pages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        //{
+        //    if (e.NewItems.Count > 0)
+        //    {
+        //        foreach (PageModel page in e.NewItems)
+        //        {
+        //            foreach (var item in page.Items)
+        //            {
+        //                if (ValidateAndGetUri(item.ImagePath))
+        //                {
+        //                    ClockTileScheduler.TileModels.AddSafe(item.Title, item.ImagePath);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -178,9 +231,6 @@ namespace HiddenTruth.Store
         }
 
         #endregion
-
-        private const string TASK_NAME = "TileUpdater";
-        private const string TASK_ENTRY = "BackgroundTasks.TileUpdater";
 
         private bool ValidateAndGetUri(string uriString)
         {
@@ -196,33 +246,33 @@ namespace HiddenTruth.Store
             }
         }
 
-        private static void AddInitTiles(string title, string imageUri)
-        {
-            // Create notification square310x310 content based on a visual template.
-            ITileSquare310x310Image tileContent = TileContentFactory.CreateTileSquare310x310Image();
-            tileContent.AddImageQuery = true;
-            tileContent.Image.Src = imageUri;
-            tileContent.Image.Alt = title;
+        //private static void AddInitTiles(string title, string imageUri)
+        //{
+        //    // Create notification square310x310 content based on a visual template.
+        //    ITileSquare310x310Image tileContent = TileContentFactory.CreateTileSquare310x310Image();
+        //    tileContent.AddImageQuery = true;
+        //    tileContent.Image.Src = imageUri;
+        //    tileContent.Image.Alt = title;
 
-            // create the notification for a wide310x150 template.
-            ITileWide310x150ImageAndText01 wide310x150Content = TileContentFactory.CreateTileWide310x150ImageAndText01();
-            wide310x150Content.TextCaptionWrap.Text = title;
-            wide310x150Content.Image.Src = imageUri;
-            wide310x150Content.Image.Alt = title;
+        //    // create the notification for a wide310x150 template.
+        //    ITileWide310x150ImageAndText01 wide310x150Content = TileContentFactory.CreateTileWide310x150ImageAndText01();
+        //    wide310x150Content.TextCaptionWrap.Text = title;
+        //    wide310x150Content.Image.Src = imageUri;
+        //    wide310x150Content.Image.Alt = title;
 
-            // create the square150x150 template and attach it to the wide310x150 template.
-            ITileSquare150x150Image square150x150Content = TileContentFactory.CreateTileSquare150x150Image();
-            square150x150Content.Image.Src = imageUri;
-            square150x150Content.Image.Alt = title;
+        //    // create the square150x150 template and attach it to the wide310x150 template.
+        //    ITileSquare150x150Image square150x150Content = TileContentFactory.CreateTileSquare150x150Image();
+        //    square150x150Content.Image.Src = imageUri;
+        //    square150x150Content.Image.Alt = title;
 
-            // add the square150x150 template to the wide310x150 template.
-            wide310x150Content.Square150x150Content = square150x150Content;
+        //    // add the square150x150 template to the wide310x150 template.
+        //    wide310x150Content.Square150x150Content = square150x150Content;
 
-            // add the wide310x150 to the Square310x310 template.
-            tileContent.Wide310x150Content = wide310x150Content;
+        //    // add the wide310x150 to the Square310x310 template.
+        //    tileContent.Wide310x150Content = wide310x150Content;
 
-            // send the notification to the app's application tile.
-            TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
-        }
+        //    // send the notification to the app's application tile.
+        //    TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
+        //}
     }
 }

@@ -125,13 +125,11 @@ namespace HiddenTruth.Store
             SearchPane.GetForCurrentView().ShowOnKeyboardInput = true;
             SearchPane.GetForCurrentView().QuerySubmitted += App_QuerySubmitted;
 
-            TileUpdateManager.CreateTileUpdaterForApplication().Clear();
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueueForSquare150x150(true);
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueueForWide310x150(true);
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueueForSquare310x310(true);
-
-            
+            //TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            //TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+            //TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueueForSquare150x150(true);
+            //TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueueForWide310x150(true);
+            //TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueueForSquare310x310(true);
 
             //AddInitTiles();
         }
